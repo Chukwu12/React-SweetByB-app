@@ -14,7 +14,7 @@ const Hero = () => {
             ByB <span className='text-secondary'> Bakery</span>
             </h1>
             <p className='text-2xl tracking-wide'>Baked to Perfection, Made with Love</p>
-            <p className='text-gray-400'>"Welcome to Sweet ByB, where every bite is a moment of pure bliss. Our handcrafted desserts are made with love,
+            <p className='text-gray-400 max-w-[500px] text-[12px]'>"Welcome to Sweet ByB, where every bite is a moment of pure bliss. Our handcrafted desserts are made with love,
                  using only the finest ingredients to bring you treats that are as beautiful as they are delicious. Whether you're
                   craving something rich and indulgent or light and refreshing, our collection of desserts is sure to satisfy your
                    sweetest cravings. Join us in celebrating the art of baking—one sweet creation at a time!"</p>
@@ -31,8 +31,10 @@ const Hero = () => {
     </div>
       {/* Hero images */}
       <div className='flex justify-center items-center'>
-        <img src={HeroImg} alt=""  className='w-[350px] md:w-[500px] drop-shadow'/>
+        <img src={HeroImg} alt=""  className='w-[250px] md:w-[250px] drop-shadow'/>
       </div>
+      {/* Second Image */}
+      <div></div>
   </div>
   </section>
   );
