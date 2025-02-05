@@ -3,6 +3,7 @@ import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import Menus from './components/Menus/Menus';
 import Banner from './components/Banner/Banner'
+import Product from './components/Product/ProductDetails'
 
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
     <Hero />
     <Menus/>
     <Banner />
+    <Product />
   </main>
   </>
   );
