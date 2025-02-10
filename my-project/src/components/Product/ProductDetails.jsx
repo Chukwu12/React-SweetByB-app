@@ -1,36 +1,46 @@
 import React from "react";
-import Product from '../components/Product/ProductDetails'; // Adjust according to the relative path
-import Image1 from '../../assets/images/cupcake-img.jpg'
-import Image2 from '../../assets/images/cheesecake-img.jpg'
-import Image3 from '../../assets/images/pudding-img.jpg'
+import { Box, HStack } from "@chakra-ui/react";
+import Product from "./Product"; // Import your Product component
 
-function Section2() {
+import Image1 from "../../assets/images/cupcake-img.jpg";
+import Image2 from "../../assets/images/cheesecake-img.jpg";
+import Image3 from "../../assets/images/pudding-img.jpg";
+
+function ProductDetails() {
   return (
-    <div className="w-full min-h-[50vh] mt-20 flex justify-center items-center overflow-hidden">
-      <div className="flex justify-center gap-5 flex-wrap">
+    <Box
+      width={"100%"}
+      minHeight={"50vh"}
+      marginTop={"5rem"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      display={"flex"}
+      overflow={"hidden"}
+    >
+      <HStack justifyContent={"center"} gap={"20px"} flexWrap={"wrap"}>
         <Product
-          cardImage={Image1} 
-          CardSubHeading={'100% Healthy & Affordable'} 
-          cardTitle={'ORGANIC CITRUS FRUITS'} 
-          cardTitleColor={'#5EA98B'} 
+          cardImage={Image1}
+          CardSubHeading={"100% Healthy & Affordable"}
+          cardTitle={"ORGANIC CITRUS FRUITS"}
+          cardTitleColor={"#5EA98B"}
         />
         
-        <Product 
-          cardImage={Image2} 
-          CardSubHeading={'Natural Raw Vegtables'} 
-          cardTitle={'NEW GREENY VEGTABLES'} 
-          cardTitleColor={'white'} 
+        <Product
+          cardImage={Image2}
+          CardSubHeading={"Natural Raw Vegetables"}
+          cardTitle={"NEW GREENY VEGETABLES"}
+          cardTitleColor={"white"}
         />
 
         <Product
-          cardImage={Image3}  
-          CardSubHeading={'Garden Fresh Fruits'} 
-          cardTitle={'HEALTHY ORGANIC EATABLES'} 
-          cardTitleColor={'#5EA98B'} 
+          cardImage={Image3}
+          CardSubHeading={"Garden Fresh Fruits"}
+          cardTitle={"HEALTHY ORGANIC EATABLES"}
+          cardTitleColor={"#5EA98B"}
         />
-      </div>
-    </div>
+      </HStack>
+    </Box>
   );
 }
 
-export default Section2;
+export default ProductDetails;

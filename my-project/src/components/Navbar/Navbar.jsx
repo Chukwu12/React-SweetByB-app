@@ -1,8 +1,9 @@
 import React from 'react'
-import { RiCake3Line } from "react-icons/ri";
+import Logo from '../../assets/images/mainlogo.png';
 import { MdMenu, MdShoppingCart } from "react-icons/md";
 import ResponsiveMenu from './ResponsiveMenu';
 import {motion} from 'framer-motion';
+
 
 
 
@@ -50,7 +51,11 @@ const Navbar = () => {
     <div className='text-2xl flex items-center gap-2 font-bold uppercase'>
         <p className='text-primary'>Sweet</p>
          <p className='text-secondary'>ByB</p>
-         <RiCake3Line className='text-pink-500'/>
+         <img
+        src={Logo}  // path to your logo image
+        alt="Logo"
+        className="w-12 h-12"  // Adjust size here
+/>
     </div>
     {/* {Menu section} */}
     <div className='hidden md:block'>

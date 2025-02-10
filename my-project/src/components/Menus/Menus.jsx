@@ -1,8 +1,9 @@
 import React from "react";
 import pudding1 from "../../assets/images/birthday-pudding.png";
 import pudding2 from "../../assets/images/pumkin-pudding.png";
-import pudding3 from "../../assets/images/red-velvet-pudding.png";
+import pudding3 from "../../assets/images/red-velvet2.png";
 import pudding4 from "../../assets/images/Conquito-pudding.png";
+import pudding5 from "../../assets/images/banana-pudding.png";
 import {AnimatePresence, motion} from "framer-motion";
 import { FadeLeft } from "../../utility/animation";
 
@@ -39,6 +40,16 @@ const MenusData = [
     img: pudding4,
     delay: 1.2,
 },
+
+{
+    id:5,
+    title: "Banana Pudding",
+    link: "/",
+    price:  "$15.00",
+    img: pudding5,
+    delay: 1.2,
+}
+    
 ]
 
 const Menus = () => {
