@@ -1,13 +1,20 @@
 import React from "react";
-import { Box, HStack } from "@chakra-ui/react";
+import { motion } from 'framer-motion';
+import { Box, HStack } from '@chakra-ui/react';
 import Product from "./Product"; // Import your Product component
 import Image1 from "../../assets/images/cupcake-img.jpg";
 import Image2 from "../../assets/images/cheesecake-img.jpg";
 import Image3 from "../../assets/images/pudding-img.jpg";
+import { FadeIn } from "../../utility/animation";
+
+
+// Wrap Chakra UI Box and HStack components with motion
+const MotionBox = motion(Box);
+const MotionHStack = motion(HStack);
 
 function ProductDetails() {
   return (
-    <Box
+    <MotionBox
       width={"100%"}
       minHeight={"50vh"}
       marginTop={"5rem"}
@@ -15,8 +22,23 @@ function ProductDetails() {
       alignItems={"center"}
       display={"flex"}
       overflow={"hidden"}
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { duration: 1 } },
+      }}
     >
-      <HStack justifyContent={"center"} gap={"20px"} flexWrap={"wrap"}>
+      <MotionHStack
+       justifyContent={"center"} 
+       gap={["10px", "15px", "20px", "30px"]} 
+       flexWrap={"wrap"}
+       initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }} // Trigger animation only once
+        variants={FadeIn(0.5)} // Apply FadeIn animation with a delay of 0.5 seconds
+       >
+
         <Product
           cardImage={Image1}
           CardSubHeading={"100% Healthy & Affordable"}
@@ -35,8 +57,8 @@ function ProductDetails() {
           cardTitle={"COOKIES"}
           cardTitleColor={"#5EA98B"}
         />
-      </HStack>
-    </Box>
+     </MotionHStack>
+     </MotionBox>
   );
 }
 

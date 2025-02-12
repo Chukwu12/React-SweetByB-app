@@ -1,3 +1,4 @@
+import { transition } from '@chakra-ui/react';
 import {motion} from 'framer-motion';
 
 export const FadeUp = (delay) => {
@@ -45,6 +46,23 @@ export const FadeRight = (delay) => {
             x:0,
             transition: {
                 duration: 1,
+                delay: delay,
+            },
+        },
+    };
+};
+
+export const FadeIn = (delay) => {
+    return {
+        hidden: {
+            opacity: 0,
+            y: 50,  // Start from a bit lower (you can adjust the `y` value)
+        },
+        visible: {
+            opacity: 1,
+            y: 0, // Move to the normal position
+            transition: {
+                duration: 1.2,
                 delay: delay,
             },
         },

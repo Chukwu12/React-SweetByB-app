@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { Box, HStack, VStack, Image, Text } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+
+// Wrap Box component with motion to animate it
+const MotionBox = motion(Box);
 
 function Product({ cardImage, CardSubHeading, cardTitle, cardTitleColor }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Box
+    <MotionBox
       width={["80%", "80%", "80%", "28rem"]}
       height={["5%", "5%", "5%", "18rem"]}
       borderRadius={"20px"}
       overflow="hidden"
       boxShadow="md"
+      whileHover={{ scale: 1.05 }} // Scale the card when hovered
+      whileTap={{ scale: 0.98 }} // Slightly scale down when clicked
+      transition={{ duration: 0.3 }}
     >
       {/* Card Content */}
       <HStack
@@ -73,7 +80,7 @@ function Product({ cardImage, CardSubHeading, cardTitle, cardTitleColor }) {
           />
         </VStack>
       </HStack>
-    </Box>
+    </MotionBox>
   );
 }
 

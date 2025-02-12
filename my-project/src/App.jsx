@@ -5,16 +5,19 @@ import Hero from './components/Hero/Hero';
 import Menus from './components/Menus/Menus';
 import Banner from './components/Banner/Banner';
 import ProductDetails from "./components/Product/ProductDetails";
+import ProductItems from "./components/ProductGallery/ProductItems"; 
 
 const App = () => {
   return (
     <ChakraProvider> 
       <main className='overflow-x-hidden'>
+         {/* Main Layout Components */}
         <Navbar />
         <Hero />
         <Menus />
         <Banner />
         <ProductDetails />
+        <ProductItems /> 
       </main>
     </ChakraProvider>
   );
