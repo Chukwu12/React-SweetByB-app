@@ -1,8 +1,8 @@
 import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import React from "react";
-import Section3Cards from "./Section3Cards";
+import ItemsCards from "./ItemsCards"; // Importing the component that renders each card
 
-function Section3() {
+function ProductItems() {
   return (
     <Box
       width={"100%"}
@@ -11,6 +11,7 @@ function Section3() {
       marginTop={"5rem"}
     >
       <VStack width={"100%"} height={"100%"} flexWrap={"wrap"}>
+             {/* Title Section */}
         <VStack>
           <HStack>
             <Text fontSize={['25px' , '40px']} fontWeight={"600"} letterSpacing={"2px"}>
@@ -31,6 +32,7 @@ function Section3() {
           </HStack>
         </VStack>
 
+         {/* Product Cards Section */}
         <HStack
           width={"95%"}
           height={"100%"}
@@ -38,11 +40,11 @@ function Section3() {
           justifyContent={"center"}
           alignItems={"center"}
         >
-          <Section3Cards />
+          <ItemsCards /> {/* This is where your card component will be rendered */}
         </HStack>
       </VStack>
     </Box>
   );
 }
 
-export default Section3;
+export default ProductItems;
