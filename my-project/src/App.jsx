@@ -6,6 +6,7 @@ import Menus from './components/Menus/Menus';
 import Banner from './components/Banner/Banner';
 import ProductDetails from "./components/Product/ProductDetails";
 import ProductItems from "./components/ProductGallery/ProductItems"; 
+import TestimonialsSection from './components/Testimonial/TestimonialsSection'; 
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Banner />
         <ProductDetails />
         <ProductItems /> 
+        <TestimonialsSection />
       </main>
     </ChakraProvider>
   );

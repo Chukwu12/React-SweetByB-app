@@ -15,7 +15,7 @@ function ProductItems() {
         <VStack>
           <HStack>
             <Text fontSize={['25px' , '40px']} fontWeight={"600"} letterSpacing={"2px"}>
-              Fruits & Vegetables
+            Shop Your Favorite Sweet Treats
             </Text>
           </HStack>
 
@@ -26,8 +26,7 @@ function ProductItems() {
               textAlign={"center"}
               marginTop={"1rem"}
             >
-              Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Welcome to Sweets by B, your one-stop shop for delicious homemade desserts! Browse our selection of rich cheesecakes, decadent cupcakes, gourmet puddings, and more—all made with love and the finest ingredients. Whether you're craving a classic treat or looking to try something new, we’ve got something to satisfy your sweet tooth. Place your order today and indulge in pure sweetness!
             </Text>
           </HStack>
         </VStack>

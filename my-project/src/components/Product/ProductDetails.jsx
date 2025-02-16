@@ -2,9 +2,9 @@ import React from "react";
 import { motion } from 'framer-motion';
 import { Box, HStack } from '@chakra-ui/react';
 import Product from "./Product"; // Import your Product component
-import Image1 from "../../assets/images/cupcake-img.jpg";
-import Image2 from "../../assets/images/cheesecake-img.jpg";
-import Image3 from "../../assets/images/pudding-img.jpg";
+import Image1 from "../../assets/images/menu1.png";
+import Image2 from "../../assets/images/pudding1.jpeg";
+import Image3 from "../../assets/images/cupcakesb.jpeg";
 import { FadeIn } from "../../utility/animation";
 
 
