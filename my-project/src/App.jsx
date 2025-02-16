@@ -6,6 +6,8 @@ import Menus from './components/Menus/Menus';
 import Banner from './components/Banner/Banner';
 import ProductDetails from "./components/Product/ProductDetails";
 import ProductItems from "./components/ProductGallery/ProductItems"; 
+import Footer from './components/Footer/Footer';
+
 
 const App = () => {
   return (
@@ -18,8 +20,10 @@ const App = () => {
         <Banner />
         <ProductDetails />
         <ProductItems /> 
+        <Footer /> 
       </main>
     </ChakraProvider>
+    
   );
 };
 
