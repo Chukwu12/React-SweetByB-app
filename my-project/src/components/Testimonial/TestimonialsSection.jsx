@@ -1,6 +1,6 @@
 import { Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import React from "react";
-import testimonialBg from "../../assets/images/testimonial bg.png";
+ import testimonialBg from "../../assets/images/testimonial-bg.png";
 import TestimonialsCarousel from "./TestimonialsCarousel";
 
 function TestimonialsSection() {
@@ -19,7 +19,7 @@ function TestimonialsSection() {
           width={"100%"}
           height={"100%"}
           objectFit={"cover"}
-          src={testimonialBg}
+           src={testimonialBg}
         />
       </HStack>
 

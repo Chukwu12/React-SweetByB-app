@@ -2,9 +2,9 @@ import React from "react";
 import { motion } from 'framer-motion';
 import { Box, HStack } from '@chakra-ui/react';
 import Product from "./Product"; // Import your Product component
-import Image1 from "../../assets/images/menu1.png";
-import Image2 from "../../assets/images/pudding1.jpeg";
-import Image3 from "../../assets/images/cupcakesb.jpeg";
+import Image1 from "../../assets/images/cheesecake-menu.jpg";
+import Image2 from "../../assets/images/pudding-menu.jpg";
+import Image3 from "../../assets/images/cookies-menu.jpg";
 import { FadeIn } from "../../utility/animation";
 
 
@@ -41,21 +41,21 @@ function ProductDetails() {
 
         <Product
           cardImage={Image1}
-          CardSubHeading={"100% Healthy & Affordable"}
+          CardSubHeading={""}
           cardTitle={"CHEESECAKE"}
-          cardTitleColor={"#5EA98B"}
+          cardTitleColor={"white"}
         />
         <Product
           cardImage={Image2}
-          CardSubHeading={"All original Flavors"}
+          CardSubHeading={""}
           cardTitle={"PUDDING"}
           cardTitleColor={"white"}
         />
         <Product
           cardImage={Image3}
-          CardSubHeading={"Freshly Baked"}
+          CardSubHeading={""}
           cardTitle={"COOKIES"}
-          cardTitleColor={"#5EA98B"}
+          cardTitleColor={"white"}
         />
      </MotionHStack>
      </MotionBox>

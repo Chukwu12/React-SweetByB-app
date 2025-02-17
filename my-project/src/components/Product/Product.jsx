@@ -64,6 +64,9 @@ function Product({ cardImage, CardSubHeading, cardTitle, cardTitleColor }) {
             _hover={{
               textDecoration: "underline",
             }}
+            color={" chartreuse;"}
+            fontWeight={"700"}
+            zIndex={"10"}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             fontSize={["10px", "12px", "16px"]}

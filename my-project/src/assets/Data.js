@@ -6,6 +6,13 @@ import dozenChocolateStrawberries from '../assets/images/dozen-chocolate-covered
 import assortedDessert from '../assets/images/assorted-dessert.jpg';
 import largePudding from '../assets/images/largepuddingtray.jpg';
 import Puddingtray from '../assets/images/puddingtrey.jpeg';
+import PuddingJar from '../assets/images/Puddingozjar.jpeg';
+import OGBananaJar from '../assets/images/banana-pudding1.jpg';
+import StrawberryShortcake from '../assets/images/Strawberry-Shortcake.jpg';
+import VeganBanana from '../assets/images/VeganBanana.jpg';
+import OreoPudding from '../assets/images/oreopudding.jpg';
+import MiniPudding from '../assets/images/mini-pudding.jpg';
+import cookies from '../assets/images/cookies.jpg';
 
 
 const itemCard = [
@@ -59,48 +66,52 @@ const itemCard = [
     },
 
     {id: 9,
-    itemImage: '/',
+    itemImage: PuddingJar,
     itemTitle: '16oz Mason Jars',
     price: '15.00',
   },
 
   {id: 10,
-  itemImage: '',
+  itemImage: OGBananaJar,
   itemTitle: 'The OG Banana',
   price: '15.00 / 55.00',
 },
 
     {id: 11,
-    itemImage: './public/Fruits & Vegetables/Carrot.png',
+    itemImage: StrawberryShortcake,
     itemTitle: 'Strawberry Shortcake',
     price: '15.00 / 55.00',
     },
 
     {id: 12,
-    itemImage: './public/Fruits & Vegetables/Carrot.png',
+    itemImage: VeganBanana,
     itemTitle: 'Vegan Banana',
     price: '20.00 / 75.00',
     },
 
     {id: 13,
-    itemImage: './public/Fruits & Vegetables/Carrot.png',
+    itemImage: OreoPudding,
     itemTitle: 'Oreo',
     price: '15.00 / 55.00',
     },
 
     {id: 14,
-    itemImage: './public/Fruits & Vegetables/Carrot.png',
+    itemImage: MiniPudding,
     itemTitle: '5oz Mini Cups with any Flavor Pudding',
     price: '3.00 each / 60.00 Minimum',
     },
 
     {id: 15,
-        itemImage: './public/Fruits & Vegetables/Carrot.png',
+        itemImage: cookies,
         itemTitle: 'Dozen Cookies',
         price: '35.00',
         },
         
     ];
+
+   
+      
+  
   
   export default itemCard;
   

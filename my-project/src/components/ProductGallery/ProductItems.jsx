@@ -21,10 +21,12 @@ function ProductItems() {
 
           <HStack>
             <Text
-              width={"60%"}
+              width={"50%"}
               margin={"auto"}
               textAlign={"center"}
               marginTop={"1rem"}
+              fontSize={"13px"}
+              color={"grey"}
             >
             Welcome to Sweets by B, your one-stop shop for delicious homemade desserts! Browse our selection of rich cheesecakes, decadent cupcakes, gourmet puddings, and more—all made with love and the finest ingredients. Whether you're craving a classic treat or looking to try something new, we’ve got something to satisfy your sweet tooth. Place your order today and indulge in pure sweetness!
             </Text>
@@ -33,7 +35,7 @@ function ProductItems() {
 
          {/* Product Cards Section */}
         <HStack
-          width={"95%"}
+          width={"80%"}
           height={"100%"}
           flexWrap={"wrap"}
           justifyContent={"center"}
