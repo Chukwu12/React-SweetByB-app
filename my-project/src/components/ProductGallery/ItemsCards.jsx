@@ -156,6 +156,7 @@ import {Box, Grid, GridItem, Image, Text, VStack, HStack,position,} from "@chakr
                         fontWeight={"600"}
                         letterSpacing={"2px"}
                         fontSize={"20px"}
+                        
                       >
                         {" "}
                         {item.itemTitle}

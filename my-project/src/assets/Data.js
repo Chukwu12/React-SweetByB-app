@@ -2,7 +2,7 @@ import classicCheesecake from '../assets/images/classic-cheesecake.webp';
 import BananaPuddingCheesecake from '../assets/images/Banana-Pudding-Cheesecake.jpg';
 import dozenCupcakes from '../assets/images/dozen-cupcakes.jpg';
 import fourCupcakes from '../assets/images/box-cupcakes-4.jpg';
-import dozenChocolateStrawberries from '../assets/images/dozen-chocolate-covered-strawberries.jpg';
+import ChocolateStrawberries from '../assets/images/dozen-chocolate-covered-strawberries.jpg';
 import assortedDessert from '../assets/images/assorted-dessert.jpg';
 import largePudding from '../assets/images/largepuddingtray.jpg';
 import Puddingtray from '../assets/images/puddingtrey.jpeg';
@@ -42,8 +42,8 @@ const itemCard = [
     },
     {
       id: 5,
-      itemImage: dozenChocolateStrawberries,
-      itemTitle: 'Dozen Chocolate Covered Strawberries',
+      itemImage: ChocolateStrawberries,
+      itemTitle: 'Chocolate Strawberries',
       price: '40.00',
     },
     {
