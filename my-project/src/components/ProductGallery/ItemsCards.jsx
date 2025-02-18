@@ -45,9 +45,10 @@ import {Box, Grid, GridItem, Image, Text, VStack, HStack,position,} from "@chakr
           templateColumns={{
             base: "repeat(1, 1fr)",
             md: "repeat(3, 1fr)",
-            lg: "repeat(4, 1fr)",
+            lg: "repeat(3, 1fr)",
           }}
           gap="1rem"
+          justifyItems={"center"}
         >
           {data.map((item, index) => (
             <GridItem key={item.id} colSpan={1} rowSpan={1}>
