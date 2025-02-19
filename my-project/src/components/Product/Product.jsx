@@ -50,7 +50,7 @@ function Product({ cardImage, CardSubHeading, cardTitle, cardTitleColor }) {
 
           {/* Card Title */}
           <Text
-            fontSize={["10px", "14px", "20px"]}
+            fontSize={["20px", "16px", "20px", "24px"]}
             fontWeight={"800"}
             color={cardTitleColor}
             letterSpacing={"0.1rem"}

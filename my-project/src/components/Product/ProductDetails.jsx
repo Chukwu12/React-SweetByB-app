@@ -43,19 +43,19 @@ function ProductDetails() {
           cardImage={Image1}
           CardSubHeading={""}
           cardTitle={"CHEESECAKE"}
-          cardTitleColor={"white"}
+          cardTitleColor={"lime"}
         />
         <Product
           cardImage={Image2}
           CardSubHeading={""}
           cardTitle={"PUDDING"}
-          cardTitleColor={"white"}
+          cardTitleColor={"lime"}
         />
         <Product
           cardImage={Image3}
           CardSubHeading={""}
           cardTitle={"COOKIES"}
-          cardTitleColor={"white"}
+          cardTitleColor={"lime"}
         />
      </MotionHStack>
      </MotionBox>
