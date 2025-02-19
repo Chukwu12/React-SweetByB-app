@@ -10,8 +10,8 @@ function Product({ cardImage, CardSubHeading, cardTitle, cardTitleColor }) {
 
   return (
     <MotionBox
-      width={["80%", "80%", "80%", "28rem"]}
-      height={["5%", "5%", "5%", "18rem"]}
+      width={["90%", "90%", "80%", "28rem"]} // For mobile, tablet, and large screens
+      height={["18rem", "18rem", "18rem", "18rem"]} // Fixed height for consistency
       borderRadius={"20px"}
       overflow="hidden"
       boxShadow="md"
@@ -38,8 +38,8 @@ function Product({ cardImage, CardSubHeading, cardTitle, cardTitleColor }) {
         {/* Card Details */}
         <VStack
           position={"absolute"}
-          top={["10%", "10%", "20%"]}
-          left={["60%", "60%", "60%", "15rem"]}
+          top={["10%", "10%", "20%", "25%"]}
+          left={["60%", "60%", "60%", "15"]}
           alignItems={"flex-start"}
           gap={["10px", "10px", "15px"]}
           width={"40%"}

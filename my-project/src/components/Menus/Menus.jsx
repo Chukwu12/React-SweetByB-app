@@ -64,7 +64,7 @@ return(
                 Pudding Menu
             </motion.h1>
 
-            <div className="grid grid-cols-1 sm:grid-col-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-col-2 md:grid-cols-3 gap-6">
                 {MenusData.map((menu) => (
                     <motion.div 
                     variants={FadeLeft(menu.delay)}
@@ -79,8 +79,8 @@ return(
                      className="w-[60px] mb-4 scale-100 transform-translate-y-6" />  
 
                      <div>
-                        <h1 className="text-md font-semi-bold item-center">{menu.title}</h1>
-                        <p className="text-lg font-semi-bold text-secondary">{menu.price}</p>
+                        <h1 className="text-md font-bold item-center ">{menu.title}</h1>
+                        <p className="text-lg font-semi-bold text-secondary text-center ">{menu.price}</p>
                         </div> 
                      </motion.div>
                 ))}
