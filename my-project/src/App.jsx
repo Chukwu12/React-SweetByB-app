@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react'; 
+import Home from './Pages/Home';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import Menus from './components/Menus/Menus';
@@ -18,15 +19,15 @@ const App = () => {
       <Navbar />
       <Routes>
           {/* Define routes */}
-          <Route path="/" element={<Home />} /> {/* Displays Home page when user visits "/" */}
-          <Route path="/shop" element={<Shop />} /> {/* Displays Shop page */}
+          {/* <Route path="/" element={<Home />} /> */}
+          {/* <Route path="/shop" element={<Shop />} />
           <Route path="/CheeseCakes" element={<CheeseCakesPage />} />
         <Route path="/Cupcakes" element={<CupcakesPage />} />
         <Route path="/DessertBoxs" element={<DessertBoxsPage />} />
         <Route path="/Puddings" element={<PuddingsPage />} />
         <Route path="/Puddings-Flavors" element={<PuddingsFlavorsPage />} />
         <Route path="/Mini-Puddings-Cups" element={<MiniPuddingsCupsPage />} />
-        <Route path="/Cookies" element={<CookiesPage />} />
+        <Route path="/Cookies" element={<CookiesPage />} /> */}
       </Routes>
       <main className='overflow-x-hidden'>
          {/* Main Layout Components */}
