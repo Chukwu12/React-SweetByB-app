@@ -1,6 +1,6 @@
 import classicCheesecake from '../assets/images/classic-cheesecake.webp';
 import BananaPuddingCheesecake from '../assets/images/Banana-Pudding-Cheesecake.jpg';
-import dozenCupcakes from '../assets/images/dozen-cupcakes.jpg';
+import dozenCupcakes from '../assets/images/dozen-cupcakes.jpeg';
 import fourCupcakes from '../assets/images/box-cupcakes-4.jpg';
 import ChocolateStrawberries from '../assets/images/dozen-chocolate-covered-strawberries.jpg';
 import assortedDessert from '../assets/images/assorted-dessert.jpg';
@@ -11,7 +11,7 @@ import OGBananaJar from '../assets/images/banana-pudding1.jpg';
 import StrawberryShortcake from '../assets/images/Strawberry-Shortcake.jpg';
 import VeganBanana from '../assets/images/VeganBanana.jpg';
 import OreoPudding from '../assets/images/oreopudding.jpg';
-import MiniPudding from '../assets/images/mini-pudding.jpg';
+import MiniPudding from '../assets/images/puddingcups.jpeg';
 import cookies from '../assets/images/cookies.jpg';
 
 
@@ -97,7 +97,7 @@ const itemCard = [
 
     {id: 14,
     itemImage: MiniPudding,
-    itemTitle: '5oz Mini Cups with any Flavor Pudding',
+    itemTitle: '5oz Mini Cups',
     price: '3.00 each / 60.00 Minimum',
     },
 

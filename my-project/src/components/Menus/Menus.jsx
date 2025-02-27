@@ -4,6 +4,7 @@ import pudding2 from "../../assets/images/pumkin-pudding.png";
 import pudding3 from "../../assets/images/red-velvet2.png";
 import pudding4 from "../../assets/images/Conquito-pudding.png";
 import pudding5 from "../../assets/images/banana-pudding.png";
+import pudding6 from "../../assets/images/pudding-shortcake.png";
 import {AnimatePresence, motion} from "framer-motion";
 import { FadeLeft } from "../../utility/animation";
 
@@ -48,6 +49,15 @@ const MenusData = [
     price:  "$15.00",
     img: pudding5,
     delay: 1.2,
+},
+
+{
+    id:6,
+    title: "Pudding Shortcake",
+    link: "/",
+    price:  "$15.00",
+    img: pudding6,
+    delay: 1.2,
 }
     
 ]
@@ -78,10 +88,11 @@ return(
                      alt=""
                      className="w-[60px] mb-4 scale-100 transform-translate-y-6" />  
 
-                     <div>
-                        <h1 className="text-md font-bold item-center ">{menu.title}</h1>
-                        <p className="text-lg font-semi-bold text-secondary text-center ">{menu.price}</p>
-                        </div> 
+                        <div className="flex justify-center items-center flex-col">
+                        <h1 className="text-md font-bold text-center">{menu.title}</h1>
+                        <p className="text-lg font-semibold text-secondary text-center">{menu.price}</p>
+                        </div>
+
                      </motion.div>
                 ))}
             </div>

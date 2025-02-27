@@ -4,10 +4,11 @@ import { MdMenu, MdShoppingCart } from "react-icons/md";
 import ResponsiveMenu from './ResponsiveMenu';
 import { motion } from 'framer-motion';
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 
 const NavbarMenu = [
-    { id: 1, title: "Home", link: "#" },
+    { id: 1, title: "Home", link: "/" },
     { id: 2, title: "Products", link: "#products" },
     { id: 3, title: "About", link: "#about" },
     { 
@@ -15,16 +16,16 @@ const NavbarMenu = [
         title: "Shop", 
         link: "#",
         submenu: [  // Dropdown menu items
-            { id: 41, title: "Cheesecakes", link: "/organic-fruits" },
-            { id: 42, title: "CupCakes", link: "/aggregate-fruits" },
-            { id: 43, title: "Dessert Boxs", link: "/pits-fruits" },
-            { id: 44, title: "Puddings", link: "/legumas-fruits" },
-            { id: 45, title: "Puddings Flavors", link: "/legum-fruits" },
-            { id: 46, title: "Mini Puddings Cups", link: "/legus-fruits" },
-            { id: 47, title: "Cookies", link: "/legus-fruits" }
+            { id: 41, title: "Cheesecakes", link: "/CheeseCakes" },
+            { id: 42, title: "CupCakes", link: "/Cupcakes" },
+            { id: 43, title: "Dessert Boxs", link: "/DessertBoxs" },
+            { id: 44, title: "Puddings", link: "/Puddings" },
+            { id: 45, title: "Puddings Flavors", link: "/Puddings-Flavors" },
+            { id: 46, title: "Mini Puddings Cups", link: "/Mini-Puddings-Cups" },
+            { id: 47, title: "Cookies", link: "/Cookies" }
         ]
     },
-    { id: 5, title: "Contacts", link: "#" }
+    { id: 5, title: "Contacts", link: "/contact" }
 ];
 
 const Navbar = () => {
@@ -61,7 +62,7 @@ const Navbar = () => {
                                                 {menu.submenu.map((sub) => (
                                                     <MenuItem 
                                                         key={sub.id} 
-                                                        as="a" 
+                                                        as={Link} 
                                                         href={sub.link} 
                                                         className="hover:text-[#5EC49D] transition-all duration-150 ease"
                                                     >
@@ -71,12 +72,12 @@ const Navbar = () => {
                                             </MenuList>
                                         </Menu>
                                     ) : (
-                                        <a 
+                                        <Link 
                                             href={menu.link}
                                             className='inline-block py-1 px-3 hover:text-primary hover:shadow-[0_3px_0_-1px_#ef4444] font-semibold'
                                         >
                                             {menu.title}
-                                        </a>
+                                        </Link>
                                     )}
                                 </li>
                             ))}
