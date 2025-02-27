@@ -15,11 +15,11 @@ function ShopLink() {
       </MenuButton>
 
       <MenuList display={'flex'} flexDirection={'column'}  gap={'10px'} >
-        <MenuItem className="hover:text-[#5EC49D] transition-all duration-150 ease" as={Link} to="/organic-fruits">
+        <MenuItem className="hover:text-[#5EC49D] transition-all duration-150 ease" as={Link} to="/CheeseCakes">
         CheeseCakes
         </MenuItem>
 
-         <MenuItem className="hover:text-[#5EC49D] transition-all duration-150 ease" as={Link} to="/aggregate-fruits">
+         <MenuItem className="hover:text-[#5EC49D] transition-all duration-150 ease" as={Link} to="/Cupcakes">
          Cupcakes
         </MenuItem>
 
@@ -27,19 +27,19 @@ function ShopLink() {
           DessertBoxs
         </MenuItem>
         
-        <MenuItem className="hover:text-[#5EC49D] transition-all duration-150 ease" as={Link} to="/legumas-fruits">
+        <MenuItem className="hover:text-[#5EC49D] transition-all duration-150 ease" as={Link} to="/DessertBoxs">
          Puddings
         </MenuItem>
 
-        <MenuItem className="hover:text-[#5EC49D] transition-all duration-150 ease" as={Link} to="/legumas-fruits">
+        <MenuItem className="hover:text-[#5EC49D] transition-all duration-150 ease" as={Link} to="/PuddingsFlavors">
          Puddings Flavors
         </MenuItem>
 
-        <MenuItem className="hover:text-[#5EC49D] transition-all duration-150 ease" as={Link} to="/legumas-fruits">
+        <MenuItem className="hover:text-[#5EC49D] transition-all duration-150 ease" as={Link} to="/MiniPuddingsCups">
          Mini Puddings Cups
         </MenuItem>
 
-        <MenuItem className="hover:text-[#5EC49D] transition-all duration-150 ease" as={Link} to="/legumas-fruits">
+        <MenuItem className="hover:text-[#5EC49D] transition-all duration-150 ease" as={Link} to="/Cookies">
          Cookies
         </MenuItem>
 
