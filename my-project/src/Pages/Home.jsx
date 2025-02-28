@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
+import ExploreMenu from '../components/ProductGallery/ExploreMenu';
 
 const Home = () => {
-    return (
-      <div>
-        <h1>Welcome to Sweets by B</h1>
-        <p>Your one-stop shop for delicious treats!</p>
-        {/* More content related to the home page */}
-      </div>
-    );
-  };
+
+  const [category, setCategory] = useState("All");
+
+  return (
+    <div>
+      {/* <ExploreMenu category={category} setCategory={setCategory} /> */}
+    </div>
+  )
+}
   
   export default Home;

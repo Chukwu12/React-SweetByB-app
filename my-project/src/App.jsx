@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import React from 'react';
+import React, {useState} from 'react';
 import { ChakraProvider } from '@chakra-ui/react'; 
 import Home from './Pages/Home';
 import Navbar from './components/Navbar/Navbar';
@@ -12,12 +12,21 @@ import TestimonialsSection from './components/Testimonial/TestimonialsSection';
 import Contact from './components/Contact/ContactSection';
 import Footer from './components/Footer/Footer';
 import ContactSection from './components/Contact/ContactSection';
+import ExploreMenu from './components/ProductGallery/ExploreMenu';
+import StoreContextProvider from './context/storeContext';
+import FoodDisplay from './components/FoodDisplay/FoodDisplay';
+
+
+
 
 
 const App = () => {
+
+  const [category, setCategory] = useState("All");
   return (
     <ChakraProvider> 
       <BrowserRouter>
+      <StoreContextProvider>
       <Navbar />
       <Routes>
           {/* Define routes */}
@@ -33,15 +42,19 @@ const App = () => {
       </Routes>
       <main className='overflow-x-hidden'>
          {/* Main Layout Components */}
+         <Home />
         <Hero />
         <Menus />
         <Banner />
-        <ProductDetails />
-        <ProductItems /> 
+        {/* <ProductDetails />  */}
+        <ExploreMenu category={category} setCategory={setCategory} />
+        <FoodDisplay category = {category} />
+        {/* <ProductItems />  */}
         <TestimonialsSection />
         <ContactSection />
         <Footer /> 
       </main>
+      </StoreContextProvider>
       </BrowserRouter>
     </ChakraProvider>
     
