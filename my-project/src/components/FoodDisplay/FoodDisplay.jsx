@@ -4,9 +4,11 @@ import './FoodDisplay.css';
 import { StoreContext } from '../../context/storeContext';
 import FoodItem from '../FoodItem/FoodItem';
 
-
 const FoodDisplay = ({ category }) => {
   const { itemCard } = useContext(StoreContext);
+
+  // Filter items based on the category
+  const filteredItems = itemCard.filter(item => category === "All" || category === item.category);
 
   return (
     <VStack className="food-display" id="food-display" spacing={4}>
@@ -26,7 +28,7 @@ const FoodDisplay = ({ category }) => {
         width="100%"
         padding="1rem"
       >
-        {itemCard.map((item, index) => (
+        {filteredItems.map((item, index) => (
           <GridItem key={index} width="100%">
             <FoodItem 
               id={item.id} 

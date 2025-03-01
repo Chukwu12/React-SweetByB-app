@@ -33,7 +33,7 @@ export const itemCard = [
       name: '9 Inch Classic cheesecake',
       price: '60.00',
       description: 'Add Blueberries $5',
-      catergory: 'Cheesecakes'
+      category: 'Cheesecakes'
     },
     {
       id: 2,
@@ -42,7 +42,7 @@ export const itemCard = [
       name: 'Banana Pudding Cheesecake',
       price: '70.00',
       description: 'Banana Pudding Flavored Cheesecake, topped with whipped cream, chessman cookies & bannas',
-      catergory: 'Cheesecakes'
+      category: 'Cheesecakes'
     },
     {
       id: 3,
@@ -51,7 +51,7 @@ export const itemCard = [
       name: 'Dozen Cupcakes',
       price: '45.00',
       description: 'Flavors: Vanilla, Chocolate, Strewberry, Oreo',
-      catergory: 'Cupcakes'
+      category: 'Cupcakes'
     },
     {
       id: 4,
@@ -60,7 +60,7 @@ export const itemCard = [
       name: 'Boxes of 4 Cupcakes',
       price: '15.00',
       description: 'Flavors: Vanilla, Chocolate, Strewberry, Oreo',
-      catergory: 'Cupcakes'
+       category:'Cupcakes'
     },
     {
       id: 5,
@@ -69,7 +69,7 @@ export const itemCard = [
       name: 'Dozen Chocolate Covered Strawberries',
       price: '40.00',
       description: '',
-      catergory: 'Dessert Boxs'
+      category: 'Dessert Boxs'
     },
     {
       id: 6,
@@ -78,7 +78,7 @@ export const itemCard = [
       name: 'Assorted Dessert Boxes',
       price: '35.00',
       description: 'Chocolate Coverd Oreos, Chocolate Rice Krispies & Chocolate covered Pretzels',
-      catergory: 'Dessert Boxs'
+      category: 'Dessert Boxs'
     },
     {
       id: 7,
@@ -87,7 +87,7 @@ export const itemCard = [
       name: 'Large Pudding Tray',
       price: '55.00',
       description: 'Serves 12+',
-      catergory: 'Pudding'
+      category: 'Pudding'
     },
     {
       id: 8,
@@ -96,7 +96,7 @@ export const itemCard = [
       name: 'Half & Half Tray',
       price: '65.00',
       description: '2 pudding flavors',
-      catergory: 'Pudding'
+      category: 'Pudding'
     },
 
     {id: 9,
@@ -105,7 +105,7 @@ export const itemCard = [
     name: '16oz Mason Jars',
     price: '15.00',
     description: 'Request flavor',
-    catergory: 'Pudding'
+    category: 'Pudding'
   },
 
   {id: 10,
@@ -114,7 +114,7 @@ export const itemCard = [
   name: 'The OG Banana',
   price: '15.00 / 55.00',
   description: 'Vanilla pudding with bananas & chessman cookies',
-  catergory: 'Pudding'
+   category:'Pudding'
 },
 
     {id: 11,
@@ -123,7 +123,7 @@ export const itemCard = [
     name: 'Strawberry Shortcake',
     price: '15.00 / 55.00',
     description: 'Vanilla pudding with Angel Food cake, Strawberry syrup, Strawberries & chessman cookie crumbs',
-    catergory: 'Pudding'
+    category: 'Pudding'
     },
 
     {id: 12,
@@ -132,7 +132,7 @@ export const itemCard = [
     name: 'Vegan Banana',
     price: '20.00 / 75.00',
     description: 'Vegan Vanilla pudding with vegan Vanilla waffers',
-    catergory: 'Pudding'
+    category:'Pudding'
     },
 
     {id: 13,
@@ -141,7 +141,7 @@ export const itemCard = [
     name: 'Oreo',
     price: '15.00 / 55.00',
     description: 'Cookies & Cream pudding with crushed Oreos',
-    catergory: 'Pudding'
+    category: 'Pudding'
     },
 
     {id: 14,
@@ -150,7 +150,7 @@ export const itemCard = [
     name: '5oz Mini Cups',
     price: '3.00 each',
     description: '60.00 Minimum Prices reflect a minimum order of 20 cups',
-    catergory: 'Mini Pudding Cups'
+    category: 'Mini Pudding Cups'
     },
 
     {id: 15,
@@ -159,7 +159,7 @@ export const itemCard = [
         name: 'Dozen Cookies',
         price: '35.00',
         description: 'Request Flavor',
-        catergory: 'Cookies'
+        category: 'Cookies'
         },
         
     ];
