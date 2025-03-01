@@ -51,7 +51,7 @@ const App = () => {
         <FoodDisplay category = {category} />
         {/* <ProductItems />  */}
         <TestimonialsSection />
-        <ContactSection />
+        {/* <ContactSection /> */}
         <Footer /> 
       </main>
       </StoreContextProvider>

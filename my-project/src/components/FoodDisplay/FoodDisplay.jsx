@@ -1,21 +1,45 @@
-import React, { useContext } from 'react'
-import './FoodDisplay.css'
-import { StoreContext } from '../../context/storeContext'
-import FoodItem from '../FoodItem/FoodItem'
+import React, { useContext } from 'react';
+import { Grid, GridItem, Text, VStack } from '@chakra-ui/react';
+import './FoodDisplay.css';
+import { StoreContext } from '../../context/storeContext';
+import FoodItem from '../FoodItem/FoodItem';
 
-const FoodDisplay = ({category}) => {
 
-    const{itemCard} = useContext(StoreContext)
+const FoodDisplay = ({ category }) => {
+  const { itemCard } = useContext(StoreContext);
+
   return (
-    <div className='food-display' id='food-display'>
-        <h2>Check out our Full Menu</h2>
-        <div className='food-display-list'>
-            {itemCard.map((item, index) => {
-                return <FoodItem key={index} id={item.id} name={item.name} description={item.description} price={item.price} itemImage={item.itemImage}/>
-            })}
-        </div>
-    </div>
-  )
-}
+    <VStack className="food-display" id="food-display" spacing={4}>
+      <Text fontSize={['25px', '40px']} fontWeight="600" letterSpacing="2px">
+        Check out our Full Menu
+      </Text>
 
-export default FoodDisplay
+      {/* Grid Layout for Food Items */}
+      <Grid
+        templateColumns={{
+          base: "repeat(1, 1fr)", // Single column on small screens
+          md: "repeat(2, 1fr)", // Two columns on medium screens
+          lg: "repeat(3, 1fr)", // Three columns on large screens
+        }}
+        gap="1rem"
+        justifyItems="center"
+        width="100%"
+        padding="1rem"
+      >
+        {itemCard.map((item, index) => (
+          <GridItem key={index} width="100%">
+            <FoodItem 
+              id={item.id} 
+              name={item.name} 
+              description={item.description} 
+              price={item.price} 
+              itemImage={item.itemImage}
+            />
+          </GridItem>
+        ))}
+      </Grid>
+    </VStack>
+  );
+};
+
+export default FoodDisplay;
