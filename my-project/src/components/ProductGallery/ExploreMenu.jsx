@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import '../ProductGallery/ExploreMenu.css';
 import { menu_list } from '../../assets/Data.js';
-import { FadeIn } from "../../utility/animation"; // Import your animation variant
+import { FadeUp, FadeIn } from "../../utility/animation"; // Import custom animations
 
 // Wrap Chakra UI components with motion
 const MotionBox = motion(Box);
@@ -25,7 +25,7 @@ const ExploreMenu = ({ category, setCategory }) => {
       animate="visible"
       variants={{
         hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0, transition: { duration: 1 } },
+        visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.2 } },
       }}
     >
       {/* Animated Title & Description */}
@@ -33,26 +33,33 @@ const ExploreMenu = ({ category, setCategory }) => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={FadeIn(0.5)}
       >
-        <MotionHStack>
-          <Text fontSize={['25px', '40px']} fontWeight={"600"} letterSpacing={"2px"}>
-            Shop Your Favorite Sweet Treats
-          </Text>
-        </MotionHStack>
+        <motion.h1 
+          variants={FadeUp(0.5)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className='text-3xl lg:text-6xl font-bold uppercase'
+        >
+          Shop Your Favorite Sweet Treats
+        </motion.h1>
 
-        <MotionHStack>
-          <Text
-            width={"50%"}
-            margin={"auto"}
-            textAlign={"center"}
-            marginTop={"1rem"}
-            fontSize={"13px"}
-            color={"grey"}
-          >
-            Welcome to Sweets by B, your one-stop shop for delicious homemade desserts! Browse our selection of rich cheesecakes, decadent cupcakes, gourmet puddings, and more—all made with love and the finest ingredients. Whether you're craving a classic treat or looking to try something new, we’ve got something to satisfy your sweet tooth. Place your order today and indulge in pure sweetness!
-          </Text>
-        </MotionHStack>
+        <motion.p
+          variants={FadeIn(0.5)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center text-gray-600 mt-4"
+          style={{
+            width: "50%",
+            fontSize: "14px",
+          }}
+        >
+          Welcome to Sweets by B, your one-stop shop for delicious homemade desserts! 
+          Browse our selection of rich cheesecakes, decadent cupcakes, gourmet puddings, and more—all made with love 
+          and the finest ingredients. Whether you're craving a classic treat or looking to try something new, 
+          we’ve got something to satisfy your sweet tooth. Place your order today and indulge in pure sweetness!
+        </motion.p>
       </MotionVStack>
 
       {/* Animated Menu Items */}
@@ -62,24 +69,30 @@ const ExploreMenu = ({ category, setCategory }) => {
         flexWrap={"wrap"}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
-        variants={FadeIn(0.5)}
+        viewport={{ once: false, amount: 0.2 }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.2 } // Smooth staggering
+          }
+        }}
+        marginTop={"3rem"} 
       >
         {menu_list.map((item, index) => (
           <motion.div
             key={index}
             onClick={() => setCategory(prev => prev === item.menu_name ? "All" : item.menu_name)}
             className='explore-menu-list-item'
-            whileHover={{ scale: 1.1 }} // Animation when hovered
-            whileTap={{ scale: 0.95 }} // Animation when clicked
+            variants={FadeUp(0.3)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
           >
             <motion.img
               className={category === item.menu_name ? "active" : ""}
               src={item.menu_image}
               alt={item.menu_name}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.15 }}
             />
             <p>{item.menu_name}</p>
           </motion.div>

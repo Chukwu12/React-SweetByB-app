@@ -4,27 +4,13 @@ import { MdMenu, MdShoppingCart } from "react-icons/md";
 import ResponsiveMenu from './ResponsiveMenu';
 import { motion } from 'framer-motion';
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-
+import { Link } from 'react-router-dom'; // ✅ Correct import
 
 const NavbarMenu = [
     { id: 1, title: "Home", link: "/" },
-    { id: 2, title: "Products", link: "#products" },
-    { id: 3, title: "About", link: "#about" },
-    { 
-        id: 4, 
-        title: "Shop", 
-        link: "#",
-        submenu: [  // Dropdown menu items
-            { id: 41, title: "Cheesecakes", link: "/CheeseCakes" },
-            { id: 42, title: "CupCakes", link: "/Cupcakes" },
-            { id: 43, title: "Dessert Boxs", link: "/DessertBoxs" },
-            { id: 44, title: "Puddings", link: "/Puddings" },
-            { id: 45, title: "Puddings Flavors", link: "/Puddings-Flavors" },
-            { id: 46, title: "Mini Puddings Cups", link: "/Mini-Puddings-Cups" },
-            { id: 47, title: "Cookies", link: "/Cookies" }
-        ]
-    },
+    { id: 2, title: "Products", link: "/products" },  // ✅ Fixed "#products"
+    { id: 3, title: "About", link: "/about" },        // ✅ Fixed "#about"
+    { id: 4, title: "Shop", link: "/shop" },          // ✅ Fixed "#"
     { id: 5, title: "Contacts", link: "/contact" }
 ];
 
@@ -42,9 +28,9 @@ const Navbar = () => {
                 >
                     {/* Logo section */}
                     <div className='text-2xl flex items-center gap-2 font-bold uppercase'>
-                        {/* <p className='text-primary'>Sweet</p>
-                        <p className='text-secondary'>ByB</p> */}
-                      <img src={Logo} alt="Logo" className="w-32 h-32" />
+                        <Link to="/">
+                            <img src={Logo} alt="Logo" className="w-32 h-32" />
+                        </Link>
                     </div>
 
                     {/* Menu section */}
@@ -62,8 +48,8 @@ const Navbar = () => {
                                                 {menu.submenu.map((sub) => (
                                                     <MenuItem 
                                                         key={sub.id} 
-                                                        as={Link} 
-                                                        href={sub.link} 
+                                                        as={Link}  // ✅ Changed from href to to
+                                                        to={sub.link} 
                                                         className="hover:text-[#5EC49D] transition-all duration-150 ease"
                                                     >
                                                         {sub.title}
@@ -73,7 +59,7 @@ const Navbar = () => {
                                         </Menu>
                                     ) : (
                                         <Link 
-                                            href={menu.link}
+                                            to={menu.link} // ✅ Changed from href to to
                                             className='inline-block py-1 px-3 hover:text-primary hover:shadow-[0_3px_0_-1px_#ef4444] font-semibold'
                                         >
                                             {menu.title}
@@ -81,9 +67,13 @@ const Navbar = () => {
                                     )}
                                 </li>
                             ))}
-                            <button className='text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-200'>
+                            {/* Cart Button */}
+                            <Link 
+                                to="/cart" 
+                                className='text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-200'
+                            >
                                 <MdShoppingCart />
-                            </button>
+                            </Link>
                         </ul>
                     </div>
 
