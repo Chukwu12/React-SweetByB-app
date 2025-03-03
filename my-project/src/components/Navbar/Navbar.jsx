@@ -4,13 +4,13 @@ import { MdMenu, MdShoppingCart } from "react-icons/md";
 import ResponsiveMenu from './ResponsiveMenu';
 import { motion } from 'framer-motion';
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { Link } from 'react-router-dom'; // ✅ Correct import
+import { Link } from 'react-router-dom'; 
 
 const NavbarMenu = [
     { id: 1, title: "Home", link: "/" },
-    { id: 2, title: "Products", link: "/products" },  // ✅ Fixed "#products"
-    { id: 3, title: "About", link: "/about" },        // ✅ Fixed "#about"
-    { id: 4, title: "Shop", link: "/shop" },          // ✅ Fixed "#"
+    { id: 2, title: "Products", link: "/products" },  
+    { id: 3, title: "About", link: "/about" },       
+    { id: 4, title: "Shop", link: "/shop" },          
     { id: 5, title: "Contacts", link: "/contact" }
 ];
 
@@ -48,7 +48,7 @@ const Navbar = () => {
                                                 {menu.submenu.map((sub) => (
                                                     <MenuItem 
                                                         key={sub.id} 
-                                                        as={Link}  // ✅ Changed from href to to
+                                                        as={Link}  
                                                         to={sub.link} 
                                                         className="hover:text-[#5EC49D] transition-all duration-150 ease"
                                                     >
@@ -59,7 +59,7 @@ const Navbar = () => {
                                         </Menu>
                                     ) : (
                                         <Link 
-                                            to={menu.link} // ✅ Changed from href to to
+                                            to={menu.link} 
                                             className='inline-block py-1 px-3 hover:text-primary hover:shadow-[0_3px_0_-1px_#ef4444] font-semibold'
                                         >
                                             {menu.title}

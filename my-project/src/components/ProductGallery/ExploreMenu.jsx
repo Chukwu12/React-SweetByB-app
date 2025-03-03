@@ -45,7 +45,7 @@ const ExploreMenu = ({ category, setCategory }) => {
         </motion.h1>
 
         <motion.p
-          variants={FadeIn(0.5)}
+          variants={FadeIn(0.7)}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -70,13 +70,7 @@ const ExploreMenu = ({ category, setCategory }) => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.2 }}
-        variants={{
-          hidden: { opacity: 0 },
-          visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.2 } // Smooth staggering
-          }
-        }}
+        variants={FadeUp(0.7)}
         marginTop={"3rem"} 
       >
         {menu_list.map((item, index) => (
