@@ -7,8 +7,7 @@ import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { Link } from 'react-router-dom'; 
 
 const NavbarMenu = [
-    { id: 1, title: "Home", link: "/" },
-    { id: 2, title: "Products", link: "/products" },  
+    { id: 1, title: "Home", link: "/" },  
     { id: 3, title: "About", link: "/about" },       
     { id: 4, title: "Shop", link: "/shop" },          
     { id: 5, title: "Contacts", link: "/contact" }
