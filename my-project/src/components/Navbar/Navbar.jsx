@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const NavbarMenu = [
     { id: 1, title: "Home", link: "/" },
-    { id: 2, title: "Products", link: "#products" },
-    { id: 3, title: "About", link: "#about" },
+    { id: 2, title: "Products", link: "/products" },
+    { id: 3, title: "About", link: "/about" },
     { 
         id: 4, 
         title: "Shop", 
