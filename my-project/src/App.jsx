@@ -1,63 +1,36 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import React, {useState} from 'react';
-import { ChakraProvider } from '@chakra-ui/react'; 
+import React from 'react';
+import { ChakraProvider } from '@chakra-ui/react';
 import Home from './Pages/Home';
 import Navbar from './components/Navbar/Navbar';
-import Hero from './components/Hero/Hero';
-import Menus from './components/Menus/Menus';
-import Banner from './components/Banner/Banner';
-import ProductDetails from "./components/Product/ProductDetails";
-import ProductItems from "./components/ProductGallery/ProductItems"; 
-import TestimonialsSection from './components/Testimonial/TestimonialsSection'; 
 import Contact from './components/Contact/ContactSection';
 import Footer from './components/Footer/Footer';
-import ContactSection from './components/Contact/ContactSection';
-import ExploreMenu from './components/ProductGallery/ExploreMenu';
 import StoreContextProvider from './context/storeContext';
-import FoodDisplay from './components/FoodDisplay/FoodDisplay';
-
-
-
-
+import About from './Pages/About';
+import Cart from './Pages/Cart'; // Import Cart Page
 
 const App = () => {
-
-  const [category, setCategory] = useState("All");
   return (
-    <ChakraProvider> 
+    <ChakraProvider>
       <BrowserRouter>
-      <StoreContextProvider>
-      <Navbar />
-      <Routes>
-          {/* Define routes */}
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/shop" element={<Shop />} />
-          <Route path="/CheeseCakes" element={<CheeseCakesPage />} />
-        <Route path="/Cupcakes" element={<CupcakesPage />} />
-        <Route path="/DessertBoxs" element={<DessertBoxsPage />} />
-        <Route path="/Puddings" element={<PuddingsPage />} />
-        <Route path="/Puddings-Flavors" element={<PuddingsFlavorsPage />} />
-        <Route path="/Mini-Puddings-Cups" element={<MiniPuddingsCupsPage />} />
-        <Route path="/Cookies" element={<CookiesPage />} /> */}
-      </Routes>
-      <main className='overflow-x-hidden'>
-         {/* Main Layout Components */}
-         <Home />
-        <Hero />
-        <Menus />
-        <Banner />
-        {/* <ProductDetails />  */}
-        <ExploreMenu category={category} setCategory={setCategory} />
-        <FoodDisplay category = {category} />
-        {/* <ProductItems />  */}
-        <TestimonialsSection />
-        {/* <ContactSection /> */}
-        <Footer /> 
-      </main>
-      </StoreContextProvider>
+        <StoreContextProvider>
+          <Navbar />
+          <Routes>
+            {/* Home Page */}
+            <Route path="/" element={<Home />} />
+            {/* About Page */}
+            <Route path="/about" element={<About />} />
+            {/* Cart Page */}
+            <Route path="/cart" element={<Cart />} />  
+            {/* Contact Page */}
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+
+          {/* Footer is outside Routes so it appears on all pages */}
+          <Footer />
+        </StoreContextProvider>
       </BrowserRouter>
     </ChakraProvider>
-    
   );
 };
 
