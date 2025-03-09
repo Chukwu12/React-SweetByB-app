@@ -35,7 +35,7 @@ const MenusData = [
 },
 {
     id:4,
-    title: "Conquito Cremas Pudding",
+    title: "Coquito Cremas Pudding",
     link: "/",
     price:  "$15.00",
     img: pudding4,
@@ -77,6 +77,7 @@ return(
             <div className="grid grid-cols-1 sm:grid-col-2 md:grid-cols-3 gap-6">
                 {MenusData.map((menu) => (
                     <motion.div 
+                    key={menu.id} 
                     variants={FadeLeft(menu.delay)}
                     initial= "hidden"
                     whileInView={"visible"}
@@ -84,9 +85,10 @@ return(
                     className="bg-white rounded-3xl px-4 py-2 
                     shadow-[0_0_22px_0_rgba(0,0,0,0.15)] flex flex-row justify-around item-center
                     gap-3">
-                     <img src={menu.img} 
-                     alt=""
-                     className="w-[60px] mb-4 scale-100 transform-translate-y-6" />  
+                    <img src={menu.img} 
+                        alt=""
+                        className="w-[100px] h-[150px] object-contain  rounded-lg" />
+ 
 
                         <div className="flex justify-center items-center flex-col">
                         <h1 className="text-md font-bold text-center">{menu.title}</h1>

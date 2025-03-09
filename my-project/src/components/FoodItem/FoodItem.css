@@ -12,7 +12,10 @@
     border-radius: 15px 15px 0px 0px;
     height: 300px;
     object-fit: cover;
+    
 }
+
+
 
 .food-item-info{
     padding: 20px;
@@ -54,6 +57,7 @@
     right: 15px;
     cursor: pointer;
     border-radius: 50%;
+    background-color: tomato;
 }
 
 .food-item-counter{

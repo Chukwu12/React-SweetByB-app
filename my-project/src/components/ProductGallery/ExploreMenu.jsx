@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Box, HStack, Text, VStack } from "@chakra-ui/react";
+import { Box, HStack, VStack } from "@chakra-ui/react";
 import '../ProductGallery/ExploreMenu.css';
 import { menu_list } from '../../assets/Data.js';
 import { FadeUp, FadeIn } from "../../utility/animation"; // Import custom animations
@@ -11,6 +11,12 @@ const MotionHStack = motion(HStack);
 const MotionVStack = motion(VStack);
 
 const ExploreMenu = ({ category, setCategory }) => {
+  
+  // Memoized function to prevent unnecessary re-renders
+  const handleCategoryClick = useCallback((menuName) => {
+    setCategory(prev => prev === menuName ? "All" : menuName);
+  }, [setCategory]);
+
   return (
     <MotionBox
       width={"100%"}
@@ -32,13 +38,13 @@ const ExploreMenu = ({ category, setCategory }) => {
       <MotionVStack
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.3 }} // Optimized to avoid repeated triggers
       >
         <motion.h1 
           variants={FadeUp(0.5)}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.3 }}
           className='text-3xl lg:text-6xl font-bold uppercase'
         >
           Shop Your Favorite Sweet Treats
@@ -48,7 +54,7 @@ const ExploreMenu = ({ category, setCategory }) => {
           variants={FadeIn(0.7)}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.3 }}
           className="text-center text-gray-600 mt-4"
           style={{
             width: "50%",
@@ -69,14 +75,14 @@ const ExploreMenu = ({ category, setCategory }) => {
         flexWrap={"wrap"}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.3 }} // Prevents re-triggering
         variants={FadeUp(0.7)}
         marginTop={"3rem"} 
       >
-        {menu_list.map((item, index) => (
+        {menu_list.map((item) => (
           <motion.div
-            key={index}
-            onClick={() => setCategory(prev => prev === item.menu_name ? "All" : item.menu_name)}
+            key={item.id} // ✅ Using unique `id` instead of index
+            onClick={() => handleCategoryClick(item.menu_name)}
             className='explore-menu-list-item'
             variants={FadeUp(0.3)}
             whileHover={{ scale: 1.1 }}
@@ -86,7 +92,7 @@ const ExploreMenu = ({ category, setCategory }) => {
               className={category === item.menu_name ? "active" : ""}
               src={item.menu_image}
               alt={item.menu_name}
-              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.15 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: item.id * 0.15 }}
             />
             <p>{item.menu_name}</p>
           </motion.div>
