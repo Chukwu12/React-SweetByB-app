@@ -34,6 +34,9 @@
     color: #747474;
     font-size: max(1.4vw, 16px);
     cursor: pointer;
+    word-wrap: break-word;
+   
+    text-align: center;
 }
 
 .explore-menu hr{
