@@ -5,7 +5,7 @@ import Cupackes from "../../assets/images/IMG_0649.jpeg"
 import Cupackes2 from "../../assets/images/IMG_9855.jpeg"
 import Chessecake from "../../assets/images/image5.jpeg"
 import Chessecake2 from "../../assets/images/IMG_9907.jpeg"
-import ValentineBox from "../../assets/images/IMG_9908.jpeg"
+import ValentineBox from "../../assets/images/IMG_9908.jpg"
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -27,12 +27,13 @@ const Banner = () => {
                         viewport={{ once: true }}
                         src={BannerImg}
                         alt="Banner image showcasing our products or services"
+                        loading="lazy"
                         className='w-full md:max-w-[800px] h-full object-cover rounded-[25px]'
                     />
                 </div>
 
                 {/* Swiper Component */}
-                <div className='flex justify-center items-center'>
+                <div className='flex justify-center self-center items-center'>
                     <Swiper
                         modules={[Navigation, Pagination, Autoplay]}
                         spaceBetween={30}
