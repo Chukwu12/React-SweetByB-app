@@ -54,8 +54,8 @@ const ExploreMenu = ({ category, setCategory }) => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-center text-gray-600 mt-4"
-          style={{ width: "50%", fontSize: "14px" }}
+          className="text-center text-gray-600 mt-4 w-full sm:w-1/2 px-4"
+          style={{ fontSize: "14px" }}
         >
           Welcome to Sweets by B, your one-stop shop for delicious homemade desserts! 
           Browse our selection of rich cheesecakes, decadent cupcakes, gourmet puddings, and more—all made with love 

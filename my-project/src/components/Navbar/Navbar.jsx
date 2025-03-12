@@ -8,9 +8,8 @@ import { Link } from 'react-router-dom';
 
 const NavbarMenu = [
     { id: 1, title: "Home", link: "/" },  
-    { id: 3, title: "About", link: "/about" },       
-    { id: 4, title: "Shop", link: "/shop" },          
-    { id: 5, title: "Contacts", link: "/contact" }
+    { id: 3, title: "About", link: "/about" },              
+    { id: 4, title: "Contacts", link: "/contact" }
 ];
 
 const Navbar = () => {
@@ -84,7 +83,8 @@ const Navbar = () => {
             </nav>
 
             {/* Mobile Menu Section */}
-            <ResponsiveMenu open={open} />
+            <ResponsiveMenu open={open} setOpen={setOpen} />
+
         </>
     );
 };
