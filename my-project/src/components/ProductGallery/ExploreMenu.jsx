@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Box, HStack, VStack } from "@chakra-ui/react";
+import { Box, HStack, VStack } from '@chakra-ui/react';
 import '../ProductGallery/ExploreMenu.css';
 import { menu_list } from '../../assets/Data.js';
 import { FadeUp, FadeIn } from "../../utility/animation"; // Import custom animations
@@ -11,11 +11,10 @@ const MotionHStack = motion(HStack);
 const MotionVStack = motion(VStack);
 
 const ExploreMenu = ({ category, setCategory }) => {
-  
-  // Memoized function to prevent unnecessary re-renders
-  const handleCategoryClick = useCallback((menuName) => {
-    setCategory(prev => prev === menuName ? "All" : menuName);
-  }, [setCategory]);
+  // Handle category change when a menu item is clicked
+  const handleCategoryChange = (menu_name) => {
+    setCategory(prev => (prev === menu_name ? "All" : menu_name));
+  };
 
   return (
     <MotionBox
@@ -44,8 +43,8 @@ const ExploreMenu = ({ category, setCategory }) => {
           variants={FadeUp(0.5)}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className='text-3xl lg:text-6xl font-bold uppercase'
+          viewport={{ once: true }}
+          className="text-3xl lg:text-6xl font-bold uppercase"
         >
           Shop Your Favorite Sweet Treats
         </motion.h1>
@@ -54,12 +53,9 @@ const ExploreMenu = ({ category, setCategory }) => {
           variants={FadeIn(0.7)}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="text-center text-gray-600 mt-4"
-          style={{
-            width: "50%",
-            fontSize: "14px",
-          }}
+          viewport={{ once: true }}
+          className="text-center text-gray-600 mt-4 w-full sm:w-1/2 px-4"
+          style={{ fontSize: "14px" }}
         >
           Welcome to Sweets by B, your one-stop shop for delicious homemade desserts! 
           Browse our selection of rich cheesecakes, decadent cupcakes, gourmet puddings, and more—all made with love 
@@ -77,13 +73,13 @@ const ExploreMenu = ({ category, setCategory }) => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }} // Prevents re-triggering
         variants={FadeUp(0.7)}
-        marginTop={"3rem"} 
+        marginTop={"3rem"}
       >
         {menu_list.map((item) => (
           <motion.div
-            key={item.id} // ✅ Using unique `id` instead of index
-            onClick={() => handleCategoryClick(item.menu_name)}
-            className='explore-menu-list-item'
+            key={index}
+            onClick={() => handleCategoryChange(item.menu_name)}
+            className="explore-menu-list-item"
             variants={FadeUp(0.3)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}

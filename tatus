@@ -1,0 +1,34 @@
+[33mb3bf6ef[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Commit local code to overwrite remote
+[33m6461f8e[m update navbar
+[33maa36d94[m update
+[33m49139a6[m updated cart.jsx using chakra for styling
+[33m9b8a0e3[m added cart functions and connected some links  for the navbar
+[33m62dec5f[m filter menu to match product item on click
+[33ma105117[m update item card content
+[33m8f74bdf[m updated menu, products, data, images, data, images, and product
+[33mef9ecbf[m Merge branch 'main' of https://github.com/Chukwu12/React-SweetByB-app into main
+[33m389bffd[m Saving local changes before merge
+[33mc72f629[m update site
+[33md51af1b[m update
+[33m41e27b1[m updated font sizes for product cards
+[33m725294c[m updated product card for mobile view
+[33mba5243e[m update
+[33m78ade8f[m update
+[33m0212655[m moved file
+[33maa4b507[m update
+[33m351d70b[m updated  navbar, products, and fonts
+[33m198eb79[m Merge branch 'main' of https://github.com/Chukwu12/React-SweetByB-app into main
+[33ma6253da[m update
+[33mce3befb[m update
+[33m9cfafad[m updated product items with images
+[33m950977d[m added menu for items and details
+[33m364bf7d[m updated product list / gallery
+[33m745036b[m update
+[33m472a89b[m update home page
+[33mbe35e56[m added menu and finished banner components
+[33m3dc6b71[m fixing banner component
+[33ma9a5d25[m added new components, navbar,menus
+[33me161c43[m updated navbar
+[33m23081aa[m updated react app
+[33m5c7fef9[m Create README.md
+[33m5504515[m Create .gitignore

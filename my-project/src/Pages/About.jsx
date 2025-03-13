@@ -6,7 +6,7 @@ import TestimonialsSection from '../components/Testimonial/TestimonialsSection';
 
 const About = () => {
   return (
-    <section id="about" className="bg-secondary/10">
+    <section id="about">
       <div className="container grid grid-cols-1 md:grid-cols-2 gap-5 space-y-6 md:space-y-0 py-14">
         {/* Banner Image */}
         <div className="flex justify-center items-center">
