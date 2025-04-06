@@ -6,6 +6,7 @@ import Cupackes2 from "../../assets/images/IMG_9855.jpeg"
 import Chessecake from "../../assets/images/image5.jpeg"
 import Chessecake2 from "../../assets/images/IMG_9907.jpeg"
 import ValentineBox from "../../assets/images/IMG_9908.jpg"
+import bannerVideo from "../../assets/images/banner-video.mp4";
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -21,14 +22,14 @@ const Banner = () => {
                 {/* Banner Image */}
                 <div className='flex justify-center items-center'>
                     <motion.img
-                        initial={{ opacity: 0, scale: 0.5 }} 
+                        initial={{ opacity: 0, scale: 0.5 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
                         viewport={{ once: true }}
                         src={BannerImg}
                         alt="Banner image showcasing our products or services"
                         loading="lazy"
-                         className="w-full h-[300px] sm:h-[400px] md:h-auto md:max-w-[800px] object-cover rounded-[25px]"
+                        className="w-full h-[300px] sm:h-[400px] md:h-auto md:max-w-[800px] object-cover rounded-[25px]"
                     />
                 </div>
 
@@ -89,6 +90,21 @@ const Banner = () => {
                                 className="w-full h-full object-cover rounded-[25px]"
                             />
                         </SwiperSlide>
+
+                        {/* SwiperSlide with a video */}
+                        <SwiperSlide>
+                            <motion.video
+                                autoPlay
+                                loop
+                                muted
+                                className="w-full h-full object-cover rounded-[25px]"
+                            >
+                                <source src={bannerVideo} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </motion.video>
+                        </SwiperSlide>
+
+
                     </Swiper>
                 </div>
             </div>

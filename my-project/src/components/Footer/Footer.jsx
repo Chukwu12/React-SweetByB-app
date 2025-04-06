@@ -1,140 +1,94 @@
-import {Box, HStack, Image, Stack,Text,} from "@chakra-ui/react";
-  import logo from "../../assets/images/footer-logo.png";
-  import { FaLocationDot } from "react-icons/fa6";
-  import { IoMdCall } from "react-icons/io";
-  import { FaFacebookF } from "react-icons/fa";
-  import { FaInstagram } from "react-icons/fa";
-  import FooterStyle from "./FooterStyle";
+import { Box, HStack, Image, Stack, Text, } from "@chakra-ui/react";
+import logo from "../../assets/images/footer-logo.png";
+import { FaInstagram } from "react-icons/fa";
+import { Divider } from "@chakra-ui/react";
+import FooterStyle from "./FooterStyle";
 
-  
-  function Footer() {
-    return (
-      <>
+
+function Footer() {
+  return (
+    <>
+      <Box
+        width={"100%"}
+        minHeight={"100vh"}
+        paddingTop={"10rem"}
+        overflow={"hidden"}
+        // marginBottom={'100px'}
+        paddingBottom={"50px"}
+      >
+        {/* Blue Box */}
         <Box
-          width={"100%"}
-          min-height={"100vh"}
-          paddingTop={"10rem"}
-          overflow={"hidden"}
-          // marginBottom={'100px'}
-          paddingBottom={"50px"}
+          width={"95%"}
+          height={"100%"}
+          margin={"auto"}
+          backgroundColor={"#6CB095"}
+          borderRadius={['30px', '30px', '30px', '80px']}
+          color={"white"}
+
         >
-          {/* Blue Box */}
-          <Box
-            width={"95%"}
-            height={"100%"}
-            margin={"auto"}
-            backgroundColor={"#6CB095"}
-            borderRadius={['30px' , '30px' , '30px' , '80px']}
-            color={"white"}
-            
+          {/*Footer Top  */}
+          <Stack
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            paddingTop={["0px", "0px", "10px", "20px", "50px"]}
           >
-            {/*Footer Top  */}
-            <Stack
-              display={"flex"}
+            <HStack
+              display={["grid", "grid", "grid", "grid", "flex"]}
+              gridTemplateColumns={"repeat(1, 1fr)"}
+
               alignItems={"center"}
               justifyContent={"center"}
-              paddingTop={["0px", "0px", "10px", "20px", "50px"]}
+              gap={"20px"}
+              paddingLeft={["20px", "0px", "20px", "0px", "0px"]}
             >
+              {/* Footer Image Logo */}
               <HStack
-                display={["grid", "grid", "grid", "grid", "flex"]}
-                gridTemplateColumns={"repeat(1, 1fr)"}
-             
-                alignItems={"center"}
                 justifyContent={"center"}
-                gap={"20px"}
-                paddingLeft={["20px", "0px", "20px", "0px", "0px"]}
+                justifyItems={"center"}
+                alignItems={"center"}
+                width={["100%", "100%", "100%", "100%", "100%"]}
+                marginTop={["10px", "10px", "10px", "10px", "10px"]}
               >
-                {/* Footer Image Logo */}
+                <Image
+                  src={logo}
+                  alt="logo"
+                  width={["80px", "100px", "120px", "140px", "160px"]}
+                  height={["80px", "100px", "120px", "140px", "160px"]}
+                  objectFit="contain"
+                />
+
+              </HStack>
+
+              {/* Footer Top Items */}
+              <HStack
+                alignItems={"center"}
+                justifyContent={"space-evenly"}
+                display={["grid", "grid", "grid", "flex", "flex"]}
+                gridTemplateColumns={[
+                  "repeat(1, 1fr)",
+                  "repeat(1, 1fr)",
+                  "repeat(1, 1fr)",
+                ]}
+                gap={["20px", "20px", "20px", "0px", "0px"]}
+              >
+
+
+                {/* Social Media */}
                 <HStack
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  width={["100%", "100%", "100%", "100%", "10%"]}
-                  marginTop={["10px", "10px", "10px", "10px", "10px"]}
+                  className="max-[]"
+                  gap={"15px"}
+                  width={"fit-content"}
+                  paddingLeft={["0px", "0px", "0px", "0px", "0px"]}
                 >
-                  <Image
-                    src={logo}
-                    alt="logo"
-                    width={"100px"}
-                    height={"100px"}
-                    objectFit={"contain"}
-                  />
-                </HStack>
-  
-                {/* Footer Top Items */}
-                <HStack
-                  alignItems={"center"}
-                  justifyContent={"space-evenly"}
-                  display={["grid", "grid", "grid", "flex", "flex"]}
-                  gridTemplateColumns={[
-                    "repeat(1, 1fr)",
-                    "repeat(1, 1fr)",
-                    "repeat(2, 1fr)",
-                  ]}
-                  gap={["20px", "20px", "20px", "0px", "0px"]}
-                >
-                  {/* Address Details */}
-                  <HStack width={["100%", "100%", "100%", "24%", "24%"]}>
+
+
+                  {/* Instagram */}
+                  <a href="https://www.instagram.com/sweets_byb/?hl=en" target="_blank" rel="noopener noreferrer">
                     <Stack
                       alignItems={"center"}
                       justifyContent={"center"}
-                      gap={"15px"}
-                      width={"50px"}
-                      height={"50px"}
-                      backgroundColor={"white"}
-                      borderRadius={"50%"}
-                    >
-                      <FaLocationDot color="#5EA98B" />
-                    </Stack>
-                    <Text width={"70%"}>
-                       Baldwin, NY
-                    </Text>
-                  </HStack>
-  
-                  {/* Phone Number */}
-                  <HStack gap={"20px"} width={"fit-content"}>
-                    <Stack
-                      alignItems={"center"}
-                      justifyContent={"center"}
-                      gap={"15px"}
-                      width={"50px"}
-                      height={"50px"}
-                      backgroundColor={"white"}
-                      borderRadius={"50%"}
-                   
-                    >
-                      <IoMdCall color="#5EA98B" />
-                    </Stack>
-                    <Text className="text-2xl max-[500px]:text-2xl font-semibold">
-                      +123-456-7890
-                    </Text>
-                  </HStack>
-  
-                  {/* Social Media */}
-                  <HStack 
-                    className="max-[]"
-                    gap={"15px"}
-                    width={"fit-content"}
-                    paddingLeft={["0px", "0px", "0px", "0px", "0px"]}
-                  >
-                    {/* Facebook */}
-                    <Stack
-                      alignItems={"center"}
-                      justifyContent={"center"}
-                      width={["30px", "50px", "50px", "50px", "50px"]}
-                      height={["30px", "50px", "50px", "50px", "50px"]}
-                      backgroundColor={"white"}
-                      borderRadius={"50%"}
-                      transition="transform 0.3s"
-                      _hover={{ transform: 'scale(1.1)' }}
-                    >
-                      <FaFacebookF color="#5EA98B" />
-                    </Stack>
-  
-                    {/* Instagram */}
-                    <a href="https://www.instagram.com/sweets_byb/?hl=en" target="_blank" rel="noopener noreferrer">
-                    <Stack
-                      alignItems={"center"}
-                      justifyContent={"center"}
+                      justifyItems={"center"}
                       width={["30px", "50px", "50px", "50px", "50px"]}
                       height={["30px", "50px", "50px", "50px", "50px"]}
                       backgroundColor={"white"}
@@ -144,21 +98,21 @@ import {Box, HStack, Image, Stack,Text,} from "@chakra-ui/react";
                     >
                       <FaInstagram color="#5EA98B" />
                     </Stack>
-                    </a>
-                
-                  </HStack>
+                  </a>
+
                 </HStack>
               </HStack>
-            </Stack>
-  
-            <hr className="mt-16 w-[70rem] m-auto" />
-            <FooterStyle />
-          </Box>
-  
-        
+            </HStack>
+          </Stack>
+
+          <Divider mt="16" width="70rem" mx="auto" />
+          <FooterStyle />
         </Box>
-      </>
-    );
-  }
-  
-  export default Footer;
+
+
+      </Box>
+    </>
+  );
+}
+
+export default Footer;

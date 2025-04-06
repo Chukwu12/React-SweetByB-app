@@ -39,12 +39,11 @@ const ExploreMenu = ({ category, setCategory }) => {
         style={{ textAlign: "center", padding: "40px 0px" }} // Center the text
       >
         <motion.h1 
-          variants={FadeUp(0.5)} 
-          className="text-3xl lg:text-6xl font-bold uppercase"
-          style={{
-            marginBottom: '1rem',
-            fontSize: '2.5rem', // Adjust the font size
-          }}
+          variants={FadeUp(0.5)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-3xl lg:text-6xl font-bold uppercase text-center"
         >
           Shop Your Favorite Sweet Treats
         </motion.h1>

@@ -59,7 +59,7 @@ function TestimonialsCarousel() {
             top ={'20px'}
             left={'35%'}
             >
-                <Image boxSize={"100px"} src='https://orgik-theme.myshopify.com/cdn/shop/files/testimonial_image_01_200x200.png?v=1639813157' />
+                
             </VStack>
 
             
@@ -78,11 +78,11 @@ function TestimonialsCarousel() {
                     fontWeight={"700"}
                     letterSpacing={'2px'}
                     color={'#5EA98B'}
-                    >Amy Amrou</Text>
+                    >Laybriccs</Text>
 
                     <Text 
                     fontWeight={"600"}
-                    >Manager</Text>
+                    >Customer</Text>
 
                     <Text
                     width={'90%'}
@@ -91,7 +91,7 @@ function TestimonialsCarousel() {
                     letterSpacing={'1px'}
 
                     >
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore quisquam qui nesciunt.
+                  My day is made the absolute best vegan pudding out there... Hit her up for all your sweet treat cravings.
                     </Text>
 
                 </VStack>
@@ -120,7 +120,7 @@ function TestimonialsCarousel() {
             top ={'20px'}
             left={'35%'}
             >
-                <Image boxSize={"100px"} src='https://orgik-theme.myshopify.com/cdn/shop/files/testimonial_image_03_200x200.png?v=1639813207' />
+                
             </VStack>
 
             
@@ -139,11 +139,11 @@ function TestimonialsCarousel() {
                     fontWeight={"700"}
                     letterSpacing={'2px'}
                     color={'#5EA98B'}
-                    >Amy Amrou</Text>
+                    >Instagram</Text>
 
                     <Text 
                     fontWeight={"600"}
-                    >Director</Text>
+                    >Customer</Text>
 
                     <Text
                     width={'90%'}
@@ -152,7 +152,7 @@ function TestimonialsCarousel() {
                     letterSpacing={'1px'}
 
                     >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, magnam fuga iusto doloremque odio cumque?
+                  Cupcakes was a hit 10 out of 10
                     </Text>
 
                 </VStack>
@@ -181,7 +181,7 @@ function TestimonialsCarousel() {
             top ={'20px'}
             left={'35%'}
             >
-                <Image boxSize={"100px"} src='https://orgik-theme.myshopify.com/cdn/shop/files/testimonial_image_04_200x200.png?v=1639813173' />
+                
             </VStack>
 
             
@@ -200,11 +200,11 @@ function TestimonialsCarousel() {
                     fontWeight={"700"}
                     letterSpacing={'2px'}
                     color={'#5EA98B'}
-                    >Amy Amrou</Text>
+                    >Instagram</Text>
 
                     <Text 
                     fontWeight={"600"}
-                    >Gardener</Text>
+                    >Customer</Text>
 
                     <Text
                     width={'90%'}
@@ -212,74 +212,15 @@ function TestimonialsCarousel() {
                     fontSize={['12px' , '13px' , '15px' , '15px']}
                     letterSpacing={'1px'}
                     >
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore quisquam qui nesciunt.
+                  Bianca holy cow these were insane I truly had to stop myself from taste tasting more than 1, so good. And the Chai were just as yummy.
                     </Text>
 
                 </VStack>
             </Box>
         </SwiperSlide>
 
-        {/* Slide 4 */}
-        <SwiperSlide>
-         
-         {/* Testimonial Card */}
-        <Box
-             width={['25rem' , '25rem' , '25rem' , '25rem']}
-             height={['21rem'  , '21rem'  , '21rem' , '26rem']}
-            display={"flex"}
-            justifyContent={"flex-end"}
-            position={"relative"}
-            backgroundColor={'white'}
-            >
-
-                {/* Testimonial Image */}
-           <VStack
-            width={'100px'}
-            height={'100px'}
-            position={"absolute"}
-            top ={'20px'}
-            left={'35%'}
-            >
-                <Image boxSize={"100px"} src='https://orgik-theme.myshopify.com/cdn/shop/files/testimonial_image_02_200x200.png?v=1639813190' />
-            </VStack>
-
-            
-                {/* Testimonial Details */}
-                <VStack 
-             width={['75%' , '85%' , '100%' , '90%']}
-                height={"70%"}
-                // backgroundColor={'red'}
-                margin={'auto'}
-                border={'1px dashed #5EA98B'}
-                paddingTop={'5rem'}
-                >
-
-                    <Text
-                   fontSize={['20px' , '20px' , '25px' , '30px']}
-                    fontWeight={"700"}
-                    letterSpacing={'2px'}
-                    color={'#5EA98B'}
-                    >Michael</Text>
-
-                    <Text 
-                    fontWeight={"600"}
-                    >CEO</Text>
-
-                    <Text
-                    width={'90%'}
-                    textAlign={'center'}
-                    fontSize={['12px' , '13px' , '15px' , '15px']}
-                    letterSpacing={'1px'}
-                    >
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore quisquam qui nesciunt.
-                    </Text>
-
-                </VStack>
-
-            </Box>
-
-        </SwiperSlide>
       
+     
       </Swiper>
     </Box>
   )

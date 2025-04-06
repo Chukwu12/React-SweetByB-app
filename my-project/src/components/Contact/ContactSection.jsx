@@ -135,51 +135,6 @@ function ContactSection() {
       marginTop={'2rem'}
       >
         
-        {/* Phone */}
-        <HStack
-        width={'50%'}
-        height={'100%'}
-        paddingY={'1rem'}
-        // backgroundColor={'red'}
-        _hover={{ 
-            border: '1px solid #5EA98B',
-        
-          }}
-        transition={'all 0.3s ease-in-out'}
-        >
-            {/*Phone icon  */}
-            <HStack
-            width={'50px'}
-            height={'50px'}
-            justifyContent={'center'}
-            alignItems={'center'}
-            borderRadius={'50%'}
-            backgroundColor={'#FFF7F3'}
-            >
-                <FaPhoneAlt   color='#5EA98B' />
-            </HStack>
-
-            {/*Phone details  */}
-            <VStack
-            alignItems={'flex-start'}
-            >
-                <Text
-                fontSize={'18px'}
-                fontWeight={'600'}
-                >Phone</Text>
-
-                <Text>
-                    Toll-Free: 1800-123-4567
-                </Text>
-
-                <Text>
-                    Fax: 1800-123-4567
-                </Text>
-
-
-            </VStack>
-        
-        </HStack>
 
 
         {/* Email */}
@@ -216,12 +171,10 @@ function ContactSection() {
                 >Email</Text>
 
                 <Text>
-                    info@example.com
+                   Biancaboursiquot@yahoo.com
                 </Text>
 
-                <Text>
-                    support@example.com
-                </Text>
+               
 
 
             </VStack>
@@ -262,11 +215,7 @@ function ContactSection() {
                 >Address</Text>
 
                 <Text>
-                    No. 123, Street Name, City,
-                </Text>
-
-                <Text>
-                    Baltmore, MD, USA 4508
+                   Baldwin, NY
                 </Text>
 
 

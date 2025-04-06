@@ -46,9 +46,9 @@ function TestimonialsSection() {
             marginTop={"1rem"}
             letterSpacing={"1px"}
           >
-            Urna et pharetra pharetra massa massa ultricies mi. Cras fermentum
-            odio eu feugiat pretium. Pellentesque massa placerat duis ultric
-            lectus
+            Sweet-By-B desserts are absolutely delightful! 
+            The flavors are rich, the presentation is beautiful, 
+            and every bite feels like it’s made with love. It's my go-to for every special occasion
           </Text>
 
 

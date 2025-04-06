@@ -1,3 +1,7 @@
+html,body{
+    overflow-x: hidden;
+}
+
 .explore-menu{
     display: flex;
     flex-direction: column;
