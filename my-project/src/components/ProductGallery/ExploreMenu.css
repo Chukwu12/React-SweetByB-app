@@ -6,7 +6,12 @@ html,body{
     display: flex;
     flex-direction: column;
     gap: 20px;
+
 }
+
+.explore-menu-container {
+    height: 60vh;
+  }
 
 .explore-menu h1 {
     color: #262626;

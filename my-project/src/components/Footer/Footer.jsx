@@ -10,7 +10,7 @@ function Footer() {
     <>
       <Box
         width={"100%"}
-        minHeight={"100vh"}
+        minHeight={"60vh"}
         paddingTop={"10rem"}
         overflow={"hidden"}
         // marginBottom={'100px'}

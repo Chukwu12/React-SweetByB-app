@@ -15,8 +15,9 @@ const ExploreMenu = ({ category, setCategory }) => {
 
   return (
     <MotionDiv
+     className="explore-menu-container"
       width="100%"
-      minHeight="50vh"
+      height="60vh"
       marginTop="5rem"
       style={{
         display: "flex",
@@ -43,14 +44,14 @@ const ExploreMenu = ({ category, setCategory }) => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-3xl lg:text-6xl font-bold uppercase text-center"
+          className="text-3xl lg:text-6xl font-bold uppercase text-center mb-6"
         >
           Shop Your Favorite Sweet Treats
         </motion.h1>
 
         <motion.p 
           variants={FadeIn(0.7)} 
-          className="text-center text-gray-600 mt-4 w-full px-4"
+          className="text-center text-gray-600 mt-6 w-full px-4"
           style={{
             fontSize: "14px",
             lineHeight: "1.6", // Add line height for better readability

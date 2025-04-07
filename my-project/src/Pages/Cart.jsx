@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Box, Button, HStack, Text, VStack, Image, IconButton } from "@chakra-ui/react";
-import { StoreContext } from "../context/storeContext"; // ✅ Corrected import name
+import { StoreContext } from "../context/storeContext"; 
 import { FiTrash2 } from "react-icons/fi"; // Trash icon for remove action
 
 function Cart() {
   const { cartItems, itemCard, removeFromCart } = useContext(StoreContext);
+
+  const navigate = useNavigate();
 
   // Calculate subtotal dynamically based on cart items
   const subtotal = itemCard.reduce((total, item) => {
@@ -75,7 +77,7 @@ function Cart() {
               <Text>${total.toFixed(2)}</Text>
             </HStack>
           </VStack>
-          <Button
+          <Button onClick={()=>navigate('/order')}
             colorScheme="teal"
             size="lg"
             width="100%"
