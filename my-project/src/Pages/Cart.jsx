@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Box, Button, HStack, Text, VStack, Image, IconButton } from "@chakra-ui/react";
 import { StoreContext } from "../context/storeContext"; 
+import {useNavigate} from "react-router-dom"
 import { FiTrash2 } from "react-icons/fi"; // Trash icon for remove action
 
 function Cart() {
@@ -60,6 +61,7 @@ function Cart() {
           </Box>
         </Box>
 
+             {/* Cart Totals Section */}
         <Box bg="gray.100" p={4} borderRadius="md" boxShadow="md">
           <Text fontSize="xl" fontWeight="bold" mb={4}>Cart Totals</Text>
           <VStack align="stretch" spacing={4}>
