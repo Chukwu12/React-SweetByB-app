@@ -1,10 +1,61 @@
-import foodModel from "../models/foodModel.js";
-import fs from 'fs'
+import FoodItem from '../models/foodModel.js';  // ESM import
+import fs from 'fs';  // ESM import
 
-// add food items
+// Add food item
+export const addFood = async (req, res) => {
+  try {
+    let image_filename = `${req.file.filename}`;
 
-const addFood = async (req, res) => {
+    await FoodItem.create({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      category: req.body.category,
+      image: image_filename,
+    });
 
-}
+    console.log("Food has been added!");
+    res.json({ success: true, message: "Food Added" });
+  } catch (err) {
+    console.log(err);
+// Example of correct usage:
+res.json({ success: true, message: "Food has been added!" });
 
-export {addFood}
+  }
+};
+
+// Get all food items
+export const listFood = async (req, res) => {
+  try {
+    const foods = await FoodItem.find({});
+    res.json({ success: true, data: foods });
+  } catch (err) {
+    console.log(err);
+    res.json({ success: false, message: "Error retrieving food list" });
+  }
+};
+
+// Remove food item
+export const removeFood = async (req, res) => {
+  try {
+    const food = await FoodItem.findById(req.body.id);
+
+    if (!food) {
+      return res.json({ success: false, message: "Food not found" });
+    }
+
+    // Delete image from uploads folder
+    fs.unlink(`uploads/${food.image}`, (err) => {
+      if (err) console.log("Failed to delete image:", err);
+    });
+
+   // Delete food from database
+   await FoodItem.deleteOne({ _id: req.body.id });
+
+   console.log("Food has been removed!");
+   res.json({ success: true, message: "Food Removed" });
+ } catch (err) {
+   console.log(err);
+   res.json({ success: false, message: "Error removing food" });
+ }
+};
