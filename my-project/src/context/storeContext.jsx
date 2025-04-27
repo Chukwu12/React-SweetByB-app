@@ -1,12 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import { itemCard } from '../assets/Data';
+// import axios from 'axios';
+
 
 export const StoreContext = createContext(null)
 
 const StoreContextProvider = (props) => {
 
     const[cartItems, setCartItems] = useState ({});
-    const url = 'http:/localhost:4000';
+    const url = 'http://localhost:4000';
 
     
     const addToCart = (itemId) => {
@@ -23,8 +25,13 @@ const StoreContextProvider = (props) => {
     }
 
     const fetchFoodList = async () => {
-        const response = await axios.get(url+"/api/")
-    }
+        try {
+            const response = await axios.get(url + "/api/food/list"); 
+            console.log(response.data); // you get { success: true, data: [foods] }
+        } catch (error) {
+            console.error("Failed to fetch food list:", error);
+        }
+    };
 
     useEffect(()=> {
         console.log(cartItems);
@@ -37,6 +44,7 @@ const StoreContextProvider = (props) => {
             setCartItems,
             addToCart,
             removeFromCart,
+            fetchFoodList,
             url
     }
     return (
