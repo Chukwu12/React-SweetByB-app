@@ -1,23 +1,20 @@
-// seedFoods.js
+// seedFood.js
+import dotenv from 'dotenv';
+dotenv.config();
 
-const mongoose = require('mongoose');
-const connectDB = require('./config/db');
-const Food = require('./models/FoodModel'); // Adjust this if your model filename is different
-const { itemCard } = require('./foodData.js'); // We'll create this file next
+import connectDB from './config/db.js';
+import itemCard from './foodData.js';
+import Food from './models/foodModel.js'; 
 
 // Seed function
 const seedFoods = async () => {
   try {
     await connectDB(); // connect to MongoDB
-
-    // Clear existing food data (optional, but usually helpful for reseeding)
-    await Food.deleteMany();
-
-    // Insert food data
-    await Food.insertMany(itemCard);
+    await Food.deleteMany(); // Clear existing food data
+    await Food.insertMany(itemCard); // Insert new food data
 
     console.log('Food data successfully seeded!');
-    process.exit(); // exit process after seeding
+    process.exit(); // Exit process after seeding
   } catch (error) {
     console.error('Error seeding food data:', error);
     process.exit(1);

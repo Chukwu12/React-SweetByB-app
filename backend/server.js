@@ -8,9 +8,10 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';  // Note the `.js` extension here (ESM modules need file extensions)
 import foodRoutes from './routers/foodRoute.js';  // Same here
+import cartRouter from './routers/cartRoute.js';
 
 
-dotenv.config({ path: './config/.env' });
+dotenv.config();
 
 // Connect to Database
 connectDB();
@@ -45,6 +46,7 @@ app.use(express.json());
 
 // Setup Routes
 app.use('/api/foods', foodRoutes);
+app.use("/api/cart", cartRouter);
 
 // Server Running
 app.listen(process.env.PORT, () => {
