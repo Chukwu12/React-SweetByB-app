@@ -16,10 +16,10 @@ const ExploreMenu = ({ category, setCategory }) => {
   return (
     <MotionDiv
      className="explore-menu-container"
-      width="100%"
-      height="60vh"
-      marginTop="5rem"
       style={{
+        width: "100%",
+        height: "60vh",
+        marginTop: "5rem",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
