@@ -17,8 +17,7 @@ const Hero = () => {
              animate="visible"
             className='text-5xl lg:text-6xl font-bold leading-relaxed xl:leading-loose font-averia'>
               Sweet
-            <br />
-            ByB <span className='text-secondary'> Bakery</span>
+             <span className='text-secondary'>  ByB</span>
             </motion.h1>
 
             <motion.p 
