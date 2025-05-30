@@ -1,13 +1,14 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const foodSchema = new mongoose.Schema({
-    name: {type:String,required:true},
-    description: {type:String,required:true},
-    price: {type:String,required:true},
-    image: {type:String,required:true},
-    category: {type:String,required:true},
-})
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  price: { type: String, required: true },
+  image: { type: String, required: true },
+  category: { type: String, required: true },
+});
 
-const foodModel = mongoose.models.food || mongoose.model("food",foodSchema);
+// MongoDB Collection named here - will give lowercase plural of name
+const FoodItem = mongoose.model("FoodItem", foodSchema);
 
-export default foodModel;
+export default FoodItem;  // Use `export default` for ESM syntax

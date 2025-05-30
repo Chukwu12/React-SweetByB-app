@@ -1,29 +1,56 @@
-import express from "express"
-import cors from "cors"
-import { connectDB } from "./config/db.js"
+import express from 'express';
+import mongoose from 'mongoose';
+// import session from 'express-session';
+// import MongoStore from 'connect-mongo';
+// import methodOverride from 'method-override';
+// import flash from 'express-flash';
+// import logger from 'morgan';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';  // Note the `.js` extension here (ESM modules need file extensions)
+import foodRoutes from './routers/foodRoute.js';  // Same here
+import cartRouter from './routers/cartRoute.js';
 
 
+dotenv.config();
 
-//app configs
-const app = express()
-const port = 4000
-
-//middleware 
-app.use(express.json())
-app.use(cors())
-
-
-//db connecton
+// Connect to Database
 connectDB();
 
-//api endpoints
-app.use("/api/food,foodRouter")
+const app = express();
 
-app.get("/",(req,res) => {
-    res.send("API Working")
-})
+// Static folder (optional)
+app.use(express.static('public'));
 
-app.listen(port, () =>{
-    console.log(`Server started on http://localhost:${port}`)
-})
+// Body Parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
+// Logging
+// app.use(logger('dev'));
+
+// Use forms for PUT/DELETE
+// app.use(methodOverride('_method'));
+
+// Setup Sessions - stored in MongoDB
+// app.use(
+//   session({
+//     secret: 'keyboard cat', // <-- you can put a real secret later
+//     resave: false,
+//     saveUninitialized: false,
+//     store: new MongoStore({ mongooseConnection: mongoose.connection }),
+//   })
+// );
+
+// Use flash messages
+// app.use(flash());
+
+// Setup Routes
+app.use('/api/foods', foodRoutes);
+app.use("/api/cart", cartRouter);
+
+// Server Running
+app.listen(process.env.PORT, () => {
+  console.log(`✅ Server running on PORT ${process.env.PORT}`);
+});
+// Check if the MongoDB URI is being loaded correctly
+console.log('MONGODB_URI:', process.env.MONGODB_URI);

@@ -162,7 +162,7 @@ function PlaceOrder() {
                 </HStack>
               </Box>
               <Button type="submit" colorScheme="teal" size="lg" width="100%" mt={6}>
-                Submit Order
+               Proceed To Payment
               </Button>
             </VStack>
           </form>
