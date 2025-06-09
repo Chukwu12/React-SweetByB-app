@@ -5,11 +5,10 @@ import { StoreContext } from '../../context/storeContext';
 import FoodItem from '../FoodItem/FoodItem';
 
 const FoodDisplay = ({ category }) => {
-  const { foodList } = useContext(StoreContext); // <-- changed from itemCard to foodList
+  const { itemCard } = useContext(StoreContext);
 
   // Filter items based on the category
-  const filteredItems = (foodList || []).filter(item => category === "All" || category === item.category);
-
+  const filteredItems = itemCard.filter(item => category === "All" || category === item.category);
 
   return (
     <VStack className="food-display" id="food-display" spacing={4}>
@@ -20,9 +19,9 @@ const FoodDisplay = ({ category }) => {
       {/* Grid Layout for Food Items */}
       <Grid
         templateColumns={{
-          base: "repeat(1, 1fr)", 
-          md: "repeat(2, 1fr)", 
-          lg: "repeat(3, 1fr)", 
+          base: "repeat(1, 1fr)", // Single column on small screens
+          md: "repeat(2, 1fr)", // Two columns on medium screens
+          lg: "repeat(3, 1fr)", // Three columns on large screens
         }}
         gap="1rem"
         justifyItems="center"
@@ -32,11 +31,11 @@ const FoodDisplay = ({ category }) => {
         {filteredItems.map((item, index) => (
           <GridItem key={index} width="100%">
             <FoodItem 
-              id={item._id}               // <-- use MongoDB _id (not item.id)
+              id={item.id} 
               name={item.name} 
               description={item.description} 
               price={item.price} 
-              itemImage={item.image}
+              itemImage={item.itemImage}
             />
           </GridItem>
         ))}

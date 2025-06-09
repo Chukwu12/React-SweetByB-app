@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from "react";
+import { itemCard } from '../assets/Data';
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
 
-    const [foodList, setFoodList] = useState([]); // ✅ use fetched food
+    // const [foodList, setFoodList] = useState([]); // ✅ use fetched food
     const[cartItems, setCartItems] = useState ({});
     
     const addToCart = (itemId) => {
@@ -26,27 +27,27 @@ const StoreContextProvider = (props) => {
     },[cartItems])
 
         // 🥘 Fetch food items from backend
-    useEffect(() => {
-    const fetchFood = async () => {
-      try {
-     const response = await fetch("http://localhost:5000/api/foods/list");
-        const data = await response.json();
-        if (data.success) {
-          setFoodList(data.data);
-        } else {
-          console.error("Failed to fetch food list");
-        }
-      } catch (err) {
-        console.error("Error fetching food list:", err);
-      }
-    };
+  //   useEffect(() => {
+  //   const fetchFood = async () => {
+  //     try {
+  //    const response = await fetch("http://localhost:5000/api/foods/list");
+  //       const data = await response.json();
+  //       if (data.success) {
+  //         setFoodList(data.data);
+  //       } else {
+  //         console.error("Failed to fetch food list");
+  //       }
+  //     } catch (err) {
+  //       console.error("Error fetching food list:", err);
+  //     }
+  //   };
 
-    fetchFood();
-  }, []);
+  //   fetchFood();
+  // }, []);
 
 
     const contextValue = {
-            foodList, // ✅ real data from MongoDB
+            itemCard,// ✅ real data from MongoDB
             cartItems,
             setCartItems,
             addToCart,

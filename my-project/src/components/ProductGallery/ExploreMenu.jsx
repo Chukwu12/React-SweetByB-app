@@ -74,9 +74,9 @@ const ExploreMenu = ({ category, setCategory }) => {
         viewport={{ once: true }}
         style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2rem" }} // Improved spacing and layout
       >
-        {menu_list.map((item) => (
+        {menu_list.map((item, index)  => (
           <motion.div
-            key={item.id}
+             key={item.menu_name + index}  // Use menu_name + index for a unique key
             onClick={() => handleCategoryChange(item.menu_name)}
             className="explore-menu-list-item"
             variants={FadeUp(0.3)}
