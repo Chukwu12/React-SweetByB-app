@@ -15,7 +15,6 @@ import { assets } from '../assets/assets';
 import axios from 'axios';
 
 const AddProductForm = () => {
-  const url = 'http://localhost:5000';
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
   const [data, setData] = useState({
@@ -52,8 +51,10 @@ const AddProductForm = () => {
     formData.append('category', data.category);
     formData.append('price', data.price);
 
+     const url = 'https://ideal-guide-pg5p57qpw55h67g-5000.app.github.dev'; // Update with your public backend URL
+
     try {
-      const response = await axios.post(`${url}/api/food/add`, formData);
+      const response = await axios.post(`${url}/api/foods/add`, formData);
       if (response.data.success) {
         // Show success toast
         toast({
