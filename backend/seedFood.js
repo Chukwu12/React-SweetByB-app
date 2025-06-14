@@ -11,14 +11,15 @@ const seedFoods = async () => {
   try {
     await connectDB(); // connect to MongoDB
     await Food.deleteMany(); // Clear existing food data
-    await Food.insertMany(itemCard); // Insert new food data
+   // Insert food data and log result
+   const insertedFoods = await Food.insertMany(itemCard);
+   console.log('Inserted Foods:', insertedFoods);
 
-    console.log('Food data successfully seeded!');
-    process.exit(); // Exit process after seeding
-  } catch (error) {
-    console.error('Error seeding food data:', error);
-    process.exit(1);
-  }
+   console.log('Food data successfully seeded!');
+   process.exit();
+ } catch (error) {
+   console.error('Error seeding food data:', error);
+   process.exit(1);
+ }
 };
-
 seedFoods();
