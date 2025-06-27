@@ -1,17 +1,19 @@
 import FoodItem from '../models/foodModel.js';  // ESM import
 import fs from 'fs';  // ESM import
+import cloudinary from "../middleware/cloudinary.js";
 
 // Add food item
 export const addFood = async (req, res) => {
   try {
-    let image_filename = `${req.file.filename}`;
+  const result = await cloudinary.uploader.upload(req.file.path); // this uploads to Cloudinary
+ 
 
     await FoodItem.create({
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
       category: req.body.category,
-      image: image_filename,
+       image: result.secure_url, // Use Cloudinary URL
     });
 
     console.log("Food has been added!");
