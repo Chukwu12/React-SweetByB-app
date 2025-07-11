@@ -1,18 +1,27 @@
 import React, { useContext } from "react";
-import { Box, Button, HStack, Text, VStack, Image, IconButton } from "@chakra-ui/react";
-import { StoreContext } from "../context/storeContext"; 
-import {useNavigate} from "react-router-dom"
+import {
+  Box,
+  Button,
+  HStack,
+  Text,
+  VStack,
+  Image,
+  IconButton,
+} from "@chakra-ui/react";
+import { StoreContext } from "../context/storeContext";
+import { useNavigate } from "react-router-dom";
 import { FiTrash2 } from "react-icons/fi"; // Trash icon for remove action
 
 function Cart() {
-  const { cartItems, itemCard, removeFromCart } = useContext(StoreContext);
+  const { cartItems, products, removeFromCart } = useContext(StoreContext);
 
   const navigate = useNavigate();
 
   // Calculate subtotal dynamically based on cart items
-  const subtotal = itemCard.reduce((total, item) => {
+  const subtotal = products.reduce((total, item) => {
     if (cartItems[item.id] > 0) {
-      return total + (parseFloat(item.price) * cartItems[item.id]);
+      const basePrice = parseFloat(item.price.split("/")[0]); // Use first price
+      return total + basePrice * cartItems[item.id];
     }
     return total;
   }, 0);
@@ -24,7 +33,9 @@ function Cart() {
     <Box maxWidth="1200px" margin="auto" padding="20px">
       <VStack spacing="24px" align="stretch">
         <Box>
-          <Text fontSize="2xl" fontWeight="bold" mb={4}>Your Cart</Text>
+          <Text fontSize="2xl" fontWeight="bold" mb={4}>
+            Your Cart
+          </Text>
           <Box bg="gray.100" p={4} borderRadius="md" boxShadow="md">
             <HStack spacing={4} fontWeight="semibold">
               <Text flex="1">Item</Text>
@@ -35,16 +46,27 @@ function Cart() {
               <Text flex="0.5">Remove</Text>
             </HStack>
             <Box as="hr" my={2} />
-            {itemCard.map((item) => {
+            {products.map((item) => {
               if (cartItems[item.id] > 0) {
                 return (
                   <Box key={item.id} py={4}>
                     <HStack spacing={4}>
-                      <Image src={item.itemImage} alt={item.itemTitle} boxSize="50px" objectFit="cover" />
+                      <Image
+                        src={item.itemImage}
+                        alt={item.itemTitle}
+                        boxSize="50px"
+                        objectFit="cover"
+                      />
                       <Text flex="1">{item.name}</Text>
                       <Text flex="1">${item.price}</Text>
                       <Text flex="1">{cartItems[item.id]}</Text>
-                      <Text flex="1">${(parseFloat(item.price) * cartItems[item.id]).toFixed(2)}</Text>
+                      <Text flex="1">
+                        $
+                        {(
+                          parseFloat(item.price.split("/")[0]) *
+                          cartItems[item.id]
+                        ).toFixed(2)}
+                      </Text>
                       <IconButton
                         icon={<FiTrash2 />}
                         aria-label="Remove from cart"
@@ -61,9 +83,11 @@ function Cart() {
           </Box>
         </Box>
 
-             {/* Cart Totals Section */}
+        {/* Cart Totals Section */}
         <Box bg="gray.100" p={4} borderRadius="md" boxShadow="md">
-          <Text fontSize="xl" fontWeight="bold" mb={4}>Cart Totals</Text>
+          <Text fontSize="xl" fontWeight="bold" mb={4}>
+            Cart Totals
+          </Text>
           <VStack align="stretch" spacing={4}>
             <HStack justify="space-between">
               <Text>Subtotal</Text>
@@ -79,7 +103,8 @@ function Cart() {
               <Text>${total.toFixed(2)}</Text>
             </HStack>
           </VStack>
-          <Button onClick={()=>navigate('/order')}
+          <Button
+            onClick={() => navigate("/order")}
             colorScheme="teal"
             size="lg"
             width="100%"

@@ -1,18 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-import { itemCard } from '../assets/Data';
-<<<<<<< HEAD
-=======
+import  itemCard  from '../assets/Data';
 import axios from 'axios';
->>>>>>> 3156c428f8d4226f624d5f481280bc318e54cf86
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
-<<<<<<< HEAD
-
-=======
     // State to hold products
->>>>>>> 3156c428f8d4226f624d5f481280bc318e54cf86
     // const [foodList, setFoodList] = useState([]); // ✅ use fetched food
     const[cartItems, setCartItems] = useState ({});
     const [products, setProducts] = useState([]);
@@ -36,47 +29,32 @@ const StoreContextProvider = (props) => {
     },[cartItems])
 
         // 🥘 Fetch food items from backend
-<<<<<<< HEAD
-  //   useEffect(() => {
-  //   const fetchFood = async () => {
-  //     try {
-  //    const response = await fetch("http://localhost:5000/api/foods/list");
-  //       const data = await response.json();
-  //       if (data.success) {
-  //         setFoodList(data.data);
-  //       } else {
-  //         console.error("Failed to fetch food list");
-  //       }
-  //     } catch (err) {
-  //       console.error("Error fetching food list:", err);
-  //     }
-  //   };
+//  useEffect(() => {
+//   const fetchProducts = async () => {
+//     try {
+//       const response = await axios.get('http://localhost:5000/api/foods/food-data');
+//       if (response.data.success) {
+//         setProducts(response.data.data);
+//       } else {
+//         console.error("Failed to fetch products");
+//       }
+//     } catch (error) {
+//       console.error("Error fetching products:", error);
+//     }
+//   };
 
-  //   fetchFood();
-  // }, []);
-=======
- useEffect(() => {
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get("https://ideal-guide-pg5p57qpw55h67g-5000.app.github.dev/api/food/list");
-      if (response.data.success) {
-        setProducts(response.data.data);
-      } else {
-        console.error("Failed to fetch products");
-      }
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
-  };
+//   fetchProducts();
+// }, []);
 
-  fetchProducts();
+  // 👇 No API call — use static itemCard for now
+  useEffect(() => {
+    setProducts(itemCard);
 }, []);
 
->>>>>>> 3156c428f8d4226f624d5f481280bc318e54cf86
 
 
     const contextValue = {
-            itemCard,// ✅ real data from MongoDB
+            // itemCard,// ✅ real data from MongoDB
             cartItems,
             products, 
             setCartItems,

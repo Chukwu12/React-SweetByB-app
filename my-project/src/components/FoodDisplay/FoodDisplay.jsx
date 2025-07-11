@@ -5,10 +5,10 @@ import { StoreContext } from '../../context/storeContext';
 import FoodItem from '../FoodItem/FoodItem';
 
 const FoodDisplay = ({ category }) => {
-  const { itemCard } = useContext(StoreContext);
+  const { products } = useContext(StoreContext);
 
   // Filter items based on the category
-  const filteredItems = itemCard.filter(item => category === "All" || category === item.category);
+  const filteredItems = products.filter(item => category === "All" || category === item.category);
 
   return (
     <VStack className="food-display" id="food-display" spacing={4}>
@@ -35,7 +35,7 @@ const FoodDisplay = ({ category }) => {
               name={item.name} 
               description={item.description} 
               price={item.price} 
-              itemImage={item.itemImage}
+              itemImage={item.itemImage} 
             />
           </GridItem>
         ))}
