@@ -5,14 +5,14 @@ import { StoreContext } from '../../context/storeContext';
 import FoodItem from '../FoodItem/FoodItem';
 
 const FoodDisplay = ({ category }) => {
-  const { itemCard } = useContext(StoreContext);
+  const {  products } = useContext(StoreContext); // Get products from context
 
   // Filter items based on the category
-  const filteredItems = itemCard.filter(item => category === "All" || category === item.category);
+  const filteredItems =  products.filter(item => category === "All" || category === item.category);
 
   return (
     <VStack className="food-display" id="food-display" spacing={4}>
-      <Text fontSize={['25px', '40px']} fontWeight="600" letterSpacing="2px">
+      <Text fontSize={['25px', '40px']} fontWeight="600" letterSpacing="2px" textAlign={'center'}>
         Check out our Full Menu
       </Text>
 
@@ -35,7 +35,7 @@ const FoodDisplay = ({ category }) => {
               name={item.name} 
               description={item.description} 
               price={item.price} 
-              itemImage={item.itemImage}
+              itemImage={item.image} 
             />
           </GridItem>
         ))}

@@ -18,7 +18,7 @@ const ExploreMenu = ({ category, setCategory }) => {
      className="explore-menu-container"
       style={{
         width: "100%",
-        height: "60vh",
+        height: "100%",
         marginTop: "5rem",
         display: "flex",
         flexDirection: "column",
