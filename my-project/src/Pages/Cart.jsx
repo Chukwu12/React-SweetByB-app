@@ -27,7 +27,9 @@ function Cart() {
     <Box maxWidth="1200px" margin="auto" padding="20px">
       <VStack spacing="24px" align="stretch">
         <Box>
-          <Text fontSize="2xl" fontWeight="bold" mb={4}>Your Cart</Text>
+          <Text fontSize="2xl" fontWeight="bold" mb={4}>
+            Your Cart
+          </Text>
           <Box bg="gray.100" p={4} borderRadius="md" boxShadow="md">
             <HStack spacing={4} fontWeight="semibold">
               <Text flex="1">Item</Text>
@@ -70,7 +72,9 @@ function Cart() {
 
         {/* Cart Totals Section */}
         <Box bg="gray.100" p={4} borderRadius="md" boxShadow="md">
-          <Text fontSize="xl" fontWeight="bold" mb={4}>Cart Totals</Text>
+          <Text fontSize="xl" fontWeight="bold" mb={4}>
+            Cart Totals
+          </Text>
           <VStack align="stretch" spacing={4}>
             <HStack justify="space-between">
               <Text>Subtotal</Text>
