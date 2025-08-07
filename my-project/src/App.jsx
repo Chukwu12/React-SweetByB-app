@@ -1,9 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import Home from './Pages/Home';
 import Auth from './Pages/AuthForm';
+<<<<<<< HEAD
+// import { AuthProvider } from './context/AuthContext'; 
+=======
 import { AuthProvider } from './context/AuthContext'; 
+>>>>>>> 6883dd441fee6e1e17ed6c3bf367a2cbe9d1aaa4
 import Navbar from './components/Navbar/Navbar';
 import Contact from './components/Contact/ContactSection';
 import Footer from './components/Footer/Footer';
@@ -20,26 +23,26 @@ const App = () => {
     <ChakraProvider>
       <BrowserRouter>
         <StoreContextProvider>
-          <AuthProvider>
+          {/* <AuthProvider> */}
           <Navbar />
           <Routes>
             {/* Auth page at root */}
-            { <Route path="/" element={<Auth />} /> }
+            {/* { <Route path="/" element={<Auth />} /> } */}
             {/* Home Page */}
-           <Route path="/dashboard" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+           <Route path="/" element={<Home />} />
             {/* About Page */}
             <Route path="/about" element={<About />} />
             {/* Cart Page */}
-            <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+            <Route path="/cart"  element={<Cart />} />
             {/* Order Page */}
-            <Route path="/order" element={<ProtectedRoute><PlaceOrder /></ProtectedRoute>} />
+            <Route path="/order" element={<PlaceOrder />} />
             {/* Contact Page */}
             <Route path="/contact" element={<Contact />} />
           </Routes>
 
           {/* Footer is outside Routes so it appears on all pages */}
           <Footer />
-          </AuthProvider>
+          {/* </AuthProvider> */}
         </StoreContextProvider>
       </BrowserRouter>
     </ChakraProvider>

@@ -133,6 +133,8 @@ function ContactSection() {
       width={'100%'}
       alignItems={'flex-start'}
       marginTop={'2rem'}
+      display={'flex'}
+      flexDirection={'row'}
       >
         
 

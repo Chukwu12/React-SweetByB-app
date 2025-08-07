@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const foodSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  price: { type: String, required: true },
+  minPrice: { type: Number, required: true },  // Min price
+  maxPrice: { type: Number, required: true },  // Max price
   image: { type: String, required: true },
   category: { type: String, required: true },
 });

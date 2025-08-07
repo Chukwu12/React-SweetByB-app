@@ -27,8 +27,9 @@ const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const toast = useToast();
   const navigate = useNavigate();
-  const { login } = useAuth(); // ✅ gets login from AuthContext
 
+  // Accessing login and isAuthenticated from context
+  const { login } = useAuth(); 
 
   const [form, setForm] = useState({
     userName: "",
@@ -63,7 +64,7 @@ const AuthForm = () => {
       const data = await response.json();
 
       if (response.ok) {
-         login(data.user); // <- save user in context
+         login(data.user); // Use the login function from context to store user data
         toast({
           title: "Success!",
           description: data.message || "Logged in successfully.",
@@ -124,6 +125,7 @@ const AuthForm = () => {
                 value={form.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
+                 autocomplete="email"
               />
             </FormControl>
 
@@ -135,6 +137,7 @@ const AuthForm = () => {
                 value={form.password}
                 onChange={handleChange}
                 placeholder="Enter your password"
+                 autocomplete="password"
               />
             </FormControl>
 

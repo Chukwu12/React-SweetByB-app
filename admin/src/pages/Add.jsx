@@ -51,10 +51,11 @@ const AddProductForm = () => {
     formData.append('category', data.category);
     formData.append('price', data.price);
 
-     const url = 'https://ideal-guide-pg5p57qpw55h67g-5000.app.github.dev'; // Update with your public backend URL
+  const url = 'https://ideal-guide-pg5p57qpw55h67g-5000.app.github.dev/api/foods/add';
+       // Update with your public backend URL
 
     try {
-      const response = await axios.post(`${url}/api/foods/add`, formData);
+      const response = await axios.post(`${url}`, formData);
       if (response.data.success) {
         // Show success toast
         toast({

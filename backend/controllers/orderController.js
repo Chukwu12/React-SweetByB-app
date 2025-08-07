@@ -26,7 +26,11 @@ const placeOrder = async (req, res) => {
                 product_data:{
                     name:item.name
                 },
+<<<<<<< HEAD
                 unit_amount:item.price*100*80
+=======
+              unit_amount: item.minPrice * 100 * 80,
+>>>>>>> c12718f69537c3ccc2acad518c4fe7f21444a91c
             },
             quantity:item.quantity
         }))

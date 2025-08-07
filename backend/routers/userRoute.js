@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import express from "express";
 import User from "../models/userModel.js";
 import passport from "passport";
@@ -39,5 +40,28 @@ router.post("/logout", (req, res) => {
     res.json({ message: "Logged out successfully." });
   });
 });
+=======
+// routes/userRoute.js
+import express from 'express';
+import * as userController from '../controllers/userController.js';  
+
+
+const router = express.Router();
+
+// Get Login Route
+router.get('/login', userController.getLogin); 
+
+// Post Login Route (Authentication)
+router.post('/login', userController.postLogin);
+
+// Get Signup Route
+router.get('/signup', userController.getSignup);
+
+// Post Signup Route (Create User)
+router.post('/signup', userController.postSignup);
+
+// Logout Route
+router.get('/logout', userController.logout);
+>>>>>>> c12718f69537c3ccc2acad518c4fe7f21444a91c
 
 export default router;

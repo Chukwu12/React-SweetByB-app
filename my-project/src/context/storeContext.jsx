@@ -1,12 +1,10 @@
 import { createContext, useEffect, useState } from "react";
-import  itemCard  from '../assets/Data';
 import axios from 'axios';
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
     // State to hold products
-    // const [foodList, setFoodList] = useState([]); // ✅ use fetched food
     const[cartItems, setCartItems] = useState ({});
     const [products, setProducts] = useState([]);
     
@@ -20,7 +18,7 @@ const StoreContextProvider = (props) => {
     }
 
     const removeFromCart = (itemId) => {
-        setCartItems((prev)=> ({...prev,[itemId]:prev[itemId]-1}))
+        setCartItems((prev)=> ({...prev,[itemId]:prev[itemId]-1}));
     }
 
     useEffect(()=> {
@@ -32,8 +30,16 @@ const StoreContextProvider = (props) => {
 //  useEffect(() => {
 //   const fetchProducts = async () => {
 //     try {
+<<<<<<< HEAD
 //         axios.get('/api/foods/food-data'); // Uses Vite proxy
 
+=======
+<<<<<<< HEAD
+//      const response = await axios.get('https://ideal-guide-pg5p57qpw55h67g-5000.app.github.dev/api/foods/list');
+
+=======
+//       const response = await axios.get('http://localhost:5000/api/foods/food-data');
+>>>>>>> c12718f69537c3ccc2acad518c4fe7f21444a91c
 //       if (response.data.success) {
 //         setProducts(response.data.data);
 //       } else {
@@ -51,11 +57,45 @@ const StoreContextProvider = (props) => {
   useEffect(() => {
     setProducts(itemCard);
 }, []);
+>>>>>>> 6883dd441fee6e1e17ed6c3bf367a2cbe9d1aaa4
 
+//       if (response.data.success) {
+//         setProducts(response.data.data);
+//       } else {
+//         console.error("Failed to fetch products");
+//       }
+//     } catch (error) {
+//       console.error("Error fetching products:", error);
+//     }
+//   };
+
+//   fetchProducts();
+// }, []);
+ // 🥘 Fetch food items from the backend
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('https://ideal-guide-pg5p57qpw55h67g-5000.app.github.dev/api/foods/list'); // Make sure to update with the correct URL
+                
+                if (response.data.success) {
+                    setProducts(response.data.data); // Set the fetched data to state
+                } else {
+                    console.error("Failed to fetch products");
+                }
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        };
+          fetchProducts();
+    }, []);
 
 
     const contextValue = {
+<<<<<<< HEAD
+            // ✅ real data from MongoDB
+=======
             // itemCard,// ✅ real data from MongoDB
+>>>>>>> 6883dd441fee6e1e17ed6c3bf367a2cbe9d1aaa4
             cartItems,
             products, 
             setCartItems,

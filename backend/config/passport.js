@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import passport from 'passport';
+>>>>>>> c12718f69537c3ccc2acad518c4fe7f21444a91c
 import { Strategy as LocalStrategy } from 'passport-local';
 import User from '../models/userModel.js';
 
@@ -9,7 +13,11 @@ export default function(passport) {
       try {
         const user = await User.findOne({ email: email.toLowerCase() });
         if (!user) {
+<<<<<<< HEAD
           return done(null, false, { message: `Email ${email} not found.` });
+=======
+          return done(null, false, { msg: `Email ${email} not found.` });
+>>>>>>> c12718f69537c3ccc2acad518c4fe7f21444a91c
         }
         const isMatch = await user.comparePassword(password);
         if (isMatch) {
