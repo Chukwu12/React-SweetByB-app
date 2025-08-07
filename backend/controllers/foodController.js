@@ -22,16 +22,8 @@ export const addFood = async (req, res) => {
       image: result.secure_url, // Cloudinary image URL
     });
 
-<<<<<<< HEAD
-    console.log("Food has been added!");
-    res.json({ success: true, message: "Food Added" });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ success: false, message: "Error adding food", error: err.message });
-=======
     console.log("✅ Food has been added!");
     res.status(201).json({ success: true, message: "Food added successfully", data: newFood });
->>>>>>> c12718f69537c3ccc2acad518c4fe7f21444a91c
 
   } catch (err) {
     console.error("❌ Error adding food:", err);

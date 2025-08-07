@@ -7,11 +7,7 @@ import express from 'express';
 import initPassport from "./config/passport.js"; 
 // import mongoose from 'mongoose';
 import session from 'express-session';
-<<<<<<< HEAD
-import passport from "passport";
-=======
 import passport from 'passport';
->>>>>>> c12718f69537c3ccc2acad518c4fe7f21444a91c
 import MongoStore from 'connect-mongo';
 import methodOverride from 'method-override';
 import flash from 'express-flash';
@@ -20,19 +16,11 @@ import './config/passport.js';
 
 
 
-<<<<<<< HEAD
-import connectDB from './config/db.js';
-import foodRoutes from './routers/foodRoute.js'; 
-import cartRouter from './routers/cartRoute.js';
-import orderRouter from './routers/orderRoute.js';
-import userRoutes from "./routers/userRoute.js";
-=======
 import connectDB from './config/db.js';  // Note the `.js` extension here (ESM modules need file extensions)
 import foodRoutes from './routers/foodRoute.js';  
 import cartRouter from './routers/cartRoute.js';
 import orderRouter from './routers/orderRoute.js'
 import userRouter from './routers/userRoute.js';
->>>>>>> c12718f69537c3ccc2acad518c4fe7f21444a91c
 
 
 
@@ -46,12 +34,6 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-<<<<<<< HEAD
-// Allow requests from frontend origin (localhost:5173)
-app.use(cors({
-  origin: 'http://localhost:5173', // exact origin
-  credentials: true   
-=======
 // Log every request origin BEFORE CORS is applied
 app.use((req, res, next) => {
   console.log("🛰️ Incoming request from origin:", req.headers.origin);
@@ -77,7 +59,6 @@ app.use(cors({
     }
   },
   credentials: true,
->>>>>>> c12718f69537c3ccc2acad518c4fe7f21444a91c
 }));
 
 app.get('/api/ping', (req, res) => {
@@ -114,31 +95,16 @@ app.use(
   })
 );
 
-<<<<<<< HEAD
-
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-initPassport(passport); // Set up passport strategies
-
-=======
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
->>>>>>> c12718f69537c3ccc2acad518c4fe7f21444a91c
 // Use flash messages
  app.use(flash());
 
 // Setup Routes
 app.use('/api', foodRoutes);
 app.use("/api/cart", cartRouter);
-<<<<<<< HEAD
-app.use("/api/order", orderRouter);
-app.use('/api', userRoutes);
-
-=======
 app.use('/user', userRouter); 
 app.use("/api/order", orderRouter);
 
@@ -152,7 +118,6 @@ app.use((err, req, res, next) => {
   console.error("🔥 Global error:", err.message);
   res.status(500).json({ success: false, message: err.message || "Server Error" });
 });
->>>>>>> c12718f69537c3ccc2acad518c4fe7f21444a91c
 
 
 
