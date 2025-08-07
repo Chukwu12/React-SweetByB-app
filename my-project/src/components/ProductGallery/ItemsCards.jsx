@@ -67,7 +67,7 @@ import {Box, Grid, GridItem, Image, Text, VStack, HStack,position,} from "@chakr
                     <Image
                       borderRadius={"20px"}
                       boxSize={"250px"}
-                      src={item.itemImage}
+                      src={item.image}
                     />
   
                     {/* Card Overlay */}

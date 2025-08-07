@@ -19,7 +19,9 @@ mongoose.connect(process.env.MONGODB_URI, {
   const formattedData = itemCard.map(item => ({
     name: item.name,
     description: item.description,
-    price: item.price,
+    minPrice: item.minPrice,
+    maxPrice: item.maxPrice || null, // Optional
+
     category: item.category,
     image: item.image, // Cloudinary URL
   }));

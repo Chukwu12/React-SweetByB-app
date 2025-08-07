@@ -5,10 +5,10 @@ import { StoreContext } from '../../context/storeContext';
 import FoodItem from '../FoodItem/FoodItem';
 
 const FoodDisplay = ({ category }) => {
-  const {  products } = useContext(StoreContext); // Get products from context
+  const { products } = useContext(StoreContext); // Get products from context
 
   // Filter items based on the category
-  const filteredItems =  products.filter(item => category === "All" || category === item.category);
+  const filteredItems = products.filter(item => category === "All" || category === item.category);
 
   return (
     <VStack className="food-display" id="food-display" spacing={4}>
@@ -30,12 +30,18 @@ const FoodDisplay = ({ category }) => {
       >
         {filteredItems.map((item, index) => (
           <GridItem key={index} width="100%">
-            <FoodItem 
-              id={item.id} 
-              name={item.name} 
-              description={item.description} 
-              price={item.price} 
+            <FoodItem
+               id={item._id}
+              name={item.name}
+              description={item.description}
+              // Update the price prop to handle ranges
+              price={
+                item.maxPrice && item.minPrice
+                  ? `$${(item.minPrice ?? 0).toFixed(2)} - $${(item.maxPrice ?? 0).toFixed(2)}`
+                  : `$${(item.minPrice ?? 0).toFixed(2)}`
+              }
               itemImage={item.image} 
+
             />
           </GridItem>
         ))}

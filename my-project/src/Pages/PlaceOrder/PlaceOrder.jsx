@@ -1,13 +1,13 @@
-import  { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Box, Button, Input, Text, VStack, HStack, FormControl, FormLabel } from "@chakra-ui/react";
-import { StoreContext } from "../../context/storeContext.jsx";  
+import { StoreContext } from "../../context/storeContext.jsx";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { useAuth } from "../../context/AuthContext";  
+import { useAuth } from "../../context/AuthContext";
 
 
 function PlaceOrder() {
-  const { cartItems, itemCard } = useContext(StoreContext);
+  const { cartItems, products } = useContext(StoreContext);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -22,12 +22,14 @@ function PlaceOrder() {
 
   const navigate = useNavigate();
 
-  const { user } = useAuth();
+  const { user } = useAuth?.() || {};
+
 
   // Calculate subtotal dynamically based on cart items
-  const subtotal = itemCard.reduce((total, item) => {
+  const subtotal = products.reduce((total, item) => {
     if (cartItems[item.id] > 0) {
-      return total + (parseFloat(item.price) * cartItems[item.id]);
+      return total + (item.minPrice * cartItems[item.id]);
+
     }
     return total;
   }, 0);
@@ -35,15 +37,15 @@ function PlaceOrder() {
   const deliveryFee = 2; // Fixed delivery fee for simplicity
   const total = subtotal + deliveryFee;
 
- // Handle form submission (e.g., for saving order data)
+  // Handle form submission (e.g., for saving order data)
   const handleSubmit = async (e) => {  // <-- Make sure this is async
     e.preventDefault();  // Prevents the form from reloading the page
 
     const orderData = {
       userId: user?._id || "guest", // fallback if not logged in
-      items: itemCard.filter(item => cartItems[item.id] > 0).map(item => ({
+      iitems: products.filter(item => cartItems[item.id] > 0).map(item => ({
         name: item.name,
-        price: item.price,
+        price: item.minPrice,
         quantity: cartItems[item.id]
       })),
       amount: total,  // Total amount to be charged
@@ -200,7 +202,7 @@ function PlaceOrder() {
                 </HStack>
               </Box>
               <Button type="submit" colorScheme="teal" size="lg" width="100%" mt={6}>
-               Proceed To Payment
+                Proceed To Payment
               </Button>
             </VStack>
           </form>

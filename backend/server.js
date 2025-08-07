@@ -1,21 +1,31 @@
+//Load environment variables
+import dotenv from 'dotenv';
+ import cors from 'cors';
+
+
 import express from 'express';
 // import mongoose from 'mongoose';
 import session from 'express-session';
+import passport from 'passport';
 import MongoStore from 'connect-mongo';
 import methodOverride from 'method-override';
 import flash from 'express-flash';
 import logger from 'morgan';
-import dotenv from 'dotenv';
-import cors from 'cors';
+import './config/passport.js';
+
+
 
 import connectDB from './config/db.js';  // Note the `.js` extension here (ESM modules need file extensions)
-import foodRoutes from './routers/foodRoute.js';  // Same here
+import foodRoutes from './routers/foodRoute.js';  
 import cartRouter from './routers/cartRoute.js';
- import foodRoute from './routers/foodRoute.js';
+import orderRouter from './routers/orderRoute.js'
+import userRouter from './routers/userRoute.js';
+
 
 
 
 dotenv.config();
+// console.log("STRIPE KEY:", process.env.STRIPE_SECRET_KEY);
 
 // Connect to Database
 connectDB();
@@ -23,17 +33,33 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Log every request origin BEFORE CORS is applied
+app.use((req, res, next) => {
+  console.log("🛰️ Incoming request from origin:", req.headers.origin);
+  next();
+});
+
+
+
 // Enable CORS for frontend
+
+const allowedOrigins = [
+  process.env.FRONTEND_URL,  // Use your environment variable for frontend URL
+];
+
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || origin.endsWith('.app.github.dev')) {
+    console.log("🔍 Checking CORS for origin:", origin);
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      console.warn(`⛔ CORS BLOCKED for origin: ${origin}`);
+      callback(new Error(`CORS blocked for origin: ${origin}`));
     }
   },
-  credentials: true
+  credentials: true,
 }));
+
 
 
 // Static folder (optional)
@@ -52,7 +78,7 @@ app.use(logger('dev'));
 // Setup Sessions - stored in MongoDB
 app.use(
   session({
-    secret: 'keyboard cat', // <-- you can put a real secret later
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ 
@@ -61,13 +87,30 @@ app.use(
   })
 );
 
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Use flash messages
  app.use(flash());
 
 // Setup Routes
-app.use('/api/foods', foodRoutes);
+app.use('/api', foodRoutes);
 app.use("/api/cart", cartRouter);
-app.use('/api', foodRoute);
+app.use('/user', userRouter); 
+app.use("/api/order", orderRouter);
+
+app.get('/api/test', (req, res) => {
+  res.json({ success: true, message: 'CORS working' });
+});
+app.use('/uploads', express.static('uploads')); // Serve uploaded images
+
+// Global Error Handler (for CORS and general errors)
+app.use((err, req, res, next) => {
+  console.error("🔥 Global error:", err.message);
+  res.status(500).json({ success: false, message: err.message || "Server Error" });
+});
+
 
 
 // Server Running

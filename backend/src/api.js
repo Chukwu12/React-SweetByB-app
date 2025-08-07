@@ -2,7 +2,7 @@
 
 export const fetchFoodData = async () => {
   try {
-    const response = await fetch('http://localhost:5000/api/food-data'); // This is the backend endpoint you created
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/food-data`); // Make sure this is correct
     if (!response.ok) {
       throw new Error('Failed to fetch food data');
     }
@@ -10,6 +10,6 @@ export const fetchFoodData = async () => {
     return data;
   } catch (error) {
     console.error('Error fetching food data:', error);
-    return [];
+    return [];  // Return an empty array in case of error
   }
 };
