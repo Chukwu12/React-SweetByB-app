@@ -11,6 +11,7 @@ router.post("/add", upload.single("image"), addFood);
 router.get("/list", listFood);
 router.delete("/remove", removeFood);
 
+
 // New route for fetching the food data
 router.get('/food-data', (req, res) => {
   try {

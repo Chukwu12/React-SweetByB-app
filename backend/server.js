@@ -1,6 +1,8 @@
 import express from 'express';
+import initPassport from "./config/passport.js"; 
 // import mongoose from 'mongoose';
 import session from 'express-session';
+import passport from "passport";
 import MongoStore from 'connect-mongo';
 import methodOverride from 'method-override';
 import flash from 'express-flash';
@@ -8,10 +10,12 @@ import logger from 'morgan';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-import connectDB from './config/db.js';  // Note the `.js` extension here (ESM modules need file extensions)
-import foodRoutes from './routers/foodRoute.js';  // Same here
+import connectDB from './config/db.js';
+import foodRoutes from './routers/foodRoute.js'; 
 import cartRouter from './routers/cartRoute.js';
- import foodRoute from './routers/foodRoute.js';
+import orderRouter from './routers/orderRoute.js';
+import userRoutes from "./routers/userRoute.js";
+
 
 
 
@@ -23,17 +27,15 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Enable CORS for frontend
+// Allow requests from frontend origin (localhost:5173)
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || origin.endsWith('.app.github.dev')) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
+  origin: 'http://localhost:5173', // exact origin
+  credentials: true   
 }));
+
+app.get('/api/ping', (req, res) => {
+  res.json({ message: "pong" });
+});
 
 
 // Static folder (optional)
@@ -52,14 +54,24 @@ app.use(logger('dev'));
 // Setup Sessions - stored in MongoDB
 app.use(
   session({
-    secret: 'keyboard cat', // <-- you can put a real secret later
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ 
-      mongoUrl: process.env.MONGODB_URI, 
-    }),
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    cookie: {
+      secure: false,
+      httpOnly: true,
+      sameSite: 'lax'
+    }
   })
 );
+
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+initPassport(passport); // Set up passport strategies
 
 // Use flash messages
  app.use(flash());
@@ -67,12 +79,15 @@ app.use(
 // Setup Routes
 app.use('/api/foods', foodRoutes);
 app.use("/api/cart", cartRouter);
-app.use('/api', foodRoute);
+app.use("/api/order", orderRouter);
+app.use('/api', userRoutes);
+
+
 
 
 // Server Running
-app.listen(process.env.PORT || 5000, '0.0.0.0', () => {
-  console.log(`✅ Server running on PORT ${process.env.PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Server running on PORT ${PORT}`);
 });
 // Check if the MongoDB URI is being loaded correctly
 console.log('MONGODB_URI:', process.env.MONGODB_URI);

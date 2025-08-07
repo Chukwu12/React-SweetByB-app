@@ -20,8 +20,7 @@ export const addFood = async (req, res) => {
     res.json({ success: true, message: "Food Added" });
   } catch (err) {
     console.log(err);
-// Example of correct usage:
-res.json({ success: true, message: "Food has been added!" });
+    res.status(500).json({ success: false, message: "Error adding food", error: err.message });
 
   }
 };
@@ -36,6 +35,8 @@ export const listFood = async (req, res) => {
     res.json({ success: false, message: "Error retrieving food list" });
   }
 };
+
+
 
 // Remove food item
 export const removeFood = async (req, res) => {
