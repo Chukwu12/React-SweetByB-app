@@ -30,7 +30,6 @@ const FoodDisplay = ({ category }) => {
       >
         {filteredItems.map((item, index) => (
           <GridItem key={index} width="100%">
-<<<<<<< HEAD
             <FoodItem
                id={item._id}
               name={item.name}
@@ -43,14 +42,6 @@ const FoodDisplay = ({ category }) => {
               }
               itemImage={item.image} 
 
-=======
-            <FoodItem 
-              id={item.id} 
-              name={item.name} 
-              description={item.description} 
-              price={item.price} 
-              itemImage={item.itemImage} 
->>>>>>> 6883dd441fee6e1e17ed6c3bf367a2cbe9d1aaa4
             />
           </GridItem>
         ))}

@@ -2,11 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import Home from './Pages/Home';
 import Auth from './Pages/AuthForm';
-<<<<<<< HEAD
 // import { AuthProvider } from './context/AuthContext'; 
-=======
-import { AuthProvider } from './context/AuthContext'; 
->>>>>>> 6883dd441fee6e1e17ed6c3bf367a2cbe9d1aaa4
 import Navbar from './components/Navbar/Navbar';
 import Contact from './components/Contact/ContactSection';
 import Footer from './components/Footer/Footer';
