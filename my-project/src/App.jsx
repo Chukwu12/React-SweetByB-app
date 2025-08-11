@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import Home from './Pages/Home';
-import Auth from './Pages/AuthForm';
+import Shop from './Pages/Shop'; 
 import { AuthProvider } from './context/AuthContext'; 
 import Navbar from './components/Navbar/Navbar';
 import Contact from './components/Contact/ContactSection';
@@ -22,11 +22,11 @@ const App = () => {
           <AuthProvider>
             <Navbar />
             <Routes>
-              {/* Auth page at root */}
-              {<Route path="/" element={<Auth />} />}
-              {/* Home Page */}
+              {/* Auth page /Home */}
+              {<Route path="/" element={<Home />} />}
+              {/* Shop Page */}
               <Route
-                path="/dashboard" element={<Home />} />
+                path="/shop" element={<Shop />} />
               {/* About Page */}
               <Route path="/about" element={<About />} />
               {/* Cart Page */}

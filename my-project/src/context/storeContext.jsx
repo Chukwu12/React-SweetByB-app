@@ -50,9 +50,9 @@ const StoreContextProvider = (props) => {
 // }, []);
 
   // 👇 No API call — use static itemCard for now
-  useEffect(() => {
-    setProducts(itemCard);
-}, []);
+//   useEffect(() => {
+//     setProducts(itemCard);
+// }, []);
 
 //       if (response.data.success) {
 //         setProducts(response.data.data);

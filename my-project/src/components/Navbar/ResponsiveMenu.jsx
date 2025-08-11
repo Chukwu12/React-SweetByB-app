@@ -11,7 +11,7 @@ const ResponsiveMenu = ({ open,setOpen }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -100 }}
             transition={{ duration: 0.3 }}
-            className=" top-20 left-0 w-full h-[200px] z-20"
+            className=" top-20 left-0 w-full h-[300px] z-20"
             onClick={() => setOpen(false)}
           >
             <div className="text-xl font-semibold uppercase bg-primary text-white py-10 m-6 rounded-3xl"
@@ -19,9 +19,14 @@ const ResponsiveMenu = ({ open,setOpen }) => {
             >
             
               <ul className="flex flex-col items-center gap-10">
-                <li>
+                  <li>
                   <Link to="/" className="hover:text-gray-300"  onClick={() => setOpen(false)}>
                     Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/shop" className="hover:text-gray-300"  onClick={() => setOpen(false)}>
+                    Shop
                   </Link>
                 </li>
                 <li>
