@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 
 import express from 'express';
+import initPassport from "./config/passport.js"; 
 // import mongoose from 'mongoose';
 import session from 'express-session';
 import passport from 'passport';
@@ -74,6 +75,10 @@ app.use(cors({
   credentials: true,
 }));
 
+app.get('/api/ping', (req, res) => {
+  res.json({ message: "pong" });
+});
+
 
 
 
@@ -96,9 +101,12 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ 
-      mongoUrl: process.env.MONGODB_URI, 
-    }),
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    cookie: {
+      secure: false,
+      httpOnly: true,
+      sameSite: 'lax'
+    }
   })
 );
 
@@ -129,8 +137,8 @@ app.use((err, req, res, next) => {
 
 
 // Server Running
-app.listen(process.env.PORT || 5000, '0.0.0.0', () => {
-  console.log(`✅ Server running on PORT ${process.env.PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Server running on PORT ${PORT}`);
 });
 // Check if the MongoDB URI is being loaded correctly
 console.log('MONGODB_URI:', process.env.MONGODB_URI);

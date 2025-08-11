@@ -25,7 +25,6 @@ export const postLogin = (req, res, next) => {
         req.flash("errors", validationErrors);
         return res.redirect("/login");
     }
-
     req.body.email = validator.normalizeEmail(req.body.email, {
         gmail_remove_dots: false,
     });

@@ -51,7 +51,7 @@ const AuthForm = () => {
     const endpoint = isLogin ? "/login" : "/signup";
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}${endpoint}`, {
+      const response = await fetch(`/api${endpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,6 +59,7 @@ const AuthForm = () => {
         credentials: "include",
         body: JSON.stringify(form),
       });
+      
 
       const data = await response.json();
 
