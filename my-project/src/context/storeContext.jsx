@@ -21,6 +21,11 @@ const StoreContextProvider = (props) => {
         setCartItems((prev)=> ({...prev,[itemId]:prev[itemId]-1}));
     }
 
+    const getTotalCartCount = () => {
+    return Object.values(cartItems).reduce((acc, curr) => acc + curr, 0);
+};
+
+
     useEffect(()=> {
         
         console.log(cartItems);
@@ -67,6 +72,7 @@ const StoreContextProvider = (props) => {
     const contextValue = {
             // ✅ real data from MongoDB
             cartItems,
+            getTotalCartCount,
             products, 
             setCartItems,
             addToCart,

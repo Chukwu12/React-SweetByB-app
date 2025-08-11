@@ -1,24 +1,30 @@
 import React from 'react';
 import Logo from '../../assets/images/logo1.png';
-import { MdMenu, MdShoppingCart } from "react-icons/md";
 import ResponsiveMenu from './ResponsiveMenu';
+import { useContext } from 'react';
+import { MdMenu, MdShoppingCart } from "react-icons/md";
+import { StoreContext } from '../../context/storeContext';
 import { motion } from 'framer-motion';
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 const NavbarMenu = [
-    { id: 1, title: "Home", link: "/" },  
-    { id: 3, title: "About", link: "/about" },              
+    { id: 1, title: "Home", link: "/" },
+    { id: 3, title: "About", link: "/about" },
     { id: 4, title: "Contacts", link: "/contact" }
 ];
 
+
 const Navbar = () => {
     const [open, setOpen] = React.useState(false);
+    const { getTotalCartCount } = useContext(StoreContext);
+    const cartCount = getTotalCartCount();
+
 
     return (
         <>
             <nav>
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
@@ -40,14 +46,14 @@ const Navbar = () => {
                                     {menu.submenu ? (
                                         <Menu>
                                             <MenuButton className="inline-flex items-center gap-2 py-1 px-3 hover:text-primary hover:shadow-[0_3px_0_-1px_#ef4444] font-semibold">
-                                                {menu.title} 
+                                                {menu.title}
                                             </MenuButton>
                                             <MenuList className="bg-white shadow-md rounded-md">
                                                 {menu.submenu.map((sub) => (
-                                                    <MenuItem 
-                                                        key={sub.id} 
-                                                        as={Link}  
-                                                        to={sub.link} 
+                                                    <MenuItem
+                                                        key={sub.id}
+                                                        as={Link}
+                                                        to={sub.link}
                                                         className="hover:text-[#5EC49D] transition-all duration-150 ease"
                                                     >
                                                         {sub.title}
@@ -56,8 +62,8 @@ const Navbar = () => {
                                             </MenuList>
                                         </Menu>
                                     ) : (
-                                        <Link 
-                                            to={menu.link} 
+                                        <Link
+                                            to={menu.link}
                                             className='inline-block py-1 px-3 hover:text-primary hover:shadow-[0_3px_0_-1px_#ef4444] font-semibold'
                                         >
                                             {menu.title}
@@ -66,11 +72,16 @@ const Navbar = () => {
                                 </li>
                             ))}
                             {/* Cart Button */}
-                            <Link 
-                                to="/cart" 
-                                className='text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-200'
+                            <Link
+                                to="/cart"
+                                className='relative text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-200'
                             >
                                 <MdShoppingCart />
+                                {cartCount > 0 && (
+                                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                                        {cartCount}
+                                    </span>
+                                )}
                             </Link>
                         </ul>
                     </div>
