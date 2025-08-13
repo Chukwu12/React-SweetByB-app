@@ -41,26 +41,28 @@ const subtotal = products.reduce((total, item) => {
   const handleSubmit = async (e) => {
     e.preventDefault();  // Prevents the form from reloading the page
 
-    const orderData = {
-      userId: user?._id || null,  // Send null if not logged in
-      items: products.filter(item => cartItems[item._id] > 0).map(item => ({
-        name: item.name,
-        minPrice: item.minPrice,
-        quantity: cartItems[item._id]
-    })),
-      amount: total,  // Total amount to be charged
-      address: {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        street: formData.street,
-        city: formData.city,
-        state: formData.state,
-        zip: formData.zip,
-        country: formData.country,
-        phone: formData.phone
-      }
-  };
+ const orderData = {
+  userId: user?._id || null,
+  items: Object.entries(cartItems).map(([id, item]) => ({
+    productId: id,
+    name: item.name,
+    minPrice: item.minPrice, 
+    quantity: item.quantity,
+  })),
+  amount: total,
+  address: {
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    email: formData.email,
+    street: formData.street,
+    city: formData.city,
+    state: formData.state,
+    zip: formData.zip,
+    country: formData.country,
+    phone: formData.phone,
+  }
+};
+
 
   try {
     // Make API request to backend to place the order

@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { Link } from 'react-router-dom';
 
+
 const NavbarMenu = [
      { id: 1, title: "Home", link: "/"},
     { id: 2, title: "Shop", link: "/shop" },

@@ -11,10 +11,10 @@ function Cart() {
 
   // Calculate subtotal dynamically based on cart items
   const subtotal = products.reduce((total, item) => {
-    const quantity = cartItems[item._id] || 0;
-    if (quantity > 0) {
-      const price = item.minPrice || 0; // fallback
-      return total + (price * quantity);
+    const cartItem = cartItems[item._id];
+    if (cartItem && cartItem.quantity > 0) {
+      const price = item.minPrice || 0;
+      return total + (price * cartItem.quantity);
     }
     return total;
   }, 0);
@@ -41,19 +41,18 @@ function Cart() {
             </HStack>
             <Box as="hr" my={2} />
             {products.map((item) => {
-              if (cartItems[item._id] > 0) {
+              const cartItem = cartItems[item._id];
+              if (cartItem && cartItem.quantity > 0) {
                 return (
                   <Box key={item._id} py={4}>
                     <HStack spacing={4}>
-                      <Image src={item.image} alt={item.itemTitle} boxSize="50px" objectFit="cover" />
+                      <Image src={item.image} alt={item.name} boxSize="50px" objectFit="cover" />
                       <Text flex="1">{item.name}</Text>
                       <Text flex="1">
                         {item.maxPrice ? `$${item.minPrice} - $${item.maxPrice}` : `$${item.minPrice}`}
                       </Text>
-                      <Text flex="1">{cartItems[item._id]}</Text>
-                      <Text flex="1">
-                        ${(item.minPrice * cartItems[item._id]).toFixed(2)}
-                      </Text>
+                      <Text flex="1">{cartItem.quantity}</Text>
+                      <Text flex="1">${(item.minPrice * cartItem.quantity).toFixed(2)}</Text>
                       <IconButton
                         icon={<FiTrash2 />}
                         aria-label="Remove from cart"
@@ -65,6 +64,7 @@ function Cart() {
                   </Box>
                 );
               }
+
               return null;
             })}
           </Box>

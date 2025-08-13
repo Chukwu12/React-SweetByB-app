@@ -1,6 +1,5 @@
-import { useAuth } from "../context/AuthContext"; // adjust path as needed
-
-
+import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 import {
   Box,
   Button,
@@ -14,28 +13,28 @@ import {
   HStack,
   Icon,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import {
-  FaFacebook,
-  FaTwitter,
-  FaGoogle,
-  FaInstagram,
-} from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { FaFacebook, FaTwitter, FaGoogle, FaInstagram } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const toast = useToast();
   const navigate = useNavigate();
-
-  // Accessing login and isAuthenticated from context
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
 
   const [form, setForm] = useState({
     userName: "",
     email: "",
     password: "",
   });
+
+  // ✅ Auto-redirect if already logged in
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/shop");
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleToggle = () => {
     setIsLogin(!isLogin);
@@ -50,43 +49,35 @@ const AuthForm = () => {
     e.preventDefault();
     const endpoint = isLogin ? "/login" : "/signup";
 
+    const API_BASE_URL =
+      import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
     try {
-      const response = await fetch(`/api${endpoint}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(form),
+      const response = await axios.post(
+        `${API_BASE_URL}/api${endpoint}`,
+        isLogin
+          ? { email: form.email, password: form.password }
+          : { ...form, confirmPassword: form.password },
+        { withCredentials: true }
+      );
+
+      const { data } = response;
+
+      login(data.user); // Save user in context
+      toast({
+        title: "Success!",
+        description: data.message || "Logged in successfully.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
       });
 
-
-      const data = await response.json();
-
-      if (response.ok) {
-        login(data.user); // Use the login function from context to store user data
-        toast({
-          title: "Success!",
-          description: data.message || "Logged in successfully.",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        });
-
-        navigate("/dashboard");
-      } else {
-        toast({
-          title: "Error",
-          description: data.message || "Something went wrong.",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-      }
+      navigate("/shop"); // ✅ Redirect to shop after login/signup
     } catch (err) {
       toast({
-        title: "Network Error",
-        description: err.message,
+        title: "Error",
+        description:
+          err.response?.data?.message || err.message || "Something went wrong.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -125,7 +116,7 @@ const AuthForm = () => {
                 value={form.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                autocomplete="email"
+                autoComplete="email"
               />
             </FormControl>
 
@@ -137,7 +128,7 @@ const AuthForm = () => {
                 value={form.password}
                 onChange={handleChange}
                 placeholder="Enter your password"
-                autocomplete="password"
+                autoComplete="password"
               />
             </FormControl>
 
