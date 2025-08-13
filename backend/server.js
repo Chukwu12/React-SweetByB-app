@@ -111,6 +111,7 @@ app.use(
 );
 
 // Passport middleware
+initPassport(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -120,7 +121,7 @@ app.use(passport.session());
 // Setup Routes
 app.use('/api', foodRoutes);
 app.use("/api/cart", cartRouter);
-app.use('/user', userRouter); 
+app.use('/api', userRouter); 
 app.use("/api/order", orderRouter);
 
 app.get('/api/test', (req, res) => {

@@ -51,7 +51,7 @@ const frontend_url = process.env.FRONTEND_URL || "http://localhost:5173";
         product_data: {
           name: item.name,
         },
-        unit_amount: Math.round(item.minPrice * 100), // Convert to paise
+           unit_amount: Math.round(item.minPrice * 100),  // Convert to paise
       },
       quantity: item.quantity,
     }));
