@@ -16,7 +16,8 @@ import './config/passport.js';
 
 
 
-import connectDB from './config/db.js';  // Note the `.js` extension here (ESM modules need file extensions)
+
+import connectDB from './config/db.js';  
 import foodRoutes from './routers/foodRoute.js';  
 import cartRouter from './routers/cartRoute.js';
 import orderRouter from './routers/orderRoute.js'
@@ -26,7 +27,6 @@ import userRouter from './routers/userRoute.js';
 
 
 dotenv.config();
-// console.log("STRIPE KEY:", process.env.STRIPE_SECRET_KEY);
 
 // Connect to Database
 connectDB();
@@ -52,18 +52,32 @@ app.use((req, res, next) => {
 
 // ✅ CORS configuration
 const allowedOrigins = [
-  'http://localhost:5173', // Vite dev server
-  process.env.FRONTEND_URL, // deployed frontend
+  process.env.FRONTEND_URL,      // Your Codespaces / production URL
+  'http://localhost:5173',       // Local dev
+  'https://localhost:5173',      // Local dev over https (just in case)
 ];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.warn(`⛔ CORS BLOCKED for origin: ${origin}`);
-      callback(new Error(`CORS blocked for origin: ${origin}`));
+app.use(cors({
+  origin: (origin, callback) => {
+    console.log("🔍 Checking CORS for origin:", origin);
+
+    if (!origin) {
+      // Allow server-to-server or curl requests with no origin
+      return callback(null, true);
     }
+
+    // Allow exact matches
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    // Also allow any *.app.github.dev for flexibility in Codespaces
+    if (/\.app\.github\.dev$/.test(origin)) {
+      return callback(null, true);
+    }
+
+    console.warn(`⛔ CORS BLOCKED for origin: ${origin}`);
+    callback(new Error(`CORS blocked for origin: ${origin}`));
   },
   credentials: true,
 };
@@ -71,6 +85,7 @@ const corsOptions = {
 // ✅ Apply CORS for all routes + handle preflight requests
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
+
 
 
 
@@ -104,6 +119,7 @@ app.use(
 );
 
 // Passport middleware
+initPassport(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -113,7 +129,7 @@ app.use(passport.session());
 // Setup Routes
 app.use('/api', foodRoutes);
 app.use("/api/cart", cartRouter);
-app.use('/user', userRouter); 
+app.use('/api', userRouter); 
 app.use("/api/order", orderRouter);
 
 app.get('/api/test', (req, res) => {

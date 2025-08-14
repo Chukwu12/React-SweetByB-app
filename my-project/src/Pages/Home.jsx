@@ -1,35 +1,172 @@
-import React, { useState } from 'react';
-import ExploreMenu from '../components/ProductGallery/ExploreMenu';
-import Hero from '../components/Hero/Hero';
-import Menus from '../components/Menus/Menus';
-import Banner from '../components/Banner/Banner';
-import FoodDisplay from '../components/FoodDisplay/FoodDisplay';
-// import TestimonialsSection from '../components/Testimonial/TestimonialsSection';
+import axios from "axios";
+import { useAuth } from "../context/AuthContext";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Text,
+  VStack,
+  useToast,
+  HStack,
+  Icon,
+} from "@chakra-ui/react";
+import { useState, useEffect } from "react";
+import { FaFacebook, FaTwitter, FaGoogle, FaInstagram } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const Home = () => {
-  const [category, setCategory] = useState("All");
+const AuthForm = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const toast = useToast();
+  const navigate = useNavigate();
+  const { login, isAuthenticated } = useAuth();
+
+  const [form, setForm] = useState({
+    userName: "",
+    email: "",
+    password: "",
+  });
+
+  // ✅ Auto-redirect if already logged in
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/shop");
+    }
+  }, [isAuthenticated, navigate]);
+
+  const handleToggle = () => {
+    setIsLogin(!isLogin);
+    setForm({ userName: "", email: "", password: "" });
+  };
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const endpoint = isLogin ? "/login" : "/signup";
+
+    const API_BASE_URL =
+      import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/api${endpoint}`,
+        isLogin
+          ? { email: form.email, password: form.password }
+          : { ...form, confirmPassword: form.password },
+        { withCredentials: true }
+      );
+
+      const { data } = response;
+
+      login(data.user); // Save user in context
+      toast({
+        title: "Success!",
+        description: data.message || "Logged in successfully.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+
+      navigate("/shop"); // ✅ Redirect to shop after login/signup
+    } catch (err) {
+      toast({
+        title: "Error",
+        description:
+          err.response?.data?.message || err.message || "Something went wrong.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+
+    setForm({ userName: "", email: "", password: "" });
+  };
 
   return (
-    <div>
-      {/* Hero Section */}
-      <Hero />
+    <Flex minH="100vh" align="center" justify="center" bg="gray.50">
+      <Box w="full" maxW="md" p={8} borderRadius="lg" boxShadow="lg" bg="white">
+        <Text fontSize="2xl" fontWeight="bold" textAlign="center" mb={6}>
+          {isLogin ? "Sign In" : "Sign Up"}
+        </Text>
 
-      {/* Menus Section */}
-      <Menus />
+        <form onSubmit={handleSubmit}>
+          <VStack spacing={4}>
+            {!isLogin && (
+              <FormControl isRequired>
+                <FormLabel>Username</FormLabel>
+                <Input
+                  name="userName"
+                  value={form.userName}
+                  onChange={handleChange}
+                  placeholder="Enter your username"
+                />
+              </FormControl>
+            )}
 
-      {/* Promotional Banner */}
-      <Banner />
+            <FormControl isRequired>
+              <FormLabel>Email</FormLabel>
+              <Input
+                name="email"
+                type="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                autoComplete="email"
+              />
+            </FormControl>
 
-      {/* Explore Menu Section */}
-      <ExploreMenu category={category} setCategory={setCategory} />
+            <FormControl isRequired>
+              <FormLabel>Password</FormLabel>
+              <Input
+                name="password"
+                type="password"
+                value={form.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
+                autoComplete="password"
+              />
+            </FormControl>
 
-      {/* Food Display (Filtered by Category) */}
-      <FoodDisplay category={category} />
+            <Button colorScheme="teal" width="full" type="submit" mt={2}>
+              {isLogin ? "Login" : "Sign Up"}
+            </Button>
 
-      {/* Testimonials */}
-      {/* <TestimonialsSection /> */}
-    </div>
+            <Button
+              variant="link"
+              colorScheme="blue"
+              onClick={handleToggle}
+              mt={2}
+            >
+              {isLogin
+                ? "Don't have an account? Sign up"
+                : "Already have an account? Sign in"}
+            </Button>
+
+            <Button
+              variant="link"
+              colorScheme="teal"
+              onClick={() => navigate('/shop')}
+            >
+              Continue as Guest
+            </Button>
+          </VStack>
+        </form>
+
+        {/* Optional: Social Icons */}
+        <HStack justify="center" spacing={4} mt={6}>
+          <Icon as={FaFacebook} boxSize={6} />
+          <Icon as={FaTwitter} boxSize={6} />
+          <Icon as={FaGoogle} boxSize={6} />
+          <Icon as={FaInstagram} boxSize={6} />
+        </HStack>
+      </Box>
+    </Flex>
   );
 };
 
-export default Home;
+export default AuthForm;

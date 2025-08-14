@@ -164,7 +164,7 @@ import {Box, Grid, GridItem, Image, Text, VStack, HStack,position,} from "@chakr
                     </HStack>
   
                     <HStack>
-                      <Text fontWeight={700}>Rs. {item.price} </Text>
+                      <Text fontWeight={700}>Rs. {item.minPrice} </Text>
                     </HStack>
                   </VStack>
                 </VStack>

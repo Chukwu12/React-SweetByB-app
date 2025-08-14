@@ -1,11 +1,25 @@
-import React from 'react'
+// src/Pages/Shop.jsx
+import  { useState } from 'react';
+import ExploreMenu from '../components/ProductGallery/ExploreMenu';
+import Hero from '../components/Hero/Hero';
+import Menus from '../components/Menus/Menus';
+import Banner from '../components/Banner/Banner';
+import FoodDisplay from '../components/FoodDisplay/FoodDisplay';
+import ScrollToTopButton from '../components/ScrollToTopButton'; //
 
-function Shop() {
+const Shop = () => {
+  const [category, setCategory] = useState("All");
+
   return (
-    <>
-     Shop 
-    </>
-  )
-}
+    <div>
+      <Hero />
+      <Menus />
+      <Banner />
+      <ExploreMenu category={category} setCategory={setCategory} />
+      <FoodDisplay category={category} />
+      <ScrollToTopButton />
+    </div>
+  );
+};
 
-export default Shop
+export default Shop;
