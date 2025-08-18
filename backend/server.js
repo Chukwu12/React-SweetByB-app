@@ -44,6 +44,13 @@ app.use((req, res, next) => {
 
 // Enable CORS for frontend
 
+// Log incoming request origins (for debugging)
+app.use((req, res, next) => {
+  console.log("🛰️ Incoming request from origin:", req.headers.origin);
+  next();
+});
+
+// ✅ CORS configuration
 const allowedOrigins = [
   process.env.FRONTEND_URL,      // Your Codespaces / production URL
   'http://localhost:5173',       // Local dev
@@ -73,11 +80,12 @@ app.use(cors({
     callback(new Error(`CORS blocked for origin: ${origin}`));
   },
   credentials: true,
-}));
+};
 
-app.get('/api/ping', (req, res) => {
-  res.json({ message: "pong" });
-});
+// ✅ Apply CORS for all routes + handle preflight requests
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 
 
 
@@ -127,6 +135,7 @@ app.use("/api/order", orderRouter);
 app.get('/api/test', (req, res) => {
   res.json({ success: true, message: 'CORS working' });
 });
+
 app.use('/uploads', express.static('uploads')); // Serve uploaded images
 
 // Global Error Handler (for CORS and general errors)
@@ -138,8 +147,8 @@ app.use((err, req, res, next) => {
 
 
 // Server Running
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`✅ Server running on PORT ${PORT}`);
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server running on port ${process.env.PORT || 5000}`);
 });
 // Check if the MongoDB URI is being loaded correctly
 console.log('MONGODB_URI:', process.env.MONGODB_URI);
