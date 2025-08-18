@@ -41,7 +41,7 @@ const FoodDisplay = ({ category }) => {
                   : `$${(item.minPrice ?? 0).toFixed(2)}`
               }
               itemImage={item.image} 
-
+              flavors={item.flavors ?? []}
             />
           </GridItem>
         ))}

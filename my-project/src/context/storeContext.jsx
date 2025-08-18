@@ -27,19 +27,25 @@ const StoreContextProvider = (props) => {
     }, []);
 
     // ✅ Add to Cart with full item details
-    const addToCart = (itemId) => {
+    const addToCart = (itemId, flavor = "") => {
         const product = products.find(p => p._id === itemId);
         if (!product) return; // Defensive check
 
+        // Use a combined key: productId + flavor
+        const cartKey = `${itemId}-${flavor}`;
+
         setCartItems(prev => {
-            const existingItem = prev[itemId];
+            const existingItem = prev[cartKey];
+            const newQuantity = existingItem ? existingItem.quantity + 1 : 1;
+
             return {
                 ...prev,
-                [itemId]: {
+                [cartKey]: {
                     name: product.name,
                     minPrice: product.minPrice,
                     image: product.image,
-                    quantity: existingItem ? existingItem.quantity + 1 : 1,
+                    quantity: newQuantity,
+                    flavor,
                 }
             };
         });
@@ -48,15 +54,15 @@ const StoreContextProvider = (props) => {
 
 
     // ✅ Remove from Cart (remove if quantity becomes 0)
-    const removeFromCart = (itemId) => {
+    const removeFromCart = (cartKey) => {
         setCartItems(prev => {
             const updated = { ...prev };
-            if (!updated[itemId]) return prev;
+            if (!updated[cartKey]) return prev;
 
-            if (updated[itemId].quantity === 1) {
-                delete updated[itemId];
+            if (updated[cartKey].quantity === 1) {
+                delete updated[cartKey];
             } else {
-                updated[itemId].quantity -= 1;
+                updated[cartKey].quantity -= 1;
             }
 
             return updated;

@@ -1,26 +1,20 @@
 import React, { useContext } from "react";
 import { Box, Button, HStack, Text, VStack, Image, IconButton } from "@chakra-ui/react";
 import { StoreContext } from "../context/storeContext";
-import { useNavigate } from "react-router-dom"
-import { FiTrash2 } from "react-icons/fi"; // Trash icon for remove action
+import { useNavigate } from "react-router-dom";
+import { FiTrash2 } from "react-icons/fi";
 
 function Cart() {
-  const { cartItems, products, removeFromCart } = useContext(StoreContext);
-
+  const { cartItems, removeFromCart } = useContext(StoreContext);
+  const hasInvalidQuantities = Object.values(cartItems).some(item => item.quantity < 5);
   const navigate = useNavigate();
 
   // Calculate subtotal dynamically based on cart items
-  const subtotal = products.reduce((total, item) => {
-    const cartItem = cartItems[item._id];
-    if (cartItem && cartItem.quantity > 0) {
-      const price = item.minPrice || 0;
-      return total + (price * cartItem.quantity);
-    }
-    return total;
+  const subtotal = Object.values(cartItems).reduce((total, item) => {
+    return total + (item.minPrice * item.quantity);
   }, 0);
 
-
-  const deliveryFee = 2; // Fixed delivery fee for simplicity
+  const deliveryFee = 2;
   const total = subtotal + deliveryFee;
 
   return (
@@ -40,33 +34,33 @@ function Cart() {
               <Text flex="0.5">Remove</Text>
             </HStack>
             <Box as="hr" my={2} />
-            {products.map((item) => {
-              const cartItem = cartItems[item._id];
-              if (cartItem && cartItem.quantity > 0) {
-                return (
-                  <Box key={item._id} py={4}>
-                    <HStack spacing={4}>
-                      <Image src={item.image} alt={item.name} boxSize="50px" objectFit="cover" />
-                      <Text flex="1">{item.name}</Text>
-                      <Text flex="1">
-                        {item.maxPrice ? `$${item.minPrice} - $${item.maxPrice}` : `$${item.minPrice}`}
-                      </Text>
-                      <Text flex="1">{cartItem.quantity}</Text>
-                      <Text flex="1">${(item.minPrice * cartItem.quantity).toFixed(2)}</Text>
-                      <IconButton
-                        icon={<FiTrash2 />}
-                        aria-label="Remove from cart"
-                        onClick={() => removeFromCart(item._id)}
-                        colorScheme="red"
-                      />
-                    </HStack>
-                    <Box as="hr" my={2} />
-                  </Box>
-                );
-              }
 
-              return null;
-            })}
+            {Object.entries(cartItems).map(([cartKey, cartItem]) => (
+              <Box key={cartKey} py={4}>
+                <HStack spacing={4} align="center">
+                  <Image src={cartItem.image} alt={cartItem.name} boxSize="60px" objectFit="cover" borderRadius="md" />
+                  <VStack flex="1" align="start" spacing={0}>
+                    <Text fontWeight="semibold">{cartItem.name}</Text>
+                    {cartItem.flavor && (
+                      <Text fontSize="sm" color="gray.500">
+                        Flavor: {cartItem.flavor}
+                      </Text>
+                    )}
+                  </VStack>
+                  <Text flex="1">${cartItem.minPrice}</Text>
+                  <Text flex="1">{cartItem.quantity}</Text>
+                  <Text flex="1">${(cartItem.minPrice * cartItem.quantity).toFixed(2)}</Text>
+                  <IconButton
+                    icon={<FiTrash2 />}
+                    aria-label="Remove from cart"
+                    onClick={() => removeFromCart(cartKey)}
+                    colorScheme="red"
+                    size="sm"
+                  />
+                </HStack>
+                <Box as="hr" my={2} />
+              </Box>
+            ))}
           </Box>
         </Box>
 
@@ -90,7 +84,13 @@ function Cart() {
               <Text>${total.toFixed(2)}</Text>
             </HStack>
           </VStack>
-          <Button onClick={() => navigate('/order')}
+          {hasInvalidQuantities && (
+            <Text color="red.500" fontWeight="bold" mb={2}>
+              ⚠️ Each item must have a minimum quantity of 5 to proceed to checkout.
+            </Text>
+          )}
+          <Button
+            onClick={() => navigate('/order')}
             colorScheme="teal"
             size="lg"
             width="100%"
