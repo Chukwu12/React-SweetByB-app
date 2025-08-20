@@ -82,61 +82,51 @@ export const getSignup = (req, res) => {
 
 // Post Signup
 export const postSignup = async (req, res, next) => {
-    const validationErrors = [];
+  const validationErrors = [];
 
-    // Validate the inputs
-    if (!validator.isEmail(req.body.email)) {
-        validationErrors.push({ msg: "Please enter a valid email address." });
-    }
-    if (!validator.isLength(req.body.password, { min: 8 })) {
-        validationErrors.push({ msg: "Password must be at least 8 characters long" });
-    }
-    if (req.body.password !== req.body.confirmPassword) {
-        validationErrors.push({ msg: "Passwords do not match" });
-    }
+  if (!validator.isEmail(req.body.email)) validationErrors.push({ msg: "Please enter a valid email address." });
+  if (!validator.isLength(req.body.password, { min: 8 })) validationErrors.push({ msg: "Password must be at least 8 characters long" });
+  if (req.body.password !== req.body.confirmPassword) validationErrors.push({ msg: "Passwords do not match" });
 
-    // If there are validation errors, re-render the signup page with errors
-    if (validationErrors.length) {
-        req.flash("errors", validationErrors);
-        return res.redirect("/signup");
-    }
+  if (validationErrors.length) {
+    req.flash("errors", validationErrors);
+    return res.redirect("/signup");
+  }
 
-    req.body.email = validator.normalizeEmail(req.body.email, {
-        gmail_remove_dots: false,
+  req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
+
+  try {
+    // Check if user already exists
+    const existingUser = await User.findOne({
+      $or: [{ email: req.body.email }, { userName: req.body.userName }]
     });
 
-    try {
-        // Check if the email or username already exists
-        const existingUser = await User.findOne({
-            $or: [{ email: req.body.email }, { userName: req.body.userName }]
-        });
-
-        if (existingUser) {
-            req.flash("errors", {
-                msg: "Account with that email address or username already exists.",
-            });
-            return res.redirect("/signup"); // Correct path for signup
-        }
-
-        // Create a new user
-        const user = new User({
-            userName: req.body.userName,
-            email: req.body.email,
-            password: req.body.password,
-        });
-
-        // Save the new user
-        await user.save();
-
-        // Log in the newly created user
-        req.logIn(user, (err) => {
-            if (err) {
-                return next(err);
-            }
-            res.redirect("/profile"); // Redirect to profile after successful signup
-        });
-
-    } catch (err) {
-        return next(err); // Handle any errors that occur during signup
+    if (existingUser) {
+      req.flash("errors", { msg: "Account with that email or username already exists." });
+      return res.redirect("/signup");
     }
+
+    // Create and save new user
+    const user = new User({
+      userName: req.body.userName,
+      email: req.body.email,
+      password: req.body.password
+    });
+
+    await user.save();
+
+    // Passport login
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+
+      // Optional: store user info in session for debugging
+      console.log("User logged in:", req.user);
+      res.redirect("/profile");
+    });
+
+  } catch (err) {
+    console.error("Signup error:", err);
+    return next(err);
+  }
 };
+

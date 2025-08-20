@@ -53,10 +53,11 @@ const ExploreMenu = ({ category, setCategory }) => {
           variants={FadeIn(0.7)} 
           className="text-center text-gray-600 mt-6 w-full px-4"
           style={{
-            fontSize: "14px",
-            lineHeight: "1.6", // Add line height for better readability
+            fontSize: "16px",
+            lineHeight: "1.8", // Add line height for better readability
             margin: '0 auto', // Ensure it's centered within the container
             maxWidth: '800px', // Limit width for better readability
+            fontWeight: "600",
           }}
         >
           Welcome to Sweets by B, your one-stop shop for delicious homemade desserts! 

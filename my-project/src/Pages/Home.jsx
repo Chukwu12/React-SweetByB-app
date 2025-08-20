@@ -9,17 +9,16 @@ import {
   Input,
   Text,
   VStack,
-  useToast,
   HStack,
   Icon,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { FaFacebook, FaTwitter, FaGoogle, FaInstagram } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { showError, showSuccess } from "../utility/alerts";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const toast = useToast();
   const navigate = useNavigate();
   const { login, isAuthenticated } = useAuth();
 
@@ -54,38 +53,34 @@ const AuthForm = () => {
 
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/api${endpoint}`,
-        isLogin
-          ? { email: form.email, password: form.password }
-          : { ...form, confirmPassword: form.password },
-        { withCredentials: true }
-      );
+      `${API_BASE_URL}/api${endpoint}`,
+    isLogin
+      ? { email: form.email, password: form.password }
+      : { ...form, confirmPassword: form.password },
+    { withCredentials: true }
+  );
 
       const { data } = response;
 
       login(data.user); // Save user in context
-      toast({
-        title: "Success!",
-        description: data.message || "Logged in successfully.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
+      
+      
+      // ✅ Show SweetAlert success
+      await showSuccess(data.message || "Logged in successfully!");
 
       navigate("/shop"); // ✅ Redirect to shop after login/signup
     } catch (err) {
-      toast({
-        title: "Error",
-        description:
-          err.response?.data?.message || err.message || "Something went wrong.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+     const errorMsg =
+        err.response?.data?.message || err.message || "Something went wrong.";
+
+      // ❌ Show SweetAlert error
+      showError(errorMsg);
     }
 
     setForm({ userName: "", email: "", password: "" });
   };
+
+  
 
   return (
     <Flex minH="100vh" align="center" justify="center" bg="gray.50">

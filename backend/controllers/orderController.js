@@ -21,6 +21,15 @@ const frontend_url = process.env.FRONTEND_URL || "http://localhost:5173";
       });
     }
 
+      // ✅ Enforce minimum quantity rule
+    const hasInvalidQuantities = items.some(item => item.quantity < 5);
+    if (hasInvalidQuantities) {
+      return res.status(400).json({
+        success: false,
+        message: "Each item must have a minimum quantity of 5.",
+      });
+    }
+
     // Validate userId - store null if invalid or missing
     const validUserId = userId && mongoose.Types.ObjectId.isValid(userId) ? userId : null;
 

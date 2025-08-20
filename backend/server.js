@@ -80,14 +80,7 @@ app.use(cors({
     callback(new Error(`CORS blocked for origin: ${origin}`));
   },
   credentials: true,
-};
-
-// ✅ Apply CORS for all routes + handle preflight requests
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
-
-
-
+}));
 
 
 // Static folder (optional)

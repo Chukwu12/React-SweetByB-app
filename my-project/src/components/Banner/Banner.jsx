@@ -1,5 +1,7 @@
-import React from 'react';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import BannerImg from "../../assets/images/image0.png";
+import MenuImg from "../../assets/images/image4.png"; //
 import Pudding1 from "../../assets/images/pudding1.jpeg";
 import Cupackes from "../../assets/images/IMG_0649.jpeg"
 import Cupackes2 from "../../assets/images/IMG_9855.jpeg"
@@ -14,13 +16,38 @@ import 'swiper/css';  // Core Swiper styles
 import 'swiper/css/navigation'; // If using navigation
 import 'swiper/css/pagination'; // If using pagination
 
-
+const MySwal = withReactContent(Swal);
 const Banner = () => {
+
+    const handleOpenMenu = () => {
+        MySwal.fire({
+            title: 'Full Menu',
+            imageUrl: MenuImg,
+            imageAlt: 'Sweets by B full menu',
+            showCloseButton: true,
+            showConfirmButton: false,
+            width: '90%',
+            padding: '1em',
+            background: '#fff',
+            imageWidth: '100%',
+            imageHeight: 'auto',
+        });
+    };
     return (
         <section id='about' className='bg-secondary/10'>
             <div className='container grid grid-cols-1 md:grid-cols-2 gap-5 space-y-6 md:space-y-0 py-14'>
                 {/* Banner Image */}
-                <div className='flex justify-center items-center'>
+
+                <div className='flex flex-col justify-center items-center space-y-6'>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="text-3xl font-bold text-center"
+                    >
+                        Discover Our Signature Sweets
+                    </motion.h2>
+
                     <motion.img
                         initial={{ opacity: 0, scale: 0.5 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -31,6 +58,13 @@ const Banner = () => {
                         loading="lazy"
                         className="w-full h-[300px] sm:h-[400px] md:h-auto md:max-w-[800px] object-cover rounded-[25px]"
                     />
+                    {/* View Menu Button */}
+                    <button
+                        onClick={handleOpenMenu}
+                        className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-full transition"
+                    >
+                        View Full Menu
+                    </button>
                 </div>
 
                 {/* Swiper Component */}
