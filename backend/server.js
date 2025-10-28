@@ -1,5 +1,6 @@
 //Load environment variables
 import dotenv from 'dotenv';
+dotenv.config();
  import cors from 'cors';
 
 
@@ -26,7 +27,7 @@ import userRouter from './routers/userRoute.js';
 
 
 
-dotenv.config();
+
 
 // Connect to Database
 connectDB();
@@ -102,7 +103,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
     cookie: {
       secure: false,
       httpOnly: true,
@@ -120,7 +121,7 @@ app.use(passport.session());
  app.use(flash());
 
 // Setup Routes
-app.use('/api', foodRoutes);
+app.use("/api/foods", foodRoutes);
 app.use("/api/cart", cartRouter);
 app.use('/api', userRouter); 
 app.use("/api/order", orderRouter);
@@ -144,4 +145,4 @@ app.listen(process.env.PORT || 5000, () => {
   console.log(`Server running on port ${process.env.PORT || 5000}`);
 });
 // Check if the MongoDB URI is being loaded correctly
-console.log('MONGODB_URI:', process.env.MONGODB_URI);
+console.log('DB_STRING:', process.env.DB_STRING);

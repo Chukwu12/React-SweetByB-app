@@ -34,11 +34,21 @@ export const addFood = async (req, res) => {
 // Get all food items
 export const listFood = async (req, res) => {
   try {
-    const foods = await FoodItem.find({});
-    res.status(200).json({ success: true, data: foods });
-  } catch (err) {
-    console.error("❌ Error fetching food list:", err);
-    res.status(500).json({ success: false, message: "Error retrieving food list", error: err.message });
+    const foods = await FoodItem.find();
+
+    if (foods.length > 0) {
+      return res.json({ success: true, data: foods });
+    } else {
+      console.log("MongoDB is empty, using fallback foodData.js");
+      const { default: itemCard } = await import('../foodData.js');
+      return res.json({ success: true, data: itemCard });
+    }
+  } catch (error) {
+    console.error("Error fetching food items:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch food items",
+    });
   }
 };
 

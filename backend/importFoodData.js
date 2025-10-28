@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 
 dotenv.config(); // Make sure .env is in root or update the path
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(process.env.DB_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(async () => {
