@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
 
+const addonSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true }
+});
+
 const foodSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
@@ -8,7 +13,7 @@ const foodSchema = new mongoose.Schema({
   image: { type: String, required: true },
   category: { type: String, required: true },
   flavors: [{ type: String }], //array for flavor strings
-  addons: [{ type: String }] 
+  addons: [addonSchema]
 });
 
 // MongoDB Collection named here - will give lowercase plural of name
