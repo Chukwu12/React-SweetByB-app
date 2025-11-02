@@ -55,7 +55,8 @@ app.use((req, res, next) => {
 const allowedOrigins = [
   process.env.FRONTEND_URL,      // Your Codespaces / production URL
   'http://localhost:5173',       // Local dev
-  'https://localhost:5173',      // Local dev over https (just in case)
+  'https://localhost:5173',    // Local dev over https (just in case)
+  'https://possessed-cape-6rx4xv74vr4hxvqj-5173.app.github.dev'  
 ];
 
 app.use(cors({
