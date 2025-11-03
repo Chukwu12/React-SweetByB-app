@@ -104,7 +104,10 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
+    store: MongoStore.create({
+  mongoUrl: process.env.DB_STRING,
+}),
+
     cookie: {
       secure: false,
       httpOnly: true,
@@ -112,6 +115,9 @@ app.use(
     }
   })
 );
+
+console.log("🧩 Mongo session store using:", process.env.MONGODB_URI || process.env.DB_STRING);
+
 
 // Passport middleware
 initPassport(passport);
