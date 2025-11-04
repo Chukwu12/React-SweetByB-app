@@ -53,10 +53,11 @@ app.use((req, res, next) => {
 
 // ✅ CORS configuration
 const allowedOrigins = [
-  process.env.FRONTEND_URL,      // Your Codespaces / production URL
-  'http://localhost:5173',       // Local dev
-  'https://localhost:5173',    // Local dev over https (just in case)
-  'https://possessed-cape-6rx4xv74vr4hxvqj-5173.app.github.dev'  
+  process.env.FRONTEND_URL,                   // Codespaces / dev
+  'http://localhost:5173',                    // Local dev
+  'https://localhost:5173',                   // Local dev over https
+  'https://possessed-cape-6rx4xv74vr4hxvqj-5173.app.github.dev', // Codespaces
+  'https://sweetbyb.netlify.app'   // <-- Netlify frontend
 ];
 
 app.use(cors({
