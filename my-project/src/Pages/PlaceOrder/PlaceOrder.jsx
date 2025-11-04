@@ -1,13 +1,12 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Box, Button, Input, Text, VStack, HStack, FormControl, FormLabel } from "@chakra-ui/react";
 import { StoreContext } from "../../context/storeContext.jsx";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useAuth } from "../../context/AuthContext";
 
-
 function PlaceOrder() {
-  const { cartItems, products } = useContext(StoreContext);
+  const { cartItems, getCartTotalPrice } = useContext(StoreContext);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -21,67 +20,54 @@ function PlaceOrder() {
   });
 
   const navigate = useNavigate();
-
   const { user } = useAuth?.() || {};
 
+  // ✅ Load saved form data from localStorage on mount
+  useEffect(() => {
+    const savedForm = localStorage.getItem('formData');
+    if (savedForm) setFormData(JSON.parse(savedForm));
+  }, []);
 
-  // Calculate subtotal dynamically based on cart items
-  const subtotal = products.reduce((total, item) => {
-    if (cartItems[item._id] > 0) {
-      return total + (item.minPrice * cartItems[item._id]);
-    }
-    return total;
-  }, 0);
+  // ✅ Save form data to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('formData', JSON.stringify(formData));
+  }, [formData]);
 
-
-  const deliveryFee = 2; // Fixed delivery fee for simplicity
+  const subtotal = getCartTotalPrice(); // Use centralized method from context
+  const deliveryFee = 2;
   const total = subtotal + deliveryFee;
 
-  const isCartValid = () => {
-    return Object.values(cartItems).every(item => item.quantity >= 5);
-  };
+  const isCartValid = () => Object.values(cartItems).every(item => item.quantity >= 5);
 
-  // Handle form submission (e.g., for saving order data)
   const handleSubmit = async (e) => {
-    e.preventDefault();  // Prevents the form from reloading the page
+    e.preventDefault();
 
-    // 🔒 Check for minimum quantity enforcement
     if (!isCartValid()) {
       alert("Each item must have a minimum quantity of 5.");
-      return; // Prevent order submission
+      return;
     }
+
+    const itemsArray = Object.values(cartItems).map(item => ({
+      name: item.name,
+      minPrice: item.minPrice,
+      quantity: item.quantity,
+      flavor: item.flavor || "",
+    }));
 
     const orderData = {
       userId: user?._id || null,
-      items: Object.entries(cartItems).map(([id, item]) => ({
-        productId: id,
-        name: item.name,
-        minPrice: item.minPrice,
-        quantity: item.quantity,
-      })),
+      items: itemsArray,
       amount: total,
-      address: {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        street: formData.street,
-        city: formData.city,
-        state: formData.state,
-        zip: formData.zip,
-        country: formData.country,
-        phone: formData.phone,
-      }
+      address: { ...formData },
     };
 
-
     try {
-      // Make API request to backend to place the order
       const response = await axios.post('/api/order/place', orderData);
-      // Log the backend response for debugging
-      console.log("Backend Response:", response);
 
       if (response.data.success) {
-        // Redirect user to Stripe checkout URL or confirmation page
+        // Clear saved form and cart on success
+        localStorage.removeItem('formData');
+        localStorage.removeItem('cartItems');
         window.location.href = response.data.session_url;
       } else {
         alert(response.data.message || "Something went wrong, please try again.");
@@ -92,16 +78,14 @@ function PlaceOrder() {
     }
   };
 
-
-
   return (
     <Box maxWidth="1200px" margin="auto" padding="20px">
       <VStack spacing="24px" align="stretch">
-        {/* Delivery Information Form */}
         <Box bg="gray.100" p={4} borderRadius="md" boxShadow="md">
           <Text fontSize="2xl" fontWeight="bold" mb={4}>Delivery Information</Text>
           <form onSubmit={handleSubmit}>
             <VStack spacing={4} align="stretch">
+              {/* Form fields */}
               <HStack spacing={4}>
                 <FormControl>
                   <FormLabel>First Name</FormLabel>
@@ -199,7 +183,7 @@ function PlaceOrder() {
                 />
               </FormControl>
 
-              {/* Cart Summary */}
+              {/* Cart Totals */}
               <Box bg="gray.100" p={4} borderRadius="md" boxShadow="md">
                 <Text fontSize="xl" fontWeight="bold" mb={4}>Cart Totals</Text>
                 <HStack justify="space-between">
