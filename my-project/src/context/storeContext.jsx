@@ -12,8 +12,7 @@ const StoreContextProvider = (props) => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('https://possessed-cape-6rx4xv74vr4hxvqj-5000.app.github.dev/api/foods/list');
-
+                const response = await axios.get('https://discerning-strength-production.up.railway.app/api/foods/list');
                 if (response.data.success) {
                     setProducts(response.data.data); // Set the fetched data to state
                 } else {
