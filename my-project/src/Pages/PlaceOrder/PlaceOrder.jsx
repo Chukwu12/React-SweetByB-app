@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { Box, Button, Input, Text, VStack, HStack, FormControl, FormLabel } from "@chakra-ui/react";
 import { StoreContext } from "../../context/storeContext.jsx";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 
 function PlaceOrder() {
@@ -22,22 +22,27 @@ function PlaceOrder() {
   const navigate = useNavigate();
   const { user } = useAuth?.() || {};
 
-  // ✅ Load saved form data from localStorage on mount
+  // Load saved form data from localStorage on mount
   useEffect(() => {
-    const savedForm = localStorage.getItem('formData');
+    const savedForm = localStorage.getItem("formData");
     if (savedForm) setFormData(JSON.parse(savedForm));
   }, []);
 
-  // ✅ Save form data to localStorage whenever it changes
+  // Save form data to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem('formData', JSON.stringify(formData));
+    localStorage.setItem("formData", JSON.stringify(formData));
   }, [formData]);
 
-  const subtotal = getCartTotalPrice(); // Use centralized method from context
+  const subtotal = getCartTotalPrice();
   const deliveryFee = 2;
   const total = subtotal + deliveryFee;
 
-  const isCartValid = () => Object.values(cartItems).every(item => item.quantity >= 5);
+  const isCartValid = () =>
+    Object.values(cartItems).every((item) => item.quantity >= 5);
+
+  // ✅ Use environment variable for backend URL with fallback
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +52,7 @@ function PlaceOrder() {
       return;
     }
 
-    const itemsArray = Object.values(cartItems).map(item => ({
+    const itemsArray = Object.values(cartItems).map((item) => ({
       name: item.name,
       minPrice: item.minPrice,
       quantity: item.quantity,
@@ -62,12 +67,16 @@ function PlaceOrder() {
     };
 
     try {
-      const response = await axios.post('/api/order/place', orderData);
+      const response = await axios.post(
+        `${API_BASE_URL}/api/order/place`,
+        orderData
+      );
 
       if (response.data.success) {
         // Clear saved form and cart on success
-        localStorage.removeItem('formData');
-        localStorage.removeItem('cartItems');
+        localStorage.removeItem("formData");
+        localStorage.removeItem("cartItems");
+        // Redirect to Stripe checkout
         window.location.href = response.data.session_url;
       } else {
         alert(response.data.message || "Something went wrong, please try again.");
@@ -82,17 +91,21 @@ function PlaceOrder() {
     <Box maxWidth="1200px" margin="auto" padding="20px">
       <VStack spacing="24px" align="stretch">
         <Box bg="gray.100" p={4} borderRadius="md" boxShadow="md">
-          <Text fontSize="2xl" fontWeight="bold" mb={4}>Delivery Information</Text>
+          <Text fontSize="2xl" fontWeight="bold" mb={4}>
+            Delivery Information
+          </Text>
           <form onSubmit={handleSubmit}>
             <VStack spacing={4} align="stretch">
-              {/* Form fields */}
+              {/* Name Fields */}
               <HStack spacing={4}>
                 <FormControl>
                   <FormLabel>First Name</FormLabel>
                   <Input
                     type="text"
                     value={formData.firstName}
-                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, firstName: e.target.value })
+                    }
                     placeholder="First name"
                     required
                   />
@@ -102,28 +115,38 @@ function PlaceOrder() {
                   <Input
                     type="text"
                     value={formData.lastName}
-                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, lastName: e.target.value })
+                    }
                     placeholder="Last name"
                     required
                   />
                 </FormControl>
               </HStack>
+
+              {/* Email */}
               <FormControl>
                 <FormLabel>Email Address</FormLabel>
                 <Input
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   placeholder="Email address"
                   required
                 />
               </FormControl>
+
+              {/* Address Fields */}
               <FormControl>
                 <FormLabel>Street</FormLabel>
                 <Input
                   type="text"
                   value={formData.street}
-                  onChange={(e) => setFormData({ ...formData, street: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, street: e.target.value })
+                  }
                   placeholder="Street"
                   required
                 />
@@ -134,7 +157,9 @@ function PlaceOrder() {
                   <Input
                     type="text"
                     value={formData.city}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, city: e.target.value })
+                    }
                     placeholder="City"
                     required
                   />
@@ -144,7 +169,9 @@ function PlaceOrder() {
                   <Input
                     type="text"
                     value={formData.state}
-                    onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, state: e.target.value })
+                    }
                     placeholder="State"
                     required
                   />
@@ -156,7 +183,9 @@ function PlaceOrder() {
                   <Input
                     type="text"
                     value={formData.zip}
-                    onChange={(e) => setFormData({ ...formData, zip: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, zip: e.target.value })
+                    }
                     placeholder="Zip"
                     required
                   />
@@ -166,18 +195,24 @@ function PlaceOrder() {
                   <Input
                     type="text"
                     value={formData.country}
-                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, country: e.target.value })
+                    }
                     placeholder="Country"
                     required
                   />
                 </FormControl>
               </HStack>
+
+              {/* Phone */}
               <FormControl>
                 <FormLabel>Phone</FormLabel>
                 <Input
                   type="text"
                   value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
                   placeholder="Phone"
                   required
                 />
@@ -185,7 +220,9 @@ function PlaceOrder() {
 
               {/* Cart Totals */}
               <Box bg="gray.100" p={4} borderRadius="md" boxShadow="md">
-                <Text fontSize="xl" fontWeight="bold" mb={4}>Cart Totals</Text>
+                <Text fontSize="xl" fontWeight="bold" mb={4}>
+                  Cart Totals
+                </Text>
                 <HStack justify="space-between">
                   <Text>Subtotal</Text>
                   <Text>${subtotal.toFixed(2)}</Text>
@@ -200,6 +237,7 @@ function PlaceOrder() {
                   <Text>${total.toFixed(2)}</Text>
                 </HStack>
               </Box>
+
               <Button type="submit" colorScheme="teal" size="lg" width="100%" mt={6}>
                 Proceed To Payment
               </Button>
