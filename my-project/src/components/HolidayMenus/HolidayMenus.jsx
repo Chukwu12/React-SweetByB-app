@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import {  Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -63,9 +63,9 @@ const holidayMenus = [
 const HolidayMenus = () => {
   const openMenuModal = (menu) => {
     // Check if fullMenu is an array
-    if (Array.isArray(menu.fullMenu)) {
+    if (Array.isArray(menu.images)) {
       // Create HTML with multiple images
-      const imagesHTML = menu.fullMenu
+      const imagesHTML = menu.images
         .map(
           (img) =>
             `<img src="${img}" alt="${menu.title}" style="width:100%; margin-bottom:10px; border-radius:15px;" />`
@@ -77,7 +77,7 @@ const HolidayMenus = () => {
         html: imagesHTML,
         showCloseButton: true,
         showConfirmButton: false,
-        width: "90%",
+        width: "80%",
         padding: "1em",
         background: "#fff",
       });
@@ -85,7 +85,7 @@ const HolidayMenus = () => {
       // Single image
       MySwal.fire({
         title: menu.title,
-        imageUrl: menu.fullMenu,
+        imageUrl: menu.images,
         imageAlt: menu.title,
         showCloseButton: true,
         showConfirmButton: false,
@@ -111,8 +111,8 @@ const HolidayMenus = () => {
         </motion.h2>
 
         <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={30}
+          modules={[Pagination, Autoplay]}
+          spaceBetween={40}
           slidesPerView={1}
           centeredSlides={true}
           navigation

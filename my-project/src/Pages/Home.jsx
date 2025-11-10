@@ -47,38 +47,29 @@ const AuthForm = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000/api/user";
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
   const endpoint = isLogin ? "login" : "signup";
 
   try {
     const response = await axios.post(
-      `${API_BASE_URL}/${endpoint}`,
+      `${API_BASE_URL}/api/user/${endpoint}`,
       isLogin
         ? { email: form.email, password: form.password }
         : { ...form, confirmPassword: form.password },
-      { withCredentials: true } // Important for session cookies
+      { withCredentials: true }
     );
 
-    const { data } = response;
-
-    login(data.user); // Save user in context
-
-    // ✅ Show SweetAlert success
-    await showSuccess(data.message || "Logged in successfully!");
-
-    navigate("/shop"); // ✅ Redirect to shop after login/signup
-
+    login(response.data.user);
+    await showSuccess(response.data.message);
+    navigate("/shop");
   } catch (err) {
-    const errorMsg =
-      err.response?.data?.message || err.message || "Something went wrong.";
-
-    // ❌ Show SweetAlert error
+    const errorMsg = err.response?.data?.message || err.message;
     showError(errorMsg);
   }
 
-  // Reset form after submission
   setForm({ userName: "", email: "", password: "" });
 };
+
 
 
 

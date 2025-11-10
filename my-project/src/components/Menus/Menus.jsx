@@ -80,7 +80,7 @@ const Menus = () => {
               initial="hidden"
               whileInView="visible"
               whileHover={{ scale: 1.05 }}
-              className="bg-white rounded-3xl p-4 
+              className="bg-secondary/10 rounded-3xl p-4 
                 shadow-[0_0_22px_0_rgba(0,0,0,0.15)] 
                 flex flex-row justify-around items-center gap-3"
             >

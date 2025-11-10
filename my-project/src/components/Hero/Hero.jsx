@@ -31,7 +31,7 @@ const Hero = () => {
              variants={FadeRight(1.2)}
              initial="hidden"
              animate="visible"
-            className='text-gray-400 max-w-[500px] text-[12px]'>"Welcome to Sweet ByB, where every bite is a moment of pure bliss. Our handcrafted desserts are made with love,
+            className='text-gray-400 max-w-[500px] text-[14px]'>"Welcome to Sweet ByB, where every bite is a moment of pure bliss. Our handcrafted desserts are made with love,
                  using only the finest ingredients to bring you treats that are as beautiful as they are delicious. Whether you're
                   craving something rich and indulgent or light and refreshing, our collection of desserts is sure to satisfy your
                    sweetest cravings. Join us in celebrating the art of baking—one sweet creation at a time!"

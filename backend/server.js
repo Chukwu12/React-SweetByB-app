@@ -131,7 +131,7 @@ app.use(passport.session());
 // Setup Routes
 app.use("/api/foods", foodRoutes);
 app.use("/api/cart", cartRouter);
-app.use('/api', userRouter); 
+app.use('/api/user', userRouter);
 app.use("/api/order", orderRouter);
 
 app.get('/api/test', (req, res) => {
