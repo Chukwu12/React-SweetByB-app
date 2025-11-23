@@ -1,29 +1,31 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {  Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
 import Swal from "sweetalert2";
 import '../HolidayMenus/HolidayMenu.css';
 import withReactContent from "sweetalert2-react-content";
 import { FadeUp } from "../../utility/animation";
 
-// Placeholder images
-import Placeholder1 from "../../assets/images/christmasplaceholder.jpg";
-import Placeholder2 from "../../assets/images/easterplaceholder.png";
-import Placeholder3 from "../../assets/images/thanksgivingplaceholder.png";
-import Placeholder5 from "../../assets/images/motherdayplaceholder.png";
-import Placeholder6 from "../../assets/images/valentine-banner.png";
+// Placeholders
+import Placeholder1 from "../../assets/images/christmasplaceholder.webp";
+import Placeholder2 from "../../assets/images/easterplaceholder.webp";
+import Placeholder3 from "../../assets/images/thanksgivingplaceholder.webp";
+import Placeholder5 from "../../assets/images/motherdayplaceholder.webp";
+import Placeholder6 from "../../assets/images/valentine-banner.webp";
 
-// Holiday menu images
-import ChristmasMenu from "../../assets/images/IMG_0878.jpeg";
-import EasterMenu from "../../assets/images/IMG_0881.jpeg";
-import ThanksgivingMenu from "../../assets/images/IMG_0879.jpeg";
-import ThanksgivingMenu2 from "../../assets/images/IMG_0876.jpeg";
-import MotherdaysMenu from '../../assets/images/IMG_0880.jpeg'
-import ValentineMenu from '../../assets/images/IMG_0877.jpeg'
+// Holiday menu images (real photos)
+import ChristmasMenu from "../../assets/images/IMG_0878.webp";
+import EasterMenu from "../../assets/images/IMG_0881.webp";
+import ThanksgivingMenu from "../../assets/images/IMG_0879.webp";
+import ThanksgivingMenu2 from "../../assets/images/IMG_0876.webp";
+import MotherdaysMenu from "../../assets/images/IMG_0880.webp";
+import ValentineMenu from "../../assets/images/IMG_0877.webp";
 
 const MySwal = withReactContent(Swal);
 
@@ -132,7 +134,7 @@ const HolidayMenus = () => {
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.05 }}
                 onClick={() => openMenuModal(menu)}
-                className="cursor-pointer bg-white rounded-[25px] shadow-md overflow-hidden flex flex-col items-center p-4"
+                className="cursor-pointer bg-gradient-to-br from-white to-rose-50 rounded-[25px] shadow-md overflow-hidden flex flex-col items-center p-4"
               >
                 <img
                   src={menu.placeholder}

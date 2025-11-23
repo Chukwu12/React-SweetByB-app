@@ -19,7 +19,6 @@ const ExploreMenu = ({ category, setCategory }) => {
       style={{
         width: "100%",
         height: "100%",
-        marginTop: "5rem",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -33,39 +32,46 @@ const ExploreMenu = ({ category, setCategory }) => {
       }}
     >
       {/* Title & Description */}
-      <motion.div 
-        initial="hidden" 
-        whileInView="visible" 
-        viewport={{ once: true }} 
-        style={{ textAlign: "center", padding: "40px 0px" }} // Center the text
-      >
-        <motion.h1 
-          variants={FadeUp(0.5)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="text-3xl lg:text-6xl font-bold uppercase text-center mb-6"
-        >
-          Shop Your Favorite Sweet Treats
-        </motion.h1>
+      <motion.div
+  initial="hidden"
+  animate="visible"
+  viewport={{ once: true }}
+  variants={{
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.3, 
+      },
+    },
+  }}
+  style={{ textAlign: "center", padding: "40px 0px", display: "flex", flexDirection: "column", alignItems: "center" }}
+>
+  <motion.h1
+    variants={FadeUp(0)} // 0 delay, will respect staggerChildren
+    className="text-3xl lg:text-6xl font-bold uppercase text-center mb-6"
+    style={{ display: 'block' }}
+  >
+    Shop Your Favorite Sweet Treats
+  </motion.h1>
 
-        <motion.p 
-          variants={FadeIn(0.7)} 
-          className="text-center text-gray-600 mt-6 w-full px-4"
-          style={{
-            fontSize: "16px",
-            lineHeight: "1.8", // Add line height for better readability
-            margin: '0 auto', // Ensure it's centered within the container
-            maxWidth: '800px', // Limit width for better readability
-            fontWeight: "600",
-          }}
-        >
-          Welcome to Sweets by B, your one-stop shop for delicious homemade desserts! 
-          Browse our selection of rich cheesecakes, decadent cupcakes, gourmet puddings, and more—all made with love 
-          and the finest ingredients. Whether you're craving a classic treat or looking to try something new, 
-          we’ve got something to satisfy your sweet tooth. Place your order today and indulge in pure sweetness!
-        </motion.p>
-      </motion.div>
+  <motion.p
+    variants={FadeIn(0)} // 0 delay, staggerChildren will handle sequencing
+    className="text-center text-gray-600"
+    style={{
+      fontSize: "16px",
+      lineHeight: "1.8",
+      maxWidth: '800px',
+      fontWeight: "600",
+      display: 'block',
+    }}
+  >
+    Welcome to Sweets by B, your one-stop shop for delicious homemade desserts! 
+    Browse our selection of rich cheesecakes, decadent cupcakes, gourmet puddings, and more—all made with love 
+    and the finest ingredients. Whether you're craving a classic treat or looking to try something new, 
+    we’ve got something to satisfy your sweet tooth. Place your order today and indulge in pure sweetness!
+  </motion.p>
+</motion.div>
+
 
       {/* Animated Menu Items */}
       <motion.div 

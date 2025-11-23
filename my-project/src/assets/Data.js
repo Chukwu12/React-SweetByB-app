@@ -1,23 +1,22 @@
 // Product Images
 import classicCheesecake from '../assets/images/classic-cheesecake.webp';
-import BananaPuddingCheesecake from '../assets/images/Banana-Pudding-Cheesecake.jpg';
-import dozenCupcakes from '../assets/images/dozen-cupcakes.jpeg';
-import fourCupcakes from '../assets/images/box-cupcakes-4.jpg';
-import ChocolateStrawberries from '../assets/images/dozen-chocolate-covered-strawberries.jpg';
-import assortedDessert from '../assets/images/assorted-dessert.jpg';
-import largePudding from '../assets/images/largepuddingtray.jpg';
-import Puddingtray from '../assets/images/puddingtrey.jpeg';
-import PuddingJar from '../assets/images/Puddingozjar.jpeg';
-import OGBananaJar from '../assets/images/banana-pudding1.jpg';
-import StrawberryShortcake from '../assets/images/Strawberry-Shortcake.jpg';
-import VeganBanana from '../assets/images/VeganBanana.jpg';
-import OreoPudding from '../assets/images/oreopudding.jpg';
-import MiniPudding from '../assets/images/puddingcups.jpeg';
-import cookies from '../assets/images/cookies.jpg';
+import BananaPuddingCheesecake from '../assets/images/Banana-Pudding-Cheesecake.webp';
+import dozenCupcakes from '../assets/images/dozen-cupcakes.webp';
+import fourCupcakes from '../assets/images/box-cupcakes-4.webp';
+import ChocolateStrawberries from '../assets/images/dozen-chocolate-covered-strawberries.webp';
+import assortedDessert from '../assets/images/assorted-dessert.webp';
+import largePudding from '../assets/images/largepuddingtray.webp';
+import Puddingtray from '../assets/images/puddingtrey.webp';
+import PuddingJar from '../assets/images/Puddingozjar.webp';
+import OGBananaJar from '../assets/images/banana-pudding1.webp';
+import StrawberryShortcake from '../assets/images/Strawberry-Shortcake.webp';
+import VeganBanana from '../assets/images/VeganBanana.webp';
+import OreoPudding from '../assets/images/oreopudding.webp';
+import MiniPudding from '../assets/images/puddingcups.webp';
+import cookies from '../assets/images/cookies.webp';
 
-
-// Menu Images 
-import menuCupcakes from '../assets/images/menu-cupcakes.jpg';
+// Menu Images
+import menuCupcakes from '../assets/images/menu-cupcakes.webp';
 import menuCheesecake from '../assets/images/menu-cheesecake.jpg';
 import menuDessetbox from '../assets/images/menu-dessertbox.jpg';
 import menuPudding from '../assets/images/menu-Pudding.jpg';

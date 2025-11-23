@@ -1,6 +1,6 @@
 import { Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import React from "react";
- import testimonialBg from "../../assets/images/testimonial-bg.png";
+ import testimonialBg from "../../assets/images/testimonial-bg.webp";
 import TestimonialsCarousel from "./TestimonialsCarousel";
 
 function TestimonialsSection() {

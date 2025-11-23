@@ -1,20 +1,25 @@
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import BannerImg from "../../assets/images/image0.png";
-import MenuImg from "../../assets/images/image4.png"; //
-import Pudding1 from "../../assets/images/pudding1.jpeg";
-import Cupackes from "../../assets/images/IMG_0649.jpeg"
-import Cupackes2 from "../../assets/images/IMG_9855.jpeg"
-import Chessecake from "../../assets/images/image5.jpeg"
-import Chessecake2 from "../../assets/images/IMG_9907.jpeg"
-import ValentineBox from "../../assets/images/IMG_9908.jpg"
+
+import BannerImg from "../../assets/images/image0.webp";
+import MenuImg from "../../assets/images/image4.webp";
+import Pudding1 from "../../assets/images/pudding1.webp";
+import Cupackes from "../../assets/images/IMG_0649.webp";
+import Cupackes2 from "../../assets/images/IMG_9855.webp";
+import Chessecake from "../../assets/images/image5.webp";
+import Chessecake2 from "../../assets/images/IMG_9907.webp";
+import ValentineBox from "../../assets/images/IMG_9908.webp";
+
 import bannerVideo from "../../assets/images/banner-video.mp4";
+
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';  // Core Swiper styles
-import 'swiper/css/navigation'; // If using navigation
-import 'swiper/css/pagination'; // If using pagination
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 
 const MySwal = withReactContent(Swal);
 const Banner = () => {

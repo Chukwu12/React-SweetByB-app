@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+
 import BannerImg from '../assets/images/banner-img.png';
-import { FadeUp } from '../utility/animation'; // Ensure this is imported correctly
+
+import { FadeUp } from '../utility/animation';
 import TestimonialsSection from '../components/Testimonial/TestimonialsSection';
 
 const About = () => {
