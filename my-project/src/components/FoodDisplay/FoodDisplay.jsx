@@ -6,45 +6,44 @@ import { StoreContext } from '../../context/storeContext';
 import FoodItem from '../FoodItem/FoodItem';
 import { FadeUp } from '../../utility/animation';
 
-const MotionVStack = motion(VStack);
-const MotionGridItem = motion(GridItem);
-const MotionText = motion(Text);
+// Motion components for DOM elements only
+const MotionDiv = motion.create("div");
+const MotionText = motion.create("p"); // for heading if you want
 
 const FoodDisplay = ({ category }) => {
   const { products } = useContext(StoreContext);
 
-  const filteredItems = products.filter(item => category === "All" || category === item.category);
+  const filteredItems = products.filter(
+    item => category === "All" || category === item.category
+  );
 
   return (
-    <MotionVStack
+    <MotionDiv
       className="food-display"
-      id="food-display"
-      spacing={4}
-      align="center"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '1rem'
+      }}
       initial="hidden"
       animate="visible"
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: 0.3, // Heading → grid → items
-          },
-        },
-      }}
+      variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.2 } } }}
     >
       {/* Heading */}
-      <MotionText
-        fontSize={['25px', '40px']}
-        fontWeight="600"
-        letterSpacing="2px"
-        textAlign="center"
-        variants={FadeUp(0)}
-      >
-        Check out our Full Menu
-      </MotionText>
+      <MotionDiv variants={FadeUp(0)}>
+        <Text
+          fontSize={['25px', '40px']}
+          fontWeight="600"
+          letterSpacing="2px"
+          textAlign="center"
+        >
+          Check out our Full Menu
+        </Text>
+      </MotionDiv>
 
       {/* Grid Layout */}
-      <motion.div
+      <MotionDiv
         style={{ width: '100%' }}
         variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
       >
@@ -61,9 +60,9 @@ const FoodDisplay = ({ category }) => {
         >
           {filteredItems.map((item, index) => (
             <GridItem key={item._id} width="100%">
-              <motion.div
+              <MotionDiv
                 variants={FadeUp(0.1 * index)}
-                style={{ width: "100%" }} // ensures it fills the grid cell
+                style={{ width: '100%' }}
               >
                 <FoodItem
                   id={item._id}
@@ -77,12 +76,12 @@ const FoodDisplay = ({ category }) => {
                   itemImage={item.image}
                   flavors={item.flavors ?? []}
                 />
-              </motion.div>
+              </MotionDiv>
             </GridItem>
           ))}
         </Grid>
-      </motion.div>
-    </MotionVStack>
+      </MotionDiv>
+    </MotionDiv>
   );
 };
 

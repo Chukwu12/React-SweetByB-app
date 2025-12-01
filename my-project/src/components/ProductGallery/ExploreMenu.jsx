@@ -4,8 +4,11 @@ import '../ProductGallery/ExploreMenu.css';
 import { menu_list } from '../../assets/Data.js';
 import { FadeUp, FadeIn } from "../../utility/animation";
 
-// Use motion.div instead of motion(Box) to avoid Chakra UI conflicts
-const MotionDiv = motion.div;
+// Motion components for DOM elements
+const MotionDiv = motion.create("div");
+const MotionH1 = motion.create("h1");
+const MotionP = motion.create("p");
+const MotionImg = motion.create("img");
 
 const ExploreMenu = ({ category, setCategory }) => {
   // Handle category change when a menu item is clicked
@@ -15,10 +18,9 @@ const ExploreMenu = ({ category, setCategory }) => {
 
   return (
     <MotionDiv
-     className="explore-menu-container"
+      className="explore-menu-container"
       style={{
         width: "100%",
-        height: "100%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -27,67 +29,69 @@ const ExploreMenu = ({ category, setCategory }) => {
       initial="hidden"
       animate="visible"
       variants={{
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.2 } },
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.2 } } // only stagger children
       }}
     >
       {/* Title & Description */}
-      <motion.div
-  initial="hidden"
-  animate="visible"
-  viewport={{ once: true }}
-  variants={{
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.3, 
-      },
-    },
-  }}
-  style={{ textAlign: "center", padding: "40px 0px", display: "flex", flexDirection: "column", alignItems: "center" }}
->
-  <motion.h1
-    variants={FadeUp(0)} // 0 delay, will respect staggerChildren
-    className="text-3xl lg:text-6xl font-bold uppercase text-center mb-6"
-    style={{ display: 'block' }}
-  >
-    Shop Your Favorite Sweet Treats
-  </motion.h1>
+      <MotionDiv
+        style={{
+          textAlign: "center",
+          padding: "40px 0px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.2 } }
+        }}
+      >
+        <MotionH1
+          variants={FadeUp(0)}
+          className="text-3xl lg:text-6xl font-bold uppercase text-center mb-6"
+        >
+          Shop Your Favorite Sweet Treats
+        </MotionH1>
 
-  <motion.p
-    variants={FadeIn(0)} // 0 delay, staggerChildren will handle sequencing
-    className="text-center text-gray-600"
-    style={{
-      fontSize: "16px",
-      lineHeight: "1.8",
-      maxWidth: '800px',
-      fontWeight: "600",
-      display: 'block',
-    }}
-  >
-    Welcome to Sweets by B, your one-stop shop for delicious homemade desserts! 
-    Browse our selection of rich cheesecakes, decadent cupcakes, gourmet puddings, and more—all made with love 
-    and the finest ingredients. Whether you're craving a classic treat or looking to try something new, 
-    we’ve got something to satisfy your sweet tooth. Place your order today and indulge in pure sweetness!
-  </motion.p>
-</motion.div>
-
+        <MotionP
+          variants={FadeIn(0)}
+          className="text-center text-gray-600"
+          style={{
+            fontSize: "16px",
+            lineHeight: "1.8",
+            maxWidth: '800px',
+            fontWeight: "600",
+          }}
+        >
+          Welcome to Sweets by B, your one-stop shop for delicious homemade desserts! 
+          Browse our selection of rich cheesecakes, decadent cupcakes, gourmet puddings, and more—all made with love 
+          and the finest ingredients. Whether you're craving a classic treat or looking to try something new, 
+          we’ve got something to satisfy your sweet tooth. Place your order today and indulge in pure sweetness!
+        </MotionP>
+      </MotionDiv>
 
       {/* Animated Menu Items */}
-      <motion.div 
-        className="menu-container" 
-        initial="hidden" 
-        whileInView="visible" 
+      <MotionDiv
+        className="menu-container"
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "2rem"
+        }}
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: true }}
-        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2rem" }} // Improved spacing and layout
+        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
       >
-        {menu_list.map((item, index)  => (
-          <motion.div
-             key={item.menu_name + index}  // Use menu_name + index for a unique key
+        {menu_list.map((item, index) => (
+          <MotionDiv
+            key={item.menu_name + index}
             onClick={() => handleCategoryChange(item.menu_name)}
             className="explore-menu-list-item"
-            variants={FadeUp(0.3)}
-            whileHover={{ scale: 1.1 }}
+            variants={FadeUp(0.1 * index)}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             style={{
               display: 'flex',
@@ -95,10 +99,10 @@ const ExploreMenu = ({ category, setCategory }) => {
               alignItems: 'center',
               cursor: 'pointer',
               maxWidth: '250px',
-              textAlign: 'center', // Ensure text is centered for each item
+              textAlign: 'center',
             }}
           >
-            <motion.img
+            <MotionImg
               className={category === item.menu_name ? "active" : ""}
               src={item.menu_image}
               alt={item.menu_name}
@@ -106,14 +110,14 @@ const ExploreMenu = ({ category, setCategory }) => {
               style={{
                 width: '100%',
                 height: '100px',
-                borderRadius: '8px', // Add border radius for a cleaner look
+                borderRadius: '8px',
                 marginBottom: '1rem',
               }}
             />
             <p>{item.menu_name}</p>
-          </motion.div>
+          </MotionDiv>
         ))}
-      </motion.div>
+      </MotionDiv>
     </MotionDiv>
   );
 };

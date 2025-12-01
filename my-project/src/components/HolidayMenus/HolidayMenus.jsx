@@ -31,6 +31,9 @@ import ValentineMenu from "../../assets/images/IMG_0877.webp";
 
 const MySwal = withReactContent(Swal);
 
+const MotionDiv = motion.create("div");
+const MotionH2 = motion.create("h2");
+
 const holidayMenus = [
   {
     id: 1,
@@ -101,14 +104,14 @@ const HolidayMenus = () => {
   return (
     <section className="py-14">
       <div className="container">
-        <motion.h2
+        <MotionH2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           className="text-3xl font-bold text-center pb-8"
         >
           Holiday Menus
-        </motion.h2>
+        </MotionH2>
 
         <Swiper
          className="holiday-swiper"
@@ -125,7 +128,7 @@ const HolidayMenus = () => {
         >
           {holidayMenus.map((menu, index) => (
             <SwiperSlide key={menu.id}>
-              <motion.div
+              <MotionDiv 
                 variants={FadeUp(index * 0.2)}
                 initial="hidden"
                 whileInView="visible"
@@ -162,7 +165,7 @@ const HolidayMenus = () => {
                 <p className="text-sm text-gray-500 mt-1 md:hidden">
                   Tap to view menu
                 </p>
-              </motion.div>
+              </MotionDiv >
             </SwiperSlide>
           ))}
         </Swiper>

@@ -7,6 +7,15 @@ import { FadeUp } from "../utility/animation";
 import TestimonialsSection from "../components/Testimonial/TestimonialsSection";
 import { TbTruckDelivery, TbStar, TbLeaf, TbCake } from "react-icons/tb";
 
+
+const MotionDiv = motion.create("div");
+const MotionH1 = motion.create("h1");
+const MotionP = motion.create("p");
+const MotionImg = motion.create("img");
+const MotionH2 = motion.create("h2");
+
+
+
 const About = () => {
   const scrollToShop = () => {
     const el = document.getElementById("product-menu");
@@ -24,7 +33,7 @@ const About = () => {
     <section id="about" className="py-16">
       <div className="container max-w-6xl mx-auto px-4">
         {/* Page Header */}
-        <motion.h2
+        <MotionH2
           variants={FadeUp(0)}
           initial="hidden"
           whileInView="visible"
@@ -32,13 +41,13 @@ const About = () => {
           className="text-3xl md:text-5xl font-bold text-center mb-8"
         >
           The Story Behind <span className="text-rose-500">Sweets by B</span>
-        </motion.h2>
+        </MotionH2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left: Image with soft accent */}
           <div className="relative flex justify-center items-center">
             <div className="absolute -inset-6 bg-rose-50/60 rounded-[28px] blur-2xl -z-10" />
-            <motion.img
+            <MotionImg 
               src={BannerImg}
               alt="Showcase of our products"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -52,7 +61,7 @@ const About = () => {
           {/* Right: Content */}
           <div className="flex flex-col justify-center">
             {/* Small avatar + signature */}
-            <motion.div
+            < MotionDiv
               variants={FadeUp(0.2)}
               initial="hidden"
               whileInView="visible"
@@ -68,9 +77,9 @@ const About = () => {
                 <p className="text-lg font-semibold">Bianca — Founder</p>
                 <p className="text-sm text-gray-500">Sweets by B</p>
               </div>
-            </motion.div>
+            </ MotionDiv>
 
-            <motion.h1
+            < MotionH1
               variants={FadeUp(0.4)}
               initial="hidden"
               whileInView="visible"
@@ -78,9 +87,9 @@ const About = () => {
               className="text-2xl md:text-3xl font-bold uppercase mb-4"
             >
               About Me
-            </motion.h1>
+            </ MotionH1>
 
-            <motion.p
+            <MotionP
               variants={FadeUp(0.6)}
               initial="hidden"
               whileInView="visible"
@@ -91,9 +100,9 @@ const About = () => {
               a child and in 2019 I turned that passion into a small business focused
               on crafting desserts that create memories. I believe desserts should be
               balanced, thoughtful, and made with high-quality ingredients.
-            </motion.p>
+            </MotionP>
 
-            <motion.p
+            <MotionP
               variants={FadeUp(0.8)}
               initial="hidden"
               whileInView="visible"
@@ -103,10 +112,10 @@ const About = () => {
               From banana pudding to cheesecakes, cupcakes, and vegan options — every
               item is handcrafted with care. Whether you’re ordering for a cozy night in
               or a celebration, my goal is to bring a little sweetness to your day.
-            </motion.p>
+            </MotionP>
 
             {/* Emotional anchor / signature */}
-            <motion.p
+            <MotionP
               variants={FadeUp(1.0)}
               initial="hidden"
               whileInView="visible"
@@ -114,10 +123,10 @@ const About = () => {
               className="italic text-rose-600 font-medium mb-6"
             >
               “I don’t just bake desserts — I bake memories.”
-            </motion.p>
+            </MotionP>
 
             {/* Feature badges */}
-            <motion.div
+            < MotionDiv
               variants={FadeUp(1.2)}
               initial="hidden"
               whileInView="visible"
@@ -143,10 +152,10 @@ const About = () => {
                 <TbStar className="text-rose-500" />
                 <span className="text-sm font-medium">100+ 5-Star Reviews</span>
               </div>
-            </motion.div>
+            </ MotionDiv>
 
             {/* CTA */}
-            <motion.div
+            < MotionDiv
               variants={FadeUp(1.4)}
               initial="hidden"
               whileInView="visible"
@@ -166,7 +175,7 @@ const About = () => {
               >
                 Contact for custom orders
               </a>
-            </motion.div>
+            </ MotionDiv>
           </div>
         </div>
 

@@ -10,6 +10,12 @@ import pudding6 from "../../assets/images/pudding-shortcake.webp";
 import { motion } from "framer-motion";
 import { FadeLeft } from "../../utility/animation";
 
+const MotionDiv = motion.create("div");
+const MotionH1 = motion.create("h1");
+const MotionImg = motion.create("img");
+
+
+
 
 const MenusData = [
   { id: 1, title: "Red Velvet Cheesecake Pudding", price: "$15.00", img: pudding3, delay: 0.3 },
@@ -24,18 +30,18 @@ const Menus = () => {
   return (
     <section className="py-16">
       <div className="container">
-        <motion.h1
+        <MotionH1
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
           className="text-3xl font-bold text-left pb-10 uppercase"
         >
           Pudding Menu
-        </motion.h1>
+        </MotionH1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {MenusData.map((menu) => (
-            <motion.div
+            <MotionDiv
               key={menu.id}
               variants={FadeLeft(menu.delay)}
               initial="hidden"
@@ -46,7 +52,7 @@ const Menus = () => {
             >
               {/* Image */}
               <div className="w-full h-52 overflow-hidden rounded-2xl mb-4">
-                <motion.img
+                <MotionImg 
                   src={menu.img}
                   alt={menu.title}
                   className="object-cover w-full h-full"
@@ -67,7 +73,7 @@ const Menus = () => {
               <p className="bg-rose-500 text-white text-sm font-bold py-1 px-4 rounded-full shadow-sm">
                 {menu.price}
               </p>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       </div>

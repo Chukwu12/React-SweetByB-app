@@ -23,6 +23,12 @@ import 'swiper/css/pagination';
 import "./BannerSwiper.css";
 
 
+const MotionImg = motion.create("img");
+const MotionH2 = motion.create("h2");
+const MotionVideo = motion.create("video");
+
+
+
 
 const MySwal = withReactContent(Swal);
 const Banner = () => {
@@ -47,16 +53,16 @@ const Banner = () => {
                 {/* Banner Image */}
 
                 <div className='flex flex-col justify-center items-center space-y-6'>
-                    <motion.h2
+                    <MotionH2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                         className="text-3xl font-bold text-center"
                     >
                         Discover Our Signature Sweets
-                    </motion.h2>
+                    </MotionH2>
 
-                    <motion.img
+                    <MotionImg
                         initial={{ opacity: 0, scale: 0.5 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
@@ -92,42 +98,42 @@ const Banner = () => {
                         
                         className= "banner-swiper w-full md:max-w-[800px] h-[300px] sm:h-[400px] md:h-auto rounded-[25px] overflow-hidden">
                         <SwiperSlide>
-                            <motion.img
+                            <MotionImg
                                 src={Pudding1}
                                 alt="Fresh Baked Goods"
                                 className="w-full h-full object-cover rounded-[25px]"
                             />
                         </SwiperSlide>
                         <SwiperSlide>
-                            <motion.img
+                            <MotionImg
                                 src={Cupackes}
                                 alt="Another Banner Image"
                                 className="w-full h-full object-cover rounded-[25px]"
                             />
                         </SwiperSlide>
                         <SwiperSlide>
-                            <motion.img
+                            <MotionImg
                                 src={Cupackes2}
                                 alt="Another Banner Image"
                                 className="w-full h-full object-cover rounded-[25px]"
                             />
                         </SwiperSlide>
                         <SwiperSlide>
-                            <motion.img
+                            <MotionImg
                                 src={Chessecake}
                                 alt="Another Banner Image"
                                 className="w-full h-full object-cover rounded-[25px]"
                             />
                         </SwiperSlide>
                         <SwiperSlide>
-                            <motion.img
+                            <MotionImg
                                 src={Shortbread}
                                 alt="Another Banner Image"
                                 className="w-full h-full object-cover rounded-[25px]"
                             />
                         </SwiperSlide>
                         <SwiperSlide>
-                            <motion.img
+                            <MotionImg
                                 src={ValentineBox}
                                 alt="Another Banner Image"
                                 className="w-full h-full object-cover rounded-[25px]"
@@ -136,7 +142,7 @@ const Banner = () => {
 
                         {/* SwiperSlide with a video */}
                         <SwiperSlide>
-                            <motion.video
+                            <MotionVideo
                                 autoPlay
                                 loop
                                 muted
@@ -144,7 +150,7 @@ const Banner = () => {
                             >
                                 <source src={bannerVideo} type="video/mp4" />
                                 Your browser does not support the video tag.
-                            </motion.video>
+                            </MotionVideo>
                         </SwiperSlide>
 
 

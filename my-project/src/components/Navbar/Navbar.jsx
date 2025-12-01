@@ -8,6 +8,8 @@ import { motion } from 'framer-motion';
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { Link } from 'react-router-dom';
 
+const MotionDiv = motion.create("div");
+
 
 const NavbarMenu = [
      { id: 1, title: "Home", link: "/"},
@@ -26,7 +28,7 @@ const Navbar = () => {
     return (
         <>
             <nav>
-                <motion.div
+                < MotionDiv
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
@@ -92,7 +94,7 @@ const Navbar = () => {
                     <div className='md:hidden' onClick={() => setOpen(!open)}>
                         <MdMenu className='text-4xl' />
                     </div>
-                </motion.div>
+                </ MotionDiv>
             </nav>
 
             {/* Mobile Menu Section */}

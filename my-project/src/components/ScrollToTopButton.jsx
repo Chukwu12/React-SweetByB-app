@@ -4,6 +4,8 @@ import { ArrowUp } from 'lucide-react';
 import { motion } from 'framer-motion'; //
 import { useEffect, useState } from 'react';
 
+const MotionDiv = motion.create("div");
+
 const ScrollToTopButton = () => {
   const [visible, setVisible] = useState(false);
 
@@ -24,7 +26,7 @@ const ScrollToTopButton = () => {
   if (!visible) return null;
 
   return (
-       <motion.div
+       <MotionDiv
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.1, rotate: -5 }}
@@ -46,7 +48,7 @@ const ScrollToTopButton = () => {
         bg="teal.400"
         _hover={{ bg: 'teal.500' }}
       />
-      </motion.div>
+      </MotionDiv>
   );
 };
 

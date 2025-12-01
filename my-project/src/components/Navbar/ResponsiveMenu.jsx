@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { StoreContext } from '../../context/storeContext';
 
+const MotionDiv = motion.create("div");
+
 const ResponsiveMenu = ({ open, setOpen }) => {
 
   const { getTotalCartCount } = useContext(StoreContext);
@@ -10,7 +12,7 @@ const ResponsiveMenu = ({ open, setOpen }) => {
   return (
     <AnimatePresence mode="wait">
       {open && (
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
@@ -51,7 +53,7 @@ const ResponsiveMenu = ({ open, setOpen }) => {
 
             </ul>
           </div>
-        </motion.div>
+        </MotionDiv>
       )}
     </AnimatePresence>
   );
