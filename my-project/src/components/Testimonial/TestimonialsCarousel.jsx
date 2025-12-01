@@ -1,229 +1,88 @@
-import React, { useRef, useState } from 'react';
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import { EffectCoverflow, Pagination } from "swiper/modules";
+import { Box, VStack, Text } from "@chakra-ui/react";
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-
-import './Swiper.css';
-
-// import required modules
-import { EffectCoverflow, Pagination } from 'swiper/modules';
-import { Box, Image, Text, VStack } from '@chakra-ui/react';
-
-
+const testimonials = [
+  {
+    name: "Laybriccs",
+    role: "Customer",
+    message:
+      "My day is made the absolute best vegan pudding out there... Hit her up for all your sweet treat cravings.",
+  },
+  {
+    name: "Instagram",
+    role: "Customer",
+    message: "Cupcakes was a hit 10 out of 10",
+  },
+  {
+    name: "Instagram",
+    role: "Customer",
+    message:
+      "Bianca holy cow these were insane I truly had to stop myself from taste testing more than 1, so good. And the Chai were just as yummy.",
+  },
+];
 
 function TestimonialsCarousel() {
   return (
-    <Box
-    width={'100%'}
-    min-height={'100%'}
-    >
-     <Swiper
-        effect={'coverflow'}
+    <Box width="100%" px={{ base: 4, md: 8 }}>
+      <Swiper
+        effect="coverflow"
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={'auto'}
+        slidesPerView={1}
+        breakpoints={{
+          640: { slidesPerView: 1.2 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
         coverflowEffect={{
-          rotate: 50,
+          rotate: 30,
           stretch: 0,
           depth: 100,
           modifier: 1,
           slideShadows: true,
         }}
-        pagination={false}
+        pagination={{ clickable: true }}
         modules={[EffectCoverflow, Pagination]}
-        className="mySwiper"
+        spaceBetween={30}
+         className="myTestimonialsSwiper"
       >
-
-        {/* Slide 1 */}
-        <SwiperSlide>
-          
-           {/* Testimonial Card */}
-           <Box
-            width={['25rem' , '25rem' , '25rem' , '25rem']}
-            height={['21rem'  , '21rem'  , '21rem' , '26rem']}
-            display={"flex"}
-            justifyContent={"flex-end"}
-            position={"relative"}
-            backgroundColor={'white'}
+        {testimonials.map((item, index) => (
+          <SwiperSlide
+            key={index}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+            <Box
+              bg="white"
+              borderRadius="xl"
+              boxShadow="lg"
+              width={{ base: "80%", md: "90%", lg: "22rem" }}
+              p={{ base: 6, md: 8 }}
+              textAlign="center"
             >
-
-                {/* Testimonial Image */}
-           <VStack
-            width={'100px'}
-            height={'100px'}
-            position={"absolute"}
-            top ={'20px'}
-            left={'35%'}
-            >
-                
-            </VStack>
-
-            
-                {/* Testimonial Details */}
-                <VStack 
-                width={['75%' , '85%' , '100%' , '90%']}
-                height={"70%"}
-                // backgroundColor={'red'}
-                margin={'auto'}
-                border={'1px dashed #5EA98B'}
-                paddingTop={'5rem'}
+              <VStack spacing={4}>
+                <Text
+                  fontSize={{ base: "xl", md: "2xl" }}
+                  fontWeight="700"
+                  color="#5EA98B"
                 >
-
-                    <Text
-                    fontSize={['20px' , '20px' , '25px' , '30px']}
-                    fontWeight={"700"}
-                    letterSpacing={'2px'}
-                    color={'#5EA98B'}
-                    >Laybriccs</Text>
-
-                    <Text 
-                    fontWeight={"600"}
-                    >Customer</Text>
-
-                    <Text
-                    width={'90%'}
-                    textAlign={'center'}
-                    fontSize={['12px' , '13px' , '15px' , '15px']}
-                    letterSpacing={'1px'}
-
-                    >
-                  My day is made the absolute best vegan pudding out there... Hit her up for all your sweet treat cravings.
-                    </Text>
-
-                </VStack>
-
+                  {item.name}
+                </Text>
+                <Text fontWeight="600">{item.role}</Text>
+                <Text fontSize={{ base: "14px", md: "16px" }} letterSpacing="0.5px">
+                  {item.message}
+                </Text>
+              </VStack>
             </Box>
-        </SwiperSlide>
-
-        {/* Slide 2 */}
-        <SwiperSlide>
-          
-           {/* Testimonial Card */}
-           <Box
-           width={['25rem' , '25rem' , '25rem' , '25rem']}
-           height={['21rem'  , '21rem'  , '21rem' , '26rem']}
-            display={"flex"}
-            justifyContent={"flex-end"}
-            position={"relative"}
-            backgroundColor={'white'}
-            >
-
-                {/* Testimonial Image */}
-           <VStack
-            width={'100px'}
-            height={'100px'}
-            position={"absolute"}
-            top ={'20px'}
-            left={'35%'}
-            >
-                
-            </VStack>
-
-            
-                {/* Testimonial Details */}
-                <VStack 
-                width={['75%' , '85%' , '100%' , '90%']}
-                height={"70%"}
-                // backgroundColor={'red'}
-                margin={'auto'}
-                border={'1px dashed #5EA98B'}
-                paddingTop={'5rem'}
-                >
-
-                    <Text
-                  fontSize={['20px' , '20px' , '25px' , '30px']}
-                    fontWeight={"700"}
-                    letterSpacing={'2px'}
-                    color={'#5EA98B'}
-                    >Instagram</Text>
-
-                    <Text 
-                    fontWeight={"600"}
-                    >Customer</Text>
-
-                    <Text
-                    width={'90%'}
-                    textAlign={'center'}
-                    fontSize={['12px' , '13px' , '15px' , '15px']}
-                    letterSpacing={'1px'}
-
-                    >
-                  Cupcakes was a hit 10 out of 10
-                    </Text>
-
-                </VStack>
-
-            </Box>
-        </SwiperSlide>
-
-        {/* Slide 3 */}
-        <SwiperSlide>
-          
-         {/* Testimonial Card */}
-         <Box
-           width={['25rem' , '25rem' , '25rem' , '25rem']}
-           height={['21rem'  , '21rem'  , '21rem' , '26rem']}
-            display={"flex"}
-            justifyContent={"flex-end"}
-            position={"relative"}
-            backgroundColor={'white'}
-            >
-
-                {/* Testimonial Image */}
-           <VStack
-            width={'100px'}
-            height={'100px'}
-            position={"absolute"}
-            top ={'20px'}
-            left={'35%'}
-            >
-                
-            </VStack>
-
-            
-                {/* Testimonial Details */}
-                <VStack 
-             width={['75%' , '85%' , '100%' , '90%']}
-                height={"70%"}
-                // backgroundColor={'red'}
-                margin={'auto'}
-                border={'1px dashed #5EA98B'}
-                paddingTop={'5rem'}
-                >
-
-                    <Text
-                  fontSize={['20px' , '20px' , '25px' , '30px']}
-                    fontWeight={"700"}
-                    letterSpacing={'2px'}
-                    color={'#5EA98B'}
-                    >Instagram</Text>
-
-                    <Text 
-                    fontWeight={"600"}
-                    >Customer</Text>
-
-                    <Text
-                    width={'90%'}
-                    textAlign={'center'}
-                    fontSize={['12px' , '13px' , '15px' , '15px']}
-                    letterSpacing={'1px'}
-                    >
-                  Bianca holy cow these were insane I truly had to stop myself from taste tasting more than 1, so good. And the Chai were just as yummy.
-                    </Text>
-
-                </VStack>
-            </Box>
-        </SwiperSlide>
-
-      
-     
+          </SwiperSlide>
+        ))}
       </Swiper>
     </Box>
-  )
+  );
 }
 
-export default TestimonialsCarousel
+export default TestimonialsCarousel;

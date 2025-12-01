@@ -49,10 +49,18 @@ const Hero = () => {
               animate="visible"
               className="flex justify-center md:justify-start"
             >
-              <button className="primary-btn flex items-center gap-2">
+              <button
+                className="primary-btn flex items-center gap-2"
+                onClick={() => {
+                  document.getElementById("product-menu")?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
+              >
                 <TbShoppingBag />
                 Order Now
               </button>
+
             </motion.div>
           </div>
         </div>

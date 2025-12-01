@@ -1,0 +1,36 @@
+/* TestimonialsSwiper.css */
+.myTestimonialsSwiper {
+  width: 78%; /* or adjust to fit your container */
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin: auto; /* center in container */
+}
+
+.myTestimonialsSwiper .swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 25rem;
+  height: 26rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.myTestimonialsSwiper .swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
+.myTestimonialsSwiper .swiper-slide video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 991px) {
+  .myTestimonialsSwiper .swiper-slide {
+    height: 21rem;
+  }
+}
+

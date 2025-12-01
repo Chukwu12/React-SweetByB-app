@@ -1,13 +1,14 @@
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
+
 import BannerImg from "../../assets/images/image0.webp";
 import MenuImg from "../../assets/images/image4.webp";
 import Pudding1 from "../../assets/images/pudding1.webp";
 import Cupackes from "../../assets/images/IMG_0649.webp";
 import Cupackes2 from "../../assets/images/IMG_9855.webp";
 import Chessecake from "../../assets/images/image5.webp";
-import Chessecake2 from "../../assets/images/IMG_9907.webp";
+import Shortbread from "../../assets/images/shortbread.webp";
 import ValentineBox from "../../assets/images/IMG_9908.webp";
 
 import bannerVideo from "../../assets/images/banner-video.mp4";
@@ -19,6 +20,8 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import "./BannerSwiper.css";
+
 
 
 const MySwal = withReactContent(Swal);
@@ -86,7 +89,8 @@ const Banner = () => {
                             clickable: true,
                         }}
                         navigation={true}
-                        className="w-full md:max-w-[800px] h-[300px] sm:h-[400px] md:h-auto rounded-[25px] overflow-hidden">
+                        
+                        className= "banner-swiper w-full md:max-w-[800px] h-[300px] sm:h-[400px] md:h-auto rounded-[25px] overflow-hidden">
                         <SwiperSlide>
                             <motion.img
                                 src={Pudding1}
@@ -117,7 +121,7 @@ const Banner = () => {
                         </SwiperSlide>
                         <SwiperSlide>
                             <motion.img
-                                src={Chessecake2}
+                                src={Shortbread}
                                 alt="Another Banner Image"
                                 className="w-full h-full object-cover rounded-[25px]"
                             />

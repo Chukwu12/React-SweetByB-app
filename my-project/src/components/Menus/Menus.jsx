@@ -17,7 +17,7 @@ const MenusData = [
   { id: 3, title: "Pumpkin Spice Pudding", price: "$15.00", img: pudding2, delay: 0.9 },
   { id: 4, title: "Coquito Cremas Pudding", price: "$15.00", img: pudding4, delay: 1.2 },
   { id: 5, title: "Banana Pudding", price: "$15.00", img: pudding5, delay: 1.2 },
-  { id: 6, title: "Pudding Shortcake", price: "$15.00", img: pudding6, delay: 1.2 },
+  { id: 6, title: "Oreo's & Strawberry Pudding", price: "$15.00", img: pudding6, delay: 1.2 },
 ];
 
 const Menus = () => {

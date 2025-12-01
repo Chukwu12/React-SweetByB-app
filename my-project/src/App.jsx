@@ -9,7 +9,7 @@ import Footer from './components/Footer/Footer';
 // import ProtectedRoute from './components/Auth/ProtectedRoute';
 import StoreContextProvider from './context/storeContext';
 import About from './Pages/About';
-import Cart from './Pages/Cart'; // Import Cart Page
+import Cart from './Pages/Cart/Cart'; // Import Cart Page
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
 
 

@@ -34,8 +34,11 @@ const Shop = () => {
       </Suspense>
 
       <Suspense fallback={<div className="text-center py-10">Loading products...</div>}>
-        <ExploreMenu category={category} setCategory={setCategory} />
+        <div id="product-menu">
+          <ExploreMenu category={category} setCategory={setCategory} />
+        </div>
       </Suspense>
+
 
       <Suspense fallback={<div className="text-center py-10">Loading items...</div>}>
         <FoodDisplay category={category} />

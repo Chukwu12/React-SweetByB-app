@@ -12,6 +12,8 @@ import '../HolidayMenus/HolidayMenu.css';
 import withReactContent from "sweetalert2-react-content";
 import { FadeUp } from "../../utility/animation";
 
+import { Eye } from "lucide-react";
+
 // Placeholders
 import Placeholder1 from "../../assets/images/christmasplaceholder.webp";
 import Placeholder2 from "../../assets/images/easterplaceholder.webp";
@@ -19,7 +21,7 @@ import Placeholder3 from "../../assets/images/thanksgivingplaceholder.webp";
 import Placeholder5 from "../../assets/images/motherdayplaceholder.webp";
 import Placeholder6 from "../../assets/images/valentine-banner.webp";
 
-// Holiday menu images (real photos)
+// Real images
 import ChristmasMenu from "../../assets/images/IMG_0878.webp";
 import EasterMenu from "../../assets/images/IMG_0881.webp";
 import ThanksgivingMenu from "../../assets/images/IMG_0879.webp";
@@ -30,7 +32,7 @@ import ValentineMenu from "../../assets/images/IMG_0877.webp";
 const MySwal = withReactContent(Swal);
 
 const holidayMenus = [
- {
+  {
     id: 1,
     title: "Christmas Menu",
     images: [ChristmasMenu],
@@ -64,9 +66,7 @@ const holidayMenus = [
 
 const HolidayMenus = () => {
   const openMenuModal = (menu) => {
-    // Check if fullMenu is an array
     if (Array.isArray(menu.images)) {
-      // Create HTML with multiple images
       const imagesHTML = menu.images
         .map(
           (img) =>
@@ -84,7 +84,6 @@ const HolidayMenus = () => {
         background: "#fff",
       });
     } else {
-      // Single image
       MySwal.fire({
         title: menu.title,
         imageUrl: menu.images,
@@ -95,7 +94,6 @@ const HolidayMenus = () => {
         padding: "1em",
         background: "#fff",
         imageWidth: "100%",
-        imageHeight: "auto",
       });
     }
   };
@@ -113,11 +111,11 @@ const HolidayMenus = () => {
         </motion.h2>
 
         <Swiper
+         className="holiday-swiper"
           modules={[Pagination, Autoplay]}
           spaceBetween={40}
           slidesPerView={1}
           centeredSlides={true}
-          navigation
           pagination={{ clickable: true }}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           breakpoints={{
@@ -133,17 +131,37 @@ const HolidayMenus = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
                 onClick={() => openMenuModal(menu)}
-                className="cursor-pointer bg-gradient-to-br from-white to-rose-50 rounded-[25px] shadow-md overflow-hidden flex flex-col items-center p-4"
+                className="holiday-card relative cursor-pointer bg-gradient-to-br 
+                from-white to-rose-50 rounded-[25px] shadow-md overflow-hidden
+                flex flex-col items-center p-4"
               >
-                <img
-                  src={menu.placeholder}
-                  alt={menu.title}
-                  className="w-full h-[250px] object-cover rounded-[25px] mb-4"
-                />
-                <h3 className="text-lg font-semibold text-center">
+                {/* Menu placeholder image */}
+                <div className="relative w-full">
+                  <img
+                    src={menu.placeholder}
+                    alt={menu.title}
+                    className="w-full h-[250px] object-cover rounded-[25px]"
+                  />
+
+                  {/* Hover overlay */}
+                  <div className="card-hover-overlay">
+                    <span className="flex items-center gap-2">
+                      <Eye size={22} /> View Menu
+                    </span>
+                  </div>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-lg font-semibold text-center mt-3">
                   {menu.title}
                 </h3>
+
+                {/* Mobile hint */}
+                <p className="text-sm text-gray-500 mt-1 md:hidden">
+                  Tap to view menu
+                </p>
               </motion.div>
             </SwiperSlide>
           ))}
@@ -152,7 +170,5 @@ const HolidayMenus = () => {
     </section>
   );
 };
-
-
 
 export default HolidayMenus;

@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { Box, Button, HStack, Text, VStack, Image, IconButton } from "@chakra-ui/react";
-import { StoreContext } from "../context/storeContext";
+import { StoreContext } from "../../context/storeContext";
 import { useNavigate } from "react-router-dom";
 import { FiTrash2 } from "react-icons/fi";
+
 
 function Cart() {
   const { cartItems, removeFromCart, getCartTotalPrice, getTotalCartCount } = useContext(StoreContext);
