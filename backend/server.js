@@ -57,7 +57,7 @@ const allowedOrigins = [
   'http://localhost:5173',                    // Local dev
   'https://localhost:5173',                   // Local dev over https
   'https://possessed-cape-6rx4xv74vr4hxvqj-5173.app.github.dev', // Codespaces
-  'https://sweetbybs.netlify.app'   // <-- Netlify frontend
+  'https://sweetsbyb.netlify.app' // <-- Netlify frontend
 ];
 
 app.use(cors({
