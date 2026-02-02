@@ -149,8 +149,6 @@ app.use((err, req, res, next) => {
 
 
 // Server Running
-app.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT || 5050, () => {
   console.log(`Server running on port ${process.env.PORT || 5000}`);
 });
-// Check if the MongoDB URI is being loaded correctly
-console.log('DB_STRING:', process.env.DB_STRING);

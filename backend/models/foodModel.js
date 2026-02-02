@@ -13,8 +13,10 @@ const foodSchema = new mongoose.Schema({
   image: { type: String, required: true },
   category: { type: String, required: true },
   flavors: [{ type: String }], //array for flavor strings
-  addons: [addonSchema]
-});
+  addons: [addonSchema],
+},
+{ collection: "fooditems" } 
+);
 
 // MongoDB Collection named here - will give lowercase plural of name
 const FoodItem = mongoose.model("FoodItem", foodSchema);

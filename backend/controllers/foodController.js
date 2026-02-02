@@ -34,14 +34,23 @@ export const addFood = async (req, res) => {
 // Get all food items
 export const listFood = async (req, res) => {
   try {
+    console.log("DB:", FoodItem.db.name);
+console.log("Collection:", FoodItem.collection.name);
+
     const foods = await FoodItem.find();
 
     if (foods.length > 0) {
       return res.json({ success: true, data: foods });
     } else {
       console.log("MongoDB is empty, using fallback foodData.js");
-      const { default: itemCard } = await import('../foodData.js');
-      return res.json({ success: true, data: itemCard });
+      const { default: itemCard } = await import("../foodData.js");
+
+      const withIds = itemCard.map((item, idx) => ({
+        ...item,
+        _id: item._id || item.id || `fallback-${idx}`,
+      }));
+
+      return res.json({ success: true, data: withIds });
     }
   } catch (error) {
     console.error("Error fetching food items:", error);
@@ -51,6 +60,7 @@ export const listFood = async (req, res) => {
     });
   }
 };
+
 
 
 

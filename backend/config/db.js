@@ -11,6 +11,7 @@ const connectDB = async () => {
   } catch (err) {
     console.error(err);
     process.exit(1);
+    console.log("🧠 Connected DB name:", mongoose.connection.name);
   }
 };
 

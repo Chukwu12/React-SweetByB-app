@@ -15,6 +15,8 @@ const FoodItem = ({ id, name, price, description, itemImage, flavors = [] }) => 
   const cartKey = `${id}-${selectedFlavor || ''}`;
   const cartItem = cartItems[cartKey];
 
+  console.log({ name, id, selectedFlavor, cartKey, cartItem });
+
   return (
     <div className='food-item'>
       <div className='food-item-img-container'>
