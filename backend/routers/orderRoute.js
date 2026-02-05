@@ -4,6 +4,11 @@ import { placeOrder } from '../controllers/orderController.js'
 
 const orderRouter = express.Router();
 
+// ✅ Allow CORS preflight for this route
+orderRouter.options("/place", (req, res) => {
+    res.sendStatus(200);
+  });
+
 orderRouter.post("/place",placeOrder);
 
 export default orderRouter;

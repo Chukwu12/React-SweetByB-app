@@ -11,7 +11,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const frontend_url = process.env.FRONTEND_URL || "http://localhost:5173";
 
   try {
-    const { userId, items, amount, address } = req.body;
+    const { userId, items, amount, address, fulfillmentMethod } = req.body;
 
     // Validate input
     if (!Array.isArray(items) || items.length === 0) {
@@ -65,7 +65,8 @@ const frontend_url = process.env.FRONTEND_URL || "http://localhost:5173";
       quantity: item.quantity,
     }));
 
-    // Add delivery fee line item ($2)
+    // ✅ Only add delivery fee if delivery
+    if (fulfillmentMethod === "delivery") {
     line_items.push({
       price_data: {
         currency: "usd",
@@ -76,6 +77,7 @@ const frontend_url = process.env.FRONTEND_URL || "http://localhost:5173";
       },
       quantity: 1,
     });
+  }
 
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
