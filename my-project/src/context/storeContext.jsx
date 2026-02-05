@@ -7,6 +7,8 @@ const StoreContextProvider = (props) => {
   // State to hold products
   const [cartItems, setCartItems] = useState({});
   const [products, setProducts] = useState([]);
+  const [fulfillmentMethod, setFulfillmentMethod] = useState("delivery");
+
 
   // 🥘 Fetch food items from the backend
   useEffect(() => {
@@ -29,12 +31,19 @@ const StoreContextProvider = (props) => {
   useEffect(() => {
     const savedCart = localStorage.getItem('cartItems');
     if (savedCart) setCartItems(JSON.parse(savedCart));
+    const savedFulfillment = localStorage.getItem("fulfillmentMethod");
+    if (savedFulfillment) setFulfillmentMethod(savedFulfillment);
   }, []);
 
   // ✅ Save cart to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
+
+  useEffect(() => {
+    localStorage.setItem("fulfillmentMethod", fulfillmentMethod);
+  }, [fulfillmentMethod]);
+  
 
   // ✅ Add to Cart with full item details
   const addToCart = (itemId, flavor = "") => {
@@ -99,6 +108,8 @@ const StoreContextProvider = (props) => {
     clearCart,
     getTotalCartCount,
     getCartTotalPrice,
+    fulfillmentMethod,
+    setFulfillmentMethod,
   };
 
   return (

@@ -6,7 +6,12 @@ import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
 
 function PlaceOrder() {
-  const { cartItems, getCartTotalPrice } = useContext(StoreContext);
+  const { cartItems, getCartTotalPrice, fulfillmentMethod } = useContext(StoreContext);
+
+  const isDelivery = fulfillmentMethod === "delivery";
+  const { user } = useAuth() || {};
+
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -19,8 +24,7 @@ function PlaceOrder() {
     phone: "",
   });
 
-  const navigate = useNavigate();
-  const { user } = useAuth?.() || {};
+   const navigate = useNavigate();
 
   // Load saved form data from localStorage on mount
   useEffect(() => {
@@ -33,16 +37,32 @@ function PlaceOrder() {
     localStorage.setItem("formData", JSON.stringify(formData));
   }, [formData]);
 
+  // ✅ Clear delivery address fields when switching to pickup
+useEffect(() => {
+  if (fulfillmentMethod === "pickup") {
+    setFormData((prev) => ({
+      ...prev,
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
+      country: "",
+    }));
+  }
+}, [fulfillmentMethod]);
+
+
   const subtotal = getCartTotalPrice();
-  const deliveryFee = 2;
-  const total = subtotal + deliveryFee;
+  const deliveryFee = fulfillmentMethod === "delivery" ? 2 : 0;
+const total = subtotal + deliveryFee;
+
 
   const isCartValid = () =>
     Object.values(cartItems).every((item) => item.quantity >= 5);
 
   // ✅ Use environment variable for backend URL with fallback
   const API_BASE_URL =
-    import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+    import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,7 +83,15 @@ function PlaceOrder() {
       userId: user?._id || null,
       items: itemsArray,
       amount: total,
-      address: { ...formData },
+      fulfillmentMethod,
+      address: isDelivery
+      ? { ...formData }
+      : {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+        },
     };
 
     try {
@@ -91,9 +119,15 @@ function PlaceOrder() {
     <Box maxWidth="1200px" margin="auto" padding="20px">
       <VStack spacing="24px" align="stretch">
         <Box bg="gray.100" p={4} borderRadius="md" boxShadow="md">
-          <Text fontSize="2xl" fontWeight="bold" mb={4}>
-            Delivery Information
+          <Text fontSize="2xl" fontWeight="bold" mb={2}>
+          {isDelivery ? "Delivery Information" : "Pickup Information"}
           </Text>
+
+          {!isDelivery && (
+            <Text color="gray.600" mb={4}>
+              Pickup orders don’t require an address. We’ll contact you if we need any details.
+            </Text>
+          )}
           <form onSubmit={handleSubmit}>
             <VStack spacing={4} align="stretch">
               {/* Name Fields */}
@@ -110,6 +144,7 @@ function PlaceOrder() {
                     required
                   />
                 </FormControl>
+
                 <FormControl>
                   <FormLabel>Last Name</FormLabel>
                   <Input
@@ -138,7 +173,23 @@ function PlaceOrder() {
                 />
               </FormControl>
 
-              {/* Address Fields */}
+               {/* Phone (always required for both) */}
+              <FormControl>
+                <FormLabel>Phone</FormLabel>
+                <Input
+                  type="text"
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
+                  placeholder="Phone"
+                  required
+                />
+              </FormControl>
+           
+          {/* Address Fields ONLY for delivery */}
+          {isDelivery && (
+                <>
               <FormControl>
                 <FormLabel>Street</FormLabel>
                 <Input
@@ -151,6 +202,7 @@ function PlaceOrder() {
                   required
                 />
               </FormControl>
+
               <HStack spacing={4}>
                 <FormControl>
                   <FormLabel>City</FormLabel>
@@ -162,8 +214,9 @@ function PlaceOrder() {
                     }
                     placeholder="City"
                     required
-                  />
+                  />   
                 </FormControl>
+
                 <FormControl>
                   <FormLabel>State</FormLabel>
                   <Input
@@ -176,7 +229,8 @@ function PlaceOrder() {
                     required
                   />
                 </FormControl>
-              </HStack>
+             </HStack>
+
               <HStack spacing={4}>
                 <FormControl>
                   <FormLabel>Zip</FormLabel>
@@ -190,6 +244,7 @@ function PlaceOrder() {
                     required
                   />
                 </FormControl>
+
                 <FormControl>
                   <FormLabel>Country</FormLabel>
                   <Input
@@ -203,42 +258,37 @@ function PlaceOrder() {
                   />
                 </FormControl>
               </HStack>
+              </>
+              )}
 
-              {/* Phone */}
-              <FormControl>
-                <FormLabel>Phone</FormLabel>
-                <Input
-                  type="text"
-                  value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                  placeholder="Phone"
-                  required
-                />
-              </FormControl>
+              
+             
 
               {/* Cart Totals */}
               <Box bg="gray.100" p={4} borderRadius="md" boxShadow="md">
                 <Text fontSize="xl" fontWeight="bold" mb={4}>
                   Cart Totals
                 </Text>
+
                 <HStack justify="space-between">
                   <Text>Subtotal</Text>
                   <Text>${subtotal.toFixed(2)}</Text>
                 </HStack>
+
                 <HStack justify="space-between">
                   <Text>Delivery Fee</Text>
                   <Text>${deliveryFee.toFixed(2)}</Text>
                 </HStack>
-                <Box as="hr" />
+
+                <Box as="hr" my={2} />
+
                 <HStack justify="space-between" fontWeight="bold">
                   <Text>Total</Text>
                   <Text>${total.toFixed(2)}</Text>
                 </HStack>
               </Box>
 
-              <Button type="submit" colorScheme="teal" size="lg" width="100%" mt={6}>
+              <Button type="submit" colorScheme="teal" size="lg" width="100%" mt={2}>
                 Proceed To Payment
               </Button>
             </VStack>

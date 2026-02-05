@@ -1,19 +1,37 @@
 import React, { useContext } from "react";
-import { Box, Button, HStack, Text, VStack, Image, IconButton } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  Text,
+  VStack,
+  Image,
+  IconButton,
+  Radio,
+  RadioGroup,
+} from "@chakra-ui/react";
 import { StoreContext } from "../../context/storeContext";
 import { useNavigate } from "react-router-dom";
 import { FiTrash2 } from "react-icons/fi";
 
-
 function Cart() {
-  const { cartItems, removeFromCart, getCartTotalPrice, getTotalCartCount } = useContext(StoreContext);
+  const {
+    cartItems,
+    removeFromCart,
+    getCartTotalPrice,
+    getTotalCartCount,
+    fulfillmentMethod,
+    setFulfillmentMethod,
+  } = useContext(StoreContext);
   const navigate = useNavigate();
 
   const subtotal = getCartTotalPrice(); // Centralized calculation
-  const deliveryFee = 2;
+  const deliveryFee = fulfillmentMethod === "delivery" ? 2 : 0;
   const total = subtotal + deliveryFee;
 
-  const hasInvalidQuantities = Object.values(cartItems).some(item => item.quantity < 5);
+  const hasInvalidQuantities = Object.values(cartItems).some(
+    (item) => item.quantity < 5
+  );
 
   return (
     <Box maxWidth="1200px" margin="auto" padding="20px">
@@ -53,7 +71,9 @@ function Cart() {
                   </VStack>
                   <Text flex="1">${cartItem.minPrice}</Text>
                   <Text flex="1">{cartItem.quantity}</Text>
-                  <Text flex="1">${(cartItem.minPrice * cartItem.quantity).toFixed(2)}</Text>
+                  <Text flex="1">
+                    ${(cartItem.minPrice * cartItem.quantity).toFixed(2)}
+                  </Text>
                   <IconButton
                     icon={<FiTrash2 />}
                     aria-label="Remove from cart"
@@ -69,6 +89,21 @@ function Cart() {
         </Box>
 
         {/* Cart Totals Section */}
+        <Text fontSize="lg" fontWeight="bold" mb={2}>
+          How would you like to receive your order?
+        </Text>
+
+        <RadioGroup
+          value={fulfillmentMethod}
+          onChange={setFulfillmentMethod}
+          mb={4}
+        >
+          <HStack spacing={6}>
+            <Radio value="delivery">Delivery</Radio>
+            <Radio value="pickup">Pickup (No delivery)</Radio>
+          </HStack>
+        </RadioGroup>
+
         <Box bg="gray.100" p={4} borderRadius="md" boxShadow="md">
           <Text fontSize="xl" fontWeight="bold" mb={4}>
             Cart Totals
@@ -79,7 +114,12 @@ function Cart() {
               <Text>${subtotal.toFixed(2)}</Text>
             </HStack>
             <HStack justify="space-between">
-              <Text>Delivery Fee</Text>
+              <Text>
+                {fulfillmentMethod === "delivery"
+                  ? "Delivery Fee"
+                  : "Pickup Fee"}
+              </Text>
+
               <Text>${deliveryFee.toFixed(2)}</Text>
             </HStack>
             <Box as="hr" />
@@ -91,18 +131,21 @@ function Cart() {
 
           {hasInvalidQuantities && (
             <Text color="red.500" fontWeight="bold" mb={2}>
-              ⚠️ Each item must have a minimum quantity of 5 to proceed to checkout.
+              ⚠️ Each item must have a minimum quantity of 5 to proceed to
+              checkout.
             </Text>
           )}
 
           <Button
-            onClick={() => navigate('/order')}
+            onClick={() => navigate("/order")}
             colorScheme="teal"
             size="lg"
             width="100%"
             mt={6}
             _hover={{ bg: "teal.500" }}
-            isDisabled={Object.keys(cartItems).length === 0 || hasInvalidQuantities}
+            isDisabled={
+              Object.keys(cartItems).length === 0 || hasInvalidQuantities
+            }
           >
             Proceed to Checkout
           </Button>
