@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
+
 import pudding1 from "../../assets/images/birthday-pudding.webp";
 import pudding2 from "../../assets/images/pumkin-pudding.webp";
 import pudding3 from "../../assets/images/red-velvet-pudding.webp";
@@ -9,29 +10,14 @@ import pudding5 from "../../assets/images/banana-pudding.webp";
 import pudding6 from "../../assets/images/pudding-shortcake.webp";
 
 const MenusData = [
-  { id: 1, title: "Red Velvet Cheesecake Pudding", price: "$15.00", img: pudding3 },
-  { id: 2, title: "Birthday Cake Pudding", price: "$15.00", img: pudding1 },
-  { id: 3, title: "Pumpkin Spice Pudding", price: "$15.00", img: pudding2 },
-  { id: 4, title: "Coquito Cremas Pudding", price: "$15.00", img: pudding4 },
-  { id: 5, title: "Banana Pudding", price: "$15.00", img: pudding5 },
-  { id: 6, title: "Oreo's & Strawberry Pudding", price: "$15.00", img: pudding6 },
+  { id: 1, title: "Red Velvet Cheesecake Pudding", price: "$15.00", img: pudding3, delay: 0.3 },
+  { id: 2, title: "Birthday Cake Pudding", price: "$15.00", img: pudding1, delay: 0.6 },
+  { id: 3, title: "Pumpkin Spice Pudding", price: "$15.00", img: pudding2, delay: 0.9 },
+  { id: 4, title: "Coquito Cremas Pudding", price: "$15.00", img: pudding4, delay: 1.2 },
+  { id: 5, title: "Banana Pudding", price: "$15.00", img: pudding5, delay: 1.2 },
+  { id: 6, title: "Oreo's & Strawberry Pudding", price: "$15.00", img: pudding6, delay: 1.2 },
 ];
 
-const container = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.05 },
-  },
-};
-
-const card = {
-  hidden: { opacity: 0, y: 12 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
 
 export default function Menus() {
   return (
@@ -47,13 +33,14 @@ export default function Menus() {
           Pudding Menu
         </motion.h1>
 
-        <motion.div
+         <motion.div
           variants={container}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
         >
+
           {MenusData.map((menu) => (
             <motion.div
               key={menu.id}
@@ -66,6 +53,7 @@ export default function Menus() {
                 transform-gpu will-change-transform
               "
             >
+              {/* Image */}
               <div className="w-full h-52 overflow-hidden rounded-2xl mb-4 bg-rose-50">
                 <motion.img
                   src={menu.img}
@@ -80,6 +68,7 @@ export default function Menus() {
                 />
               </div>
 
+              {/* Title */}
               <div className="relative mb-3">
                 <h2 className="text-[17px] font-semibold text-gray-800 leading-snug drop-shadow-sm">
                   {menu.title}
@@ -87,6 +76,7 @@ export default function Menus() {
                 <span className="block w-8 h-[2px] bg-rose-400 mt-2 mx-auto"></span>
               </div>
 
+              {/* Price */}
               <p className="bg-rose-500 text-white text-sm font-bold py-1 px-4 rounded-full shadow-sm">
                 {menu.price}
               </p>
@@ -97,3 +87,5 @@ export default function Menus() {
     </section>
   );
 }
+
+
