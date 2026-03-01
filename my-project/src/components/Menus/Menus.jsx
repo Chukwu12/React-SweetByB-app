@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 import pudding1 from "../../assets/images/birthday-pudding.webp";
 import pudding2 from "../../assets/images/pumkin-pudding.webp";
@@ -7,78 +8,92 @@ import pudding4 from "../../assets/images/Conquito-pudding.webp";
 import pudding5 from "../../assets/images/banana-pudding.webp";
 import pudding6 from "../../assets/images/pudding-shortcake.webp";
 
-import { motion } from "framer-motion";
-import { FadeLeft } from "../../utility/animation";
-
-const MotionDiv = motion.create("div");
-const MotionH1 = motion.create("h1");
-const MotionImg = motion.create("img");
-
-
-
-
 const MenusData = [
-  { id: 1, title: "Red Velvet Cheesecake Pudding", price: "$15.00", img: pudding3, delay: 0.3 },
-  { id: 2, title: "Birthday Cake Pudding", price: "$15.00", img: pudding1, delay: 0.6 },
-  { id: 3, title: "Pumpkin Spice Pudding", price: "$15.00", img: pudding2, delay: 0.9 },
-  { id: 4, title: "Coquito Cremas Pudding", price: "$15.00", img: pudding4, delay: 1.2 },
-  { id: 5, title: "Banana Pudding", price: "$15.00", img: pudding5, delay: 1.2 },
-  { id: 6, title: "Oreo's & Strawberry Pudding", price: "$15.00", img: pudding6, delay: 1.2 },
+  { id: 1, title: "Red Velvet Cheesecake Pudding", price: "$15.00", img: pudding3 },
+  { id: 2, title: "Birthday Cake Pudding", price: "$15.00", img: pudding1 },
+  { id: 3, title: "Pumpkin Spice Pudding", price: "$15.00", img: pudding2 },
+  { id: 4, title: "Coquito Cremas Pudding", price: "$15.00", img: pudding4 },
+  { id: 5, title: "Banana Pudding", price: "$15.00", img: pudding5 },
+  { id: 6, title: "Oreo's & Strawberry Pudding", price: "$15.00", img: pudding6 },
 ];
 
-const Menus = () => {
+const container = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.12, delayChildren: 0.05 },
+  },
+};
+
+const card = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+export default function Menus() {
   return (
     <section className="py-16">
       <div className="container">
-        <MotionH1
-          initial={{ opacity: 0, y: -10 }}
+        <motion.h1
+          initial={{ opacity: 0, y: -8 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
+          viewport={{ once: true, amount: 0.7 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-3xl font-bold text-left pb-10 uppercase"
         >
           Pudding Menu
-        </MotionH1>
+        </motion.h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+        >
           {MenusData.map((menu) => (
-            <MotionDiv
+            <motion.div
               key={menu.id}
-              variants={FadeLeft(menu.delay)}
-              initial="hidden"
-              whileInView="visible"
-              whileHover={{ scale: 1.03 }}
-              className="bg-gradient-to-br from-white to-rose-50 rounded-3xl p-5 shadow-lg 
-                         flex flex-col items-center text-center transition-all hover:shadow-xl"
+              variants={card}
+              className="
+                bg-gradient-to-br from-white to-rose-50
+                rounded-3xl p-5 shadow-lg border border-rose-100
+                flex flex-col items-center text-center
+                transition-shadow duration-300 hover:shadow-xl
+                transform-gpu will-change-transform
+              "
             >
-              {/* Image */}
-              <div className="w-full h-52 overflow-hidden rounded-2xl mb-4">
-                <MotionImg 
+              <div className="w-full h-52 overflow-hidden rounded-2xl mb-4 bg-rose-50">
+                <motion.img
                   src={menu.img}
                   alt={menu.title}
+                  loading="lazy"
+                  decoding="async"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
                   className="object-cover w-full h-full"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.4 }}
                 />
               </div>
 
-              {/* Title */}
               <div className="relative mb-3">
-                <h1 className="text-lg font-semibold text-gray-800 drop-shadow-sm">
+                <h2 className="text-[17px] font-semibold text-gray-800 leading-snug drop-shadow-sm">
                   {menu.title}
-                </h1>
-                <span className="block w-8 h-[2px] bg-rose-400 mt-1 mx-auto"></span>
+                </h2>
+                <span className="block w-8 h-[2px] bg-rose-400 mt-2 mx-auto"></span>
               </div>
 
-              {/* Price */}
               <p className="bg-rose-500 text-white text-sm font-bold py-1 px-4 rounded-full shadow-sm">
                 {menu.price}
               </p>
-            </MotionDiv>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
-};
-
-export default Menus;
+}
