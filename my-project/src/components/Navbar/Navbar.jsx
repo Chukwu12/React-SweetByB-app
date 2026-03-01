@@ -6,7 +6,10 @@ import { MdMenu, MdShoppingCart } from "react-icons/md";
 import { StoreContext } from '../../context/storeContext';
 import { motion } from 'framer-motion';
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import apiClient from '../../api';
+import { useAuth } from '../../context/AuthContext';
+import { showSuccess, showError } from '../../utility/alerts';
 
 const MotionDiv = motion.create("div");
 
@@ -23,6 +26,8 @@ const Navbar = () => {
     const [open, setOpen] = React.useState(false);
     const { getTotalCartCount } = useContext(StoreContext);
     const cartCount = getTotalCartCount();
+    const { user, logout, isAuthenticated } = useAuth();
+    const navigate = useNavigate();
 
 
     return (
@@ -87,6 +92,27 @@ const Navbar = () => {
                                     </span>
                                 )}
                             </Link>
+
+                            {/* Sign Out Button (shows when authenticated) */}
+                            {isAuthenticated && (
+                                <motion.button
+                                    whileHover={{ scale: 1.03 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="ml-4 inline-block py-1 px-4 bg-red-500 text-white rounded-full font-semibold shadow-md hover:shadow-lg transition-transform duration-150"
+                                    onClick={async () => {
+                                        try {
+                                            await apiClient.get("/api/user/logout");
+                                            logout();
+                                            showSuccess('Signed out');
+                                            navigate('/');
+                                        } catch (err) {
+                                            showError(err.response?.data?.message || err.message);
+                                        }
+                                    }}
+                                >
+                                    Sign Out
+                                </motion.button>
+                            )}
                         </ul>
                     </div>
 

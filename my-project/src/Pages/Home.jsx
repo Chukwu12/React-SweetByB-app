@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiClient from "../api";
 import { useAuth } from "../context/AuthContext";
 import {
   Box,
@@ -11,6 +11,7 @@ import {
   VStack,
   HStack,
   Icon,
+  Spinner,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { FaFacebook, FaTwitter, FaGoogle, FaInstagram } from "react-icons/fa";
@@ -20,7 +21,7 @@ import { showError, showSuccess } from "../utility/alerts";
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
-  const { login, isAuthenticated } = useAuth();
+  const { user, login, isAuthenticated, logout, isLoading } = useAuth();
 
   const [form, setForm] = useState({
     userName: "",
@@ -28,12 +29,8 @@ const AuthForm = () => {
     password: "",
   });
 
-  // ✅ Auto-redirect if already logged in
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/shop");
-    }
-  }, [isAuthenticated, navigate]);
+  // NOTE: we navigate to shop after successful login/signup below.
+  // Keep users on the Home page when already authenticated so they can sign out here.
 
   const handleToggle = () => {
     setIsLogin(!isLogin);
@@ -47,16 +44,14 @@ const AuthForm = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
-  const endpoint = isLogin ? "login" : "signup";
+  const endpoint = isLogin ? "/api/user/login" : "/api/user/signup";
 
   try {
-    const response = await axios.post(
-      `${API_BASE_URL}/api/user/${endpoint}`,
+    const response = await apiClient.post(
+      endpoint,
       isLogin
         ? { email: form.email, password: form.password }
-        : { ...form, confirmPassword: form.password },
-      { withCredentials: true }
+        : { ...form, confirmPassword: form.password }
     );
 
     login(response.data.user);
@@ -70,8 +65,40 @@ const handleSubmit = async (e) => {
   setForm({ userName: "", email: "", password: "" });
 };
 
+const handleSignOut = async () => {
+  try {
+    await apiClient.get("/api/user/logout");
+    logout();
+    showSuccess("Signed out successfully");
+    navigate("/");
+  } catch (err) {
+    const errorMsg = err.response?.data?.message || err.message;
+    showError(errorMsg);
+  }
+};
 
 
+
+
+if (isLoading) {
+  return (
+    <Flex minH="100vh" align="center" justify="center" bg="gray.50">
+      <Spinner size="lg" color="teal.500" />
+    </Flex>
+  );
+}
+
+if (isAuthenticated) {
+  return (
+    <Flex minH="100vh" align="center" justify="center" bg="gray.50">
+      <Box w="full" maxW="md" p={8} borderRadius="lg" boxShadow="lg" bg="white" textAlign="center">
+        <Text fontSize="xl" fontWeight="semibold">Signed in as {user?.userName || user?.email}</Text>
+        <Button colorScheme="teal" width="full" mt={6} onClick={() => navigate('/shop')}>Go to Shop</Button>
+        <Button colorScheme="red" width="full" mt={3} onClick={handleSignOut}>Sign Out</Button>
+      </Box>
+    </Flex>
+  );
+}
 
 return (
   <Flex minH="100vh" align="center" justify="center" bg="gray.50">

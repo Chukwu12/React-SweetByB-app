@@ -5,11 +5,9 @@ import User from '../models/userModel.js';  // Corrected path to userModel.js
 // Get Login page
 export const getLogin = (req, res) => {
     if (req.user) {
-        return res.redirect("/profile");
+        return res.json({ success: true, user: req.user });
     }
-    res.render("login", {
-        title: "Login",
-    });
+    res.json({ success: false, message: "Not authenticated" });
 };
 
 // Post Login
@@ -22,8 +20,7 @@ export const postLogin = (req, res, next) => {
         validationErrors.push({ msg: "Password cannot be blank." });
 
     if (validationErrors.length) {
-        req.flash("errors", validationErrors);
-        return res.redirect("/login");
+        return res.status(400).json({ success: false, message: validationErrors[0].msg });
     }
     req.body.email = validator.normalizeEmail(req.body.email, {
         gmail_remove_dots: false,
@@ -35,18 +32,17 @@ export const postLogin = (req, res, next) => {
         }
 
         if (!user) {
-            req.flash("errors", { msg: info.message });  // Log the failure reason
-            return res.redirect("/login");
+            return res.status(401).json({ success: false, message: info.message || "Invalid credentials" });
         }
 
-        console.log("Session before login:", req.session);
         req.logIn(user, (err) => {
             if (err) {
                 return next(err);
             }
-            console.log("Session after login:", req.session); // Check if the user is in the session
-            req.flash("success", { msg: "Success! You are logged in." });
-            res.redirect(req.session.returnTo || "/profile");
+            if (process.env.NODE_ENV !== 'production') {
+              console.log("✅ User logged in:", user.email);
+            }
+            res.json({ success: true, message: "Login successful!", user: user });
         });
     })(req, res, next);
 };
@@ -55,15 +51,16 @@ export const postLogin = (req, res, next) => {
 export const logout = (req, res) => {
     req.logout(function (err) {
         if (err) {
-            return next(err);
+            return res.status(500).json({ success: false, message: "Logout error" });
         }
-        console.log('User has logged out.');
         req.session.destroy((err) => {
             if (err) {
-                console.log("Error: Failed to destroy the session during logout.", err);
+                if (process.env.NODE_ENV !== 'production') {
+                  console.error("Session destroy error:", err.message);
+                }
             }
             req.user = null;
-            res.redirect("/");
+            res.json({ success: true, message: "Logged out successfully" });
         });
     });
 };
@@ -71,13 +68,9 @@ export const logout = (req, res) => {
 // Get Signup page
 export const getSignup = (req, res) => {
     if (req.user) {
-        return res.redirect("/profile"); // If the user is logged in, redirect to profile
+        return res.json({ success: true, user: req.user });
     }
-    res.render("signup", {
-        title: "Create Account",
-        errors: req.flash("errors"),
-        inputData: req.body  // so you can pre-fill email/username
-    });
+    res.json({ success: false, message: "Not authenticated" });
 };
 
 // Post Signup
@@ -89,8 +82,7 @@ export const postSignup = async (req, res, next) => {
   if (req.body.password !== req.body.confirmPassword) validationErrors.push({ msg: "Passwords do not match" });
 
   if (validationErrors.length) {
-    req.flash("errors", validationErrors);
-    return res.redirect("/signup");
+        return res.status(400).json({ success: false, message: validationErrors[0].msg });
   }
 
   req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
@@ -102,8 +94,7 @@ export const postSignup = async (req, res, next) => {
     });
 
     if (existingUser) {
-      req.flash("errors", { msg: "Account with that email or username already exists." });
-      return res.redirect("/signup");
+            return res.status(400).json({ success: false, message: "Account with that email or username already exists." });
     }
 
     // Create and save new user
@@ -121,12 +112,30 @@ export const postSignup = async (req, res, next) => {
 
       // Optional: store user info in session for debugging
       console.log("User logged in:", req.user);
-      res.redirect("/profile");
+            res.json({ success: true, message: "Signup successful!", user: user });
     });
 
   } catch (err) {
     console.error("Signup error:", err);
-    return next(err);
+        return res.status(500).json({ success: false, message: "Server error during signup" });
+  }
+};
+
+// Get current user (for session persistence)
+export const getCurrentUser = async (req, res) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ success: false, message: "Not authenticated" });
+    }
+    // Fetch fresh user data from DB to ensure latest info
+    const user = await User.findById(req.user.id || req.user._id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+    res.json({ success: true, user: user });
+  } catch (err) {
+    console.error("getCurrentUser error:", err);
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 };
 

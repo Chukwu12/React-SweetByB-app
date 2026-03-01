@@ -22,7 +22,9 @@ export const addFood = async (req, res) => {
       image: result.secure_url, // Cloudinary image URL
     });
 
-    console.log("✅ Food has been added!");
+    if (process.env.NODE_ENV !== 'production') {
+      console.log("✅ Food has been added!");
+    }
     res.status(201).json({ success: true, message: "Food added successfully", data: newFood });
 
   } catch (err) {
@@ -34,15 +36,14 @@ export const addFood = async (req, res) => {
 // Get all food items
 export const listFood = async (req, res) => {
   try {
-    console.log("DB:", FoodItem.db.name);
-console.log("Collection:", FoodItem.collection.name);
-
     const foods = await FoodItem.find();
 
     if (foods.length > 0) {
       return res.json({ success: true, data: foods });
     } else {
-      console.log("MongoDB is empty, using fallback foodData.js");
+      if (process.env.NODE_ENV !== 'production') {
+        console.log("MongoDB is empty, using fallback foodData.js");
+      }
       const { default: itemCard } = await import("../foodData.js");
 
       const withIds = itemCard.map((item, idx) => ({
@@ -80,7 +81,9 @@ export const removeFood = async (req, res) => {
     // Delete food item from MongoDB
     await FoodItem.findByIdAndDelete(req.body.id);
 
-    console.log("✅ Food item removed!");
+    if (process.env.NODE_ENV !== 'production') {
+      console.log("✅ Food item removed!");
+    }
     res.status(200).json({ success: true, message: "Food removed successfully" });
 
   } catch (err) {

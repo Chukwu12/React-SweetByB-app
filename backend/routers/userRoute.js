@@ -17,6 +17,9 @@ router.get('/signup', userController.getSignup);
 // Post Signup Route (Create User)
 router.post('/signup', userController.postSignup);
 
+// Get Current User (for session persistence)
+router.get('/me', userController.getCurrentUser);
+
 // Logout Route
 router.get('/logout', userController.logout);
 

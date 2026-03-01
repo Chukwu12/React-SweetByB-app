@@ -18,6 +18,22 @@ const MenusData = [
   { id: 6, title: "Oreo's & Strawberry Pudding", price: "$15.00", img: pudding6, delay: 1.2 },
 ];
 
+// Animation variants for framer-motion
+const container = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const card = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
 
 export default function Menus() {
   return (

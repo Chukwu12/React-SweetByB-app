@@ -62,7 +62,9 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    console.log("🔍 Checking CORS for origin:", origin);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log("🔍 Checking CORS for origin:", origin);
+    }
 
     if (!origin) {
       // Allow server-to-server or curl requests with no origin
@@ -110,14 +112,17 @@ app.use(
 }),
 
     cookie: {
-      secure: false,
+      secure: process.env.NODE_ENV === 'production',
       httpOnly: true,
-      sameSite: 'lax'
+      sameSite: 'lax',
+      maxAge: 24 * 60 * 60 * 1000 // 24 hours
     }
   })
 );
 
-console.log("🧩 Mongo session store using:", process.env.MONGODB_URI || process.env.DB_STRING);
+if (process.env.NODE_ENV !== 'production') {
+  console.log("🧩 Mongo session store using db:", process.env.DB_STRING ? 'MongoDB' : 'unknown');
+}
 
 
 // Passport middleware
@@ -149,6 +154,7 @@ app.use((err, req, res, next) => {
 
 
 // Server Running
-app.listen(process.env.PORT || 5000, () => {
-  console.log(`Server running on port ${process.env.PORT || 5000}`);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT} (${process.env.NODE_ENV || 'development'} mode)`);
 });

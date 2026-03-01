@@ -1,13 +1,18 @@
 import { useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../context/storeContext';
+import { useAuth } from '../../context/AuthContext';
+import apiClient from '../../api';
+import { showSuccess, showError } from '../../utility/alerts';
 
 const MotionDiv = motion.create("div");
 
 const ResponsiveMenu = ({ open, setOpen }) => {
 
   const { getTotalCartCount } = useContext(StoreContext);
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
   
   return (
     <AnimatePresence mode="wait">
@@ -50,6 +55,28 @@ const ResponsiveMenu = ({ open, setOpen }) => {
                   🛒 Cart ({getTotalCartCount()})
                 </Link>
               </li>
+
+              {isAuthenticated && (
+                <li>
+                  <button
+                    className="bg-red-500 text-white px-6 py-2 rounded-full font-semibold"
+                    onClick={async (e) => {
+                      e.stopPropagation();
+                      try {
+                        await apiClient.get("/api/user/logout");
+                        logout();
+                        showSuccess('Signed out');
+                        setOpen(false);
+                        navigate('/');
+                      } catch (err) {
+                        showError(err.response?.data?.message || err.message);
+                      }
+                    }}
+                  >
+                    Sign Out
+                  </button>
+                </li>
+              )}
 
             </ul>
           </div>
