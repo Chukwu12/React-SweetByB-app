@@ -95,8 +95,8 @@ const Banner = () => {
                             clickable: true,
                         }}
                         navigation={true}
-                        
-                        className= "banner-swiper w-full md:max-w-[800px] h-[300px] sm:h-[400px] md:h-auto rounded-[25px] overflow-hidden">
+
+                        className="banner-swiper w-full md:max-w-[800px] h-[300px] sm:h-[400px] md:h-auto rounded-[25px] overflow-hidden">
                         <SwiperSlide>
                             <MotionImg
                                 src={Pudding1}
@@ -143,9 +143,11 @@ const Banner = () => {
                         {/* SwiperSlide with a video */}
                         <SwiperSlide>
                             <MotionVideo
-                                autoPlay
-                                loop
                                 muted
+                                loop
+                                playsInline
+                                webkit-playsinline="true"
+                                preload="metadata"
                                 className="w-full h-full object-cover rounded-[25px]"
                             >
                                 <source src={bannerVideo} type="video/mp4" />

@@ -6,10 +6,11 @@ import RedIcon from "../../assets/images/minus-red.png";
 import { StoreContext } from '../../context/storeContext';
 import { Select, FormControl, FormLabel } from '@chakra-ui/react';
 
-const FoodItem = ({ id, name, price, description, itemImage, flavors = [] }) => {
+const FoodItem = ({ id, _id, name, price, description, itemImage, flavors = [] }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
 
   const [selectedFlavor, setSelectedFlavor] = useState('');
+  
 
   // Generate the cart key for this item + flavor
   const cartKey = `${id}-${selectedFlavor || ''}`;
