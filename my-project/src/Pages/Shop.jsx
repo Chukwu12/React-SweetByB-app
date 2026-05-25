@@ -181,7 +181,7 @@ const Shop = () => {
         </Suspense>
       </section>
 
-      <ScrollToTopButton />
+      <ScrollToTopButton showAfter={650} mobileBottom="92px" desktopBottom="30px" />
     </div>
   );
 };

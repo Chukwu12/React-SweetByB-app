@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { StoreContext } from "../../context/storeContext.jsx";
-import axios from "axios";
+import apiClient from "../../api";
 import { useAuth } from "../../context/AuthContext";
 
 function PlaceOrder() {
@@ -89,10 +89,6 @@ const total = subtotal + deliveryFee;
     },
   };
 
-  // ✅ Use environment variable for backend URL with fallback
-  const API_BASE_URL =
-    import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -124,10 +120,7 @@ const total = subtotal + deliveryFee;
     };
 
     try {
-      const response = await axios.post(
-        `${API_BASE_URL}/api/order/place`,
-        orderData
-      );
+      const response = await apiClient.post("/api/order/place", orderData);
 
       if (response.data.success) {
         // Clear saved form and cart on success

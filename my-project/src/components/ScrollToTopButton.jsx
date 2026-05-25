@@ -1,22 +1,56 @@
 // src/components/ScrollToTopButton.jsx
 import { IconButton } from '@chakra-ui/react';
 import { ArrowUp } from 'lucide-react';
-import { motion } from 'framer-motion'; //
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 const MotionDiv = motion.create("div");
 
-const ScrollToTopButton = () => {
+const ScrollToTopButton = ({
+  showAfter = 600,
+  desktopBottom = '30px',
+  mobileBottom = '96px',
+}) => {
   const [visible, setVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Show button when scrolled down
   useEffect(() => {
+    let rafId;
+
     const toggleVisibility = () => {
-      setVisible(window.scrollY > 300);
+      setVisible(window.scrollY > showAfter);
     };
 
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        toggleVisibility();
+        rafId = null;
+      });
+    };
+
+    toggleVisibility();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      if (rafId) window.cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [showAfter]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 1023px)');
+    const applyMatch = (event) => setIsMobile(event.matches);
+
+    setIsMobile(mediaQuery.matches);
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', applyMatch);
+      return () => mediaQuery.removeEventListener('change', applyMatch);
+    }
+
+    mediaQuery.addListener(applyMatch);
+    return () => mediaQuery.removeListener(applyMatch);
   }, []);
 
   const scrollToTop = () => {
@@ -33,8 +67,8 @@ const ScrollToTopButton = () => {
       transition={{ type: "spring", stiffness: 300 }}
       style={{
         position: 'fixed',
-        bottom: '30px',
-        right: '30px',
+        bottom: isMobile ? mobileBottom : desktopBottom,
+        right: isMobile ? '20px' : '30px',
         zIndex: 999,
       }}
     >
