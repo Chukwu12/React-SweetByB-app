@@ -1,19 +1,25 @@
 /* TestimonialsSwiper.css */
 .myTestimonialsSwiper {
-  width: 78%; /* or adjust to fit your container */
-  padding-top: 50px;
-  padding-bottom: 50px;
-  margin: auto; /* center in container */
+  width: min(100%, 1120px);
+  padding-top: 18px;
+  padding-bottom: 56px;
+  margin: auto;
 }
 
 .myTestimonialsSwiper .swiper-slide {
   background-position: center;
   background-size: cover;
-  width: 25rem;
-  height: 26rem;
+  width: 23rem;
+  height: 24.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0.66;
+  transition: transform 250ms ease, opacity 250ms ease;
+}
+
+.myTestimonialsSwiper .swiper-slide-active {
+  opacity: 1;
 }
 
 .myTestimonialsSwiper .swiper-slide img {
@@ -28,9 +34,37 @@
   object-fit: cover;
 }
 
+.myTestimonialsSwiper .swiper-pagination {
+  bottom: 2px !important;
+}
+
+.myTestimonialsSwiper .swiper-pagination-bullet {
+  width: 9px;
+  height: 9px;
+  background: rgba(137, 103, 92, 0.45);
+  opacity: 1;
+}
+
+.myTestimonialsSwiper .swiper-pagination-bullet-active {
+  background: #d97757;
+  box-shadow: 0 0 0 6px rgba(217, 119, 87, 0.16);
+}
+
 @media (max-width: 991px) {
   .myTestimonialsSwiper .swiper-slide {
-    height: 21rem;
+    height: 22rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .myTestimonialsSwiper {
+    width: 100%;
+    padding-bottom: 48px;
+  }
+
+  .myTestimonialsSwiper .swiper-slide {
+    width: 18.8rem;
+    height: 21.2rem;
   }
 }
 

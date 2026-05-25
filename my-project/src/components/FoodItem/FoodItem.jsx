@@ -5,6 +5,7 @@ import GreenIcon from "../../assets/images/plus-green.png";
 import RedIcon from "../../assets/images/minus-red.png";
 import { StoreContext } from '../../context/storeContext';
 import { Select, FormControl, FormLabel } from '@chakra-ui/react';
+import { showError } from '../../utility/alerts';
 
 const FoodItem = ({ id, _id, name, price, description, itemImage, flavors = [] }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
@@ -16,8 +17,6 @@ const FoodItem = ({ id, _id, name, price, description, itemImage, flavors = [] }
   const cartKey = `${id}-${selectedFlavor || ''}`;
   const cartItem = cartItems[cartKey];
 
-  console.log({ name, id, selectedFlavor, cartKey, cartItem });
-
   return (
     <div className='food-item'>
       <div className='food-item-img-container'>
@@ -28,7 +27,7 @@ const FoodItem = ({ id, _id, name, price, description, itemImage, flavors = [] }
             className='add'
             onClick={() => {
               if (flavors.length > 0 && !selectedFlavor) {
-                alert("Please select a flavor!");
+                showError("Please select a flavor before adding this item.", "Flavor Required");
                 return;
               }
               addToCart(id, selectedFlavor);

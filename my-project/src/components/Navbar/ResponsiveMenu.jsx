@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../context/storeContext';
 import { useAuth } from '../../context/AuthContext';
 import apiClient from '../../api';
 import { showSuccess, showError } from '../../utility/alerts';
+import { MdClose } from 'react-icons/md';
 
 const MotionDiv = motion.create("div");
 
@@ -18,48 +19,103 @@ const ResponsiveMenu = ({ open, setOpen }) => {
     <AnimatePresence mode="wait">
       {open && (
         <MotionDiv
-          initial={{ opacity: 0, y: -100 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -100 }}
-          transition={{ duration: 0.3 }}
-          className=" top-20 left-0 w-full h-[350px] z-20"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.22 }}
+          className="fixed inset-0 z-[70] bg-[#1f1411]/45 backdrop-blur-sm"
           onClick={() => setOpen(false)}
         >
-          <div className="text-xl font-semibold uppercase bg-primary text-white py-10 m-6 rounded-3xl"
+          <motion.div
+            initial={{ opacity: 0, y: -24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -24, scale: 0.98 }}
+            transition={{ duration: 0.24 }}
+            className="mx-4 mt-4 rounded-3xl border border-[#efd5c6] bg-gradient-to-b from-[#fff7f1] to-[#ffece2] shadow-[0_30px_70px_-36px_rgba(42,20,14,0.7)] overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
+            <div className="flex justify-between items-center px-5 py-4 border-b border-[#efd8cc]">
+              <div>
+                <p className="font-playfair text-xl text-[#3B2A28]">Sweets by B</p>
+                <p className="font-manrope text-[11px] tracking-[0.16em] uppercase text-[#8a695f]">Navigation</p>
+              </div>
+              <button
+                type="button"
+                className="p-2 rounded-full bg-white border border-[#ead4c8] text-[#634f48]"
+                onClick={() => setOpen(false)}
+                aria-label="Close menu"
+              >
+                <MdClose className="text-2xl" />
+              </button>
+            </div>
 
-            <ul className="flex flex-col items-center gap-10">
+            <ul className="flex flex-col p-5 gap-3">
               <li>
-                <Link to="/" className="hover:text-gray-300" onClick={() => setOpen(false)}>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    `block w-full rounded-2xl px-4 py-3 font-manrope font-semibold transition-all ${
+                      isActive ? "bg-[#D97757] text-white" : "bg-white/75 text-[#5f4a45]"
+                    }`
+                  }
+                  onClick={() => setOpen(false)}
+                >
                   Home
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/shop" className="hover:text-gray-300" onClick={() => setOpen(false)}>
+                <NavLink
+                  to="/shop"
+                  className={({ isActive }) =>
+                    `block w-full rounded-2xl px-4 py-3 font-manrope font-semibold transition-all ${
+                      isActive ? "bg-[#D97757] text-white" : "bg-white/75 text-[#5f4a45]"
+                    }`
+                  }
+                  onClick={() => setOpen(false)}
+                >
                   Shop
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/about" className="hover:text-gray-300" onClick={() => setOpen(false)}>
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    `block w-full rounded-2xl px-4 py-3 font-manrope font-semibold transition-all ${
+                      isActive ? "bg-[#D97757] text-white" : "bg-white/75 text-[#5f4a45]"
+                    }`
+                  }
+                  onClick={() => setOpen(false)}
+                >
                   About
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-gray-300" onClick={() => setOpen(false)}>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    `block w-full rounded-2xl px-4 py-3 font-manrope font-semibold transition-all ${
+                      isActive ? "bg-[#D97757] text-white" : "bg-white/75 text-[#5f4a45]"
+                    }`
+                  }
+                  onClick={() => setOpen(false)}
+                >
                   Contact
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/cart" className="hover:text-gray-300" onClick={() => setOpen(false)}>
-                  🛒 Cart ({getTotalCartCount()})
+                <Link
+                  to="/cart"
+                  className="block w-full rounded-2xl px-4 py-3 font-manrope font-semibold bg-[#3B2A28] text-white"
+                  onClick={() => setOpen(false)}
+                >
+                  Cart ({getTotalCartCount()})
                 </Link>
               </li>
 
               {isAuthenticated && (
                 <li>
                   <button
-                    className="bg-red-500 text-white px-6 py-2 rounded-full font-semibold"
+                    className="w-full bg-[#D97757] text-white px-6 py-3 rounded-2xl font-manrope font-semibold"
                     onClick={async (e) => {
                       e.stopPropagation();
                       try {
@@ -79,7 +135,7 @@ const ResponsiveMenu = ({ open, setOpen }) => {
               )}
 
             </ul>
-          </div>
+          </motion.div>
         </MotionDiv>
       )}
     </AnimatePresence>

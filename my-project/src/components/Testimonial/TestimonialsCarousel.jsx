@@ -5,6 +5,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import { Box, VStack, Text } from "@chakra-ui/react";
+import "./TestimonialsSwiper.css";
 
 const testimonials = [
   {
@@ -35,20 +36,20 @@ function TestimonialsCarousel() {
         centeredSlides={true}
         slidesPerView={1}
         breakpoints={{
-          640: { slidesPerView: 1.2 },
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
+          640: { slidesPerView: 1.15 },
+          768: { slidesPerView: 1.7 },
+          1024: { slidesPerView: 2.35 },
         }}
         coverflowEffect={{
-          rotate: 30,
+          rotate: 12,
           stretch: 0,
-          depth: 100,
+          depth: 120,
           modifier: 1,
-          slideShadows: true,
+          slideShadows: false,
         }}
         pagination={{ clickable: true }}
         modules={[EffectCoverflow, Pagination]}
-        spaceBetween={30}
+        spaceBetween={18}
          className="myTestimonialsSwiper"
       >
         {testimonials.map((item, index) => (
@@ -57,23 +58,31 @@ function TestimonialsCarousel() {
             style={{ display: "flex", justifyContent: "center" }}
           >
             <Box
-              bg="white"
-              borderRadius="xl"
-              boxShadow="lg"
-              width={{ base: "80%", md: "90%", lg: "22rem" }}
+              bg="linear-gradient(155deg, rgba(255,255,255,0.95) 0%, rgba(255,244,238,0.95) 100%)"
+              borderRadius="2xl"
+              border="1px solid"
+              borderColor="#edd8cc"
+              boxShadow="0 22px 48px -32px rgba(59,42,40,0.55)"
+              width={{ base: "86%", md: "90%", lg: "22rem" }}
               p={{ base: 6, md: 8 }}
               textAlign="center"
             >
               <VStack spacing={4}>
+                <Text fontFamily="'Playfair Display', serif" fontSize={{ base: "3xl", md: "4xl" }} lineHeight="1" color="#d97757" mb={-1}>
+                  "
+                </Text>
                 <Text
+                  fontFamily="'Playfair Display', serif"
                   fontSize={{ base: "xl", md: "2xl" }}
                   fontWeight="700"
-                  color="#5EA98B"
+                  color="#3B2A28"
                 >
                   {item.name}
                 </Text>
-                <Text fontWeight="600">{item.role}</Text>
-                <Text fontSize={{ base: "14px", md: "16px" }} letterSpacing="0.5px">
+                <Text fontFamily="'Manrope', sans-serif" fontWeight="700" letterSpacing="0.08em" textTransform="uppercase" fontSize="xs" color="#9a7268">
+                  {item.role}
+                </Text>
+                <Text fontFamily="'Manrope', sans-serif" fontSize={{ base: "14px", md: "16px" }} lineHeight="1.9" color="#6d5751">
                   {item.message}
                 </Text>
               </VStack>

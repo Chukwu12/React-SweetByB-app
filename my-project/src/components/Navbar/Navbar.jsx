@@ -5,8 +5,7 @@ import { useContext } from 'react';
 import { MdMenu, MdShoppingCart } from "react-icons/md";
 import { StoreContext } from '../../context/storeContext';
 import { motion } from 'framer-motion';
-import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import apiClient from '../../api';
 import { useAuth } from '../../context/AuthContext';
 import { showSuccess, showError } from '../../utility/alerts';
@@ -26,68 +25,58 @@ const Navbar = () => {
     const [open, setOpen] = React.useState(false);
     const { getTotalCartCount } = useContext(StoreContext);
     const cartCount = getTotalCartCount();
-    const { user, logout, isAuthenticated } = useAuth();
+    const { logout, isAuthenticated } = useAuth();
     const navigate = useNavigate();
 
 
     return (
         <>
-            <nav>
+            <nav className="sticky top-0 z-50 bg-[#fffaf6]/85 backdrop-blur-md border-b border-[#efd9cb]">
                 < MotionDiv
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                    className='container flex justify-between items-center py-4 md:pt-4'
+                    transition={{ duration: 0.45, delay: 0.2 }}
+                    className='container flex justify-between items-center py-3 md:py-3'
                 >
                     {/* Logo section */}
-                    <div className='text-2xl flex items-center gap-2 font-bold uppercase'>
-                        <Link to="/">
-                            <img src={Logo} alt="Logo" className="w-32 h-32" />
+                    <div className='text-2xl flex items-center gap-2 font-bold uppercase shrink-0'>
+                        <Link to="/" className="flex items-center gap-3">
+                            <img src={Logo} alt="Logo" className="w-14 h-14 md:w-16 md:h-16 object-contain" />
+                            <div className="hidden sm:block leading-tight">
+                                <p className="font-playfair text-[#3B2A28] text-xl md:text-2xl normal-case">Sweets by B</p>
+                                <p className="font-manrope text-[10px] md:text-xs tracking-[0.18em] uppercase text-[#8f6b60]">Dessert Boutique</p>
+                            </div>
                         </Link>
                     </div>
 
                     {/* Menu section */}
                     <div className='hidden md:block'>
-                        <ul className='flex items-center gap-6 text-gray-600'>
+                        <ul className='flex items-center gap-2 text-gray-600 bg-white/75 border border-[#ead4c8] rounded-full px-3 py-2 shadow-[0_14px_30px_-20px_rgba(59,42,40,0.55)]'>
                             {NavbarMenu.map((menu) => (
                                 <li key={menu.id} className='text-ul'>
-                                    {/* If menu has a submenu, render a dropdown */}
-                                    {menu.submenu ? (
-                                        <Menu>
-                                            <MenuButton className="inline-flex items-center gap-2 py-1 px-3 hover:text-primary hover:shadow-[0_3px_0_-1px_#ef4444] font-semibold">
-                                                {menu.title}
-                                            </MenuButton>
-                                            <MenuList className="bg-white shadow-md rounded-md">
-                                                {menu.submenu.map((sub) => (
-                                                    <MenuItem
-                                                        key={sub.id}
-                                                        as={Link}
-                                                        to={sub.link}
-                                                        className="hover:text-[#5EC49D] transition-all duration-150 ease"
-                                                    >
-                                                        {sub.title}
-                                                    </MenuItem>
-                                                ))}
-                                            </MenuList>
-                                        </Menu>
-                                    ) : (
-                                        <Link
-                                            to={menu.link}
-                                            className='inline-block py-1 px-3 hover:text-primary hover:shadow-[0_3px_0_-1px_#ef4444] font-semibold'
-                                        >
-                                            {menu.title}
-                                        </Link>
-                                    )}
+                                    <NavLink
+                                        to={menu.link}
+                                        className={({ isActive }) =>
+                                            `inline-block py-2 px-4 rounded-full font-manrope font-semibold transition-all duration-200 ${
+                                                isActive
+                                                    ? "bg-[#D97757] text-white shadow-[0_10px_20px_-12px_rgba(217,119,87,0.9)]"
+                                                    : "text-[#6a5550] hover:bg-[#fff1e8] hover:text-[#3B2A28]"
+                                            }`
+                                        }
+                                    >
+                                        {menu.title}
+                                    </NavLink>
                                 </li>
                             ))}
                             {/* Cart Button */}
                             <Link
                                 to="/cart"
-                                className='relative text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-200'
+                                className='relative text-2xl text-[#5b4945] hover:bg-[#fff1e8] hover:text-[#D97757] rounded-full p-2.5 duration-200 border border-transparent hover:border-[#ecd6cb]'
+                                aria-label="Open cart"
                             >
                                 <MdShoppingCart />
                                 {cartCount > 0 && (
-                                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                                    <span className="absolute -top-1 -right-1 bg-[#D97757] text-white text-[11px] w-5 h-5 rounded-full flex items-center justify-center font-semibold">
                                         {cartCount}
                                     </span>
                                 )}
@@ -98,7 +87,7 @@ const Navbar = () => {
                                 <motion.button
                                     whileHover={{ scale: 1.03 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="ml-4 inline-block py-1 px-4 bg-red-500 text-white rounded-full font-semibold shadow-md hover:shadow-lg transition-transform duration-150"
+                                    className="ml-2 inline-block py-2 px-4 bg-[#3B2A28] text-white rounded-full font-manrope font-semibold shadow-md hover:shadow-lg transition-transform duration-150"
                                     onClick={async () => {
                                         try {
                                             await apiClient.get("/api/user/logout");
@@ -117,15 +106,20 @@ const Navbar = () => {
                     </div>
 
                     {/* Mobile Toggle Menu */}
-                    <div className='md:hidden' onClick={() => setOpen(!open)}>
-                        <MdMenu className='text-4xl' />
-                    </div>
+                    <button
+                        type="button"
+                        className='md:hidden p-2.5 rounded-full bg-white text-[#5f4a45] border border-[#ead4c8] shadow-sm'
+                        onClick={() => setOpen(!open)}
+                        aria-label="Toggle navigation menu"
+                        aria-expanded={open}
+                    >
+                        <MdMenu className='text-3xl' />
+                    </button>
                 </ MotionDiv>
             </nav>
 
             {/* Mobile Menu Section */}
             <ResponsiveMenu open={open} setOpen={setOpen} />
-
         </>
     );
 };

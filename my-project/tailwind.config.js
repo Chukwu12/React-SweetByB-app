@@ -8,11 +8,19 @@ export default {
           colors: {
             primary: "#de2c4d",
             secondary: "#fb923c",
+            brandPrimary: "#D97757",
+            brandCream: "#FFF8F3",
+            brandPink: "#FCE7F3",
+            brandBrown: "#3B2A28",
+            brandSage: "#A7C4A0",
+            brandGold: "#F4B860",
           },
     
           fontFamily: {
             poppins: ["Poppins", "sans-serif"],
             averia: ["Averia Serif Libre", "serif"],
+            playfair: ["Playfair Display", "serif"],
+            manrope: ["Manrope", "sans-serif"],
           },
     
           container: {

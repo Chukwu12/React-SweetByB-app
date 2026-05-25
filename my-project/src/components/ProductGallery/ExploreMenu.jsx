@@ -9,6 +9,7 @@ const MotionDiv = motion.create("div");
 const MotionH1 = motion.create("h1");
 const MotionP = motion.create("p");
 const MotionImg = motion.create("img");
+const MotionButton = motion.create("button");
 
 const ExploreMenu = ({ category, setCategory }) => {
   // Handle category change when a menu item is clicked
@@ -19,13 +20,6 @@ const ExploreMenu = ({ category, setCategory }) => {
   return (
     <MotionDiv
       className="explore-menu-container"
-      style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center"
-      }}
       initial="hidden"
       animate="visible"
       variants={{
@@ -33,89 +27,70 @@ const ExploreMenu = ({ category, setCategory }) => {
         visible: { transition: { staggerChildren: 0.2 } } // only stagger children
       }}
     >
+      <div className="explore-menu-glow explore-menu-glow-left" />
+      <div className="explore-menu-glow explore-menu-glow-right" />
+
       {/* Title & Description */}
       <MotionDiv
-        style={{
-          textAlign: "center",
-          padding: "40px 0px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center"
-        }}
+        className="explore-menu-heading-wrap"
         variants={{
           hidden: {},
           visible: { transition: { staggerChildren: 0.2 } }
         }}
       >
+        <span className="explore-menu-eyebrow">Find Your Flavor</span>
+
         <MotionH1
           variants={FadeUp(0)}
-          className="text-3xl lg:text-6xl font-bold uppercase text-center mb-6"
+          className="font-playfair text-4xl lg:text-6xl font-bold tracking-tight text-center mb-4 text-neutral-900"
         >
           Shop Your Favorite Sweet Treats
         </MotionH1>
 
         <MotionP
           variants={FadeIn(0)}
-          className="text-center text-gray-600"
-          style={{
-            fontSize: "16px",
-            lineHeight: "1.8",
-            maxWidth: '800px',
-            fontWeight: "600",
-          }}
+          className="font-manrope text-center text-gray-600 explore-menu-subcopy"
         >
           Welcome to Sweets by B, your one-stop shop for delicious homemade desserts! 
           Browse our selection of rich cheesecakes, decadent cupcakes, gourmet puddings, and more—all made with love 
           and the finest ingredients. Whether you're craving a classic treat or looking to try something new, 
           we’ve got something to satisfy your sweet tooth. Place your order today and indulge in pure sweetness!
         </MotionP>
+
+        <div className="explore-menu-meta">
+          <span>{menu_list.length} curated categories</span>
+          <span>Selected: {category === "All" ? "All Desserts" : category}</span>
+        </div>
       </MotionDiv>
 
       {/* Animated Menu Items */}
       <MotionDiv
         className="menu-container"
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: "2rem"
-        }}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
       >
         {menu_list.map((item, index) => (
-          <MotionDiv
+          <MotionButton
             key={item.menu_name + index}
+            type="button"
             onClick={() => handleCategoryChange(item.menu_name)}
-            className="explore-menu-list-item"
+            className={`explore-menu-list-item ${category === item.menu_name ? "is-active" : ""}`}
             variants={FadeUp(0.1 * index)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              cursor: 'pointer',
-              maxWidth: '250px',
-              textAlign: 'center',
-            }}
+            whileHover={{ y: -8, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
             <MotionImg
-              className={category === item.menu_name ? "active" : ""}
+              className="explore-menu-item-image"
               src={item.menu_image}
               alt={item.menu_name}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              style={{
-                width: '100%',
-                height: '100px',
-                borderRadius: '8px',
-                marginBottom: '1rem',
-              }}
             />
-            <p>{item.menu_name}</p>
-          </MotionDiv>
+            <p className="font-manrope text-[15px] md:text-base font-semibold text-neutral-800 tracking-wide">
+              {item.menu_name}
+            </p>
+          </MotionButton>
         ))}
       </MotionDiv>
     </MotionDiv>

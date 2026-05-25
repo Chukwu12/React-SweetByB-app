@@ -1,9 +1,8 @@
-.food-display{
-    margin-top: 30px;
+.food-display {
+    margin-top: 0;
 }
 
-
-.food-display-list{  
-    margin-top: 30px;
+.premium-food-display {
+    isolation: isolate;
 }
 

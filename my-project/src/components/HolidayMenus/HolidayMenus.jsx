@@ -1,11 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay, EffectCoverflow } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
 
 import Swal from "sweetalert2";
 import '../HolidayMenus/HolidayMenu.css';
@@ -108,36 +109,47 @@ const HolidayMenus = () => {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-3xl font-bold text-center pb-8"
+          className="font-playfair text-4xl md:text-5xl font-bold tracking-tight text-center pb-8 text-neutral-900"
         >
           Holiday Menus
         </MotionH2>
 
         <Swiper
-         className="holiday-swiper"
-          modules={[Pagination, Autoplay]}
-          spaceBetween={40}
+          className="holiday-swiper"
+          modules={[Pagination, Autoplay, EffectCoverflow]}
+          effect="coverflow"
+          coverflowEffect={{
+            rotate: 8,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: false,
+          }}
+          spaceBetween={30}
           slidesPerView={1}
           centeredSlides={true}
           pagination={{ clickable: true }}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          autoplay={{ delay: 3200, disableOnInteraction: false }}
           breakpoints={{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
+            640: { slidesPerView: 1.2 },
+            1024: { slidesPerView: 2.4 },
           }}
         >
           {holidayMenus.map((menu, index) => (
             <SwiperSlide key={menu.id}>
-              <MotionDiv 
+              <MotionDiv
                 variants={FadeUp(index * 0.2)}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{
+                  y: -10,
+                  rotate: 1,
+                }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => openMenuModal(menu)}
                 className="holiday-card relative cursor-pointer bg-gradient-to-br 
-                from-white to-rose-50 rounded-[25px] shadow-md overflow-hidden
+                from-white to-rose-50 rounded-[25px] shadow-2xl overflow-hidden
                 flex flex-col items-center p-4"
               >
                 {/* Menu placeholder image */}
@@ -145,7 +157,7 @@ const HolidayMenus = () => {
                   <img
                     src={menu.placeholder}
                     alt={menu.title}
-                    className="w-full h-[250px] object-cover rounded-[25px]"
+                    className="w-full h-[320px] object-cover rounded-[25px]"
                   />
 
                   {/* Hover overlay */}
@@ -157,14 +169,18 @@ const HolidayMenus = () => {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg font-semibold text-center mt-3">
+                <h3 className="font-playfair text-2xl font-semibold text-center mt-3 text-neutral-900">
                   {menu.title}
                 </h3>
 
                 {/* Mobile hint */}
-                <p className="text-sm text-gray-500 mt-1 md:hidden">
+                <p className="font-manrope text-sm text-gray-500 mt-1 md:hidden">
                   Tap to view menu
                 </p>
+
+                <span className="font-manrope text-[11px] tracking-[0.18em] uppercase text-rose-500/80 mt-2">
+                  Limited Seasonal Drop
+                </span>
               </MotionDiv >
             </SwiperSlide>
           ))}

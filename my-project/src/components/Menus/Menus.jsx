@@ -37,17 +37,28 @@ const card = {
 
 export default function Menus() {
   return (
-    <section className="py-16">
-      <div className="container">
-        <motion.h1
+    <section id="menus" className="relative overflow-hidden py-20 bg-gradient-to-b from-[#fff8f3] to-[#fff4ed]">
+      <div className="absolute -top-20 -left-12 w-72 h-72 rounded-full bg-[#fce7f3]/40 blur-3xl" />
+      <div className="absolute -bottom-24 right-0 w-80 h-80 rounded-full bg-[#f4b860]/20 blur-3xl" />
+
+      <div className="container relative z-10">
+        <motion.div
           initial={{ opacity: 0, y: -8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.7 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-3xl font-bold text-left pb-10 uppercase"
+          className="mb-10"
         >
-          Pudding Menu
-        </motion.h1>
+          <p className="font-manrope text-xs md:text-sm tracking-[0.2em] uppercase text-[#9a7268] mb-3">
+            Crafted Fresh Daily
+          </p>
+          <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-left text-neutral-900">
+            Pudding Menu
+          </h1>
+          <p className="font-manrope text-[#755f58] mt-4 max-w-2xl leading-8">
+            A boutique selection of rich puddings layered with flavor, texture, and handcrafted finishes made for celebrations and everyday indulgence.
+          </p>
+        </motion.div>
 
          <motion.div
           variants={container}
@@ -57,43 +68,46 @@ export default function Menus() {
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
         >
 
-          {MenusData.map((menu) => (
+          {MenusData.map((menu, index) => (
             <motion.div
               key={menu.id}
               variants={card}
+              whileHover={{ y: -8, rotate: 0.4 }}
+              transition={{ duration: 0.35, ease: "easeOut", delay: menu.delay * 0.08 }}
               className="
-                bg-gradient-to-br from-white to-rose-50
-                rounded-3xl p-5 shadow-lg border border-rose-100
+                relative bg-gradient-to-br from-white to-rose-50/80
+                rounded-3xl p-5 shadow-xl border border-[#f1ddd4]
                 flex flex-col items-center text-center
-                transition-shadow duration-300 hover:shadow-xl
+                transition-shadow duration-300 hover:shadow-2xl
                 transform-gpu will-change-transform
               "
             >
+              <span className="absolute top-4 right-4 font-manrope text-[10px] uppercase tracking-[0.14em] text-[#c2785f] bg-[#fff2ea] border border-[#f2d7ca] px-2 py-1 rounded-full">
+                Signature
+              </span>
+
               {/* Image */}
-              <div className="w-full h-52 overflow-hidden rounded-2xl mb-4 bg-rose-50">
-                <motion.img
+              <div className="w-full h-56 overflow-hidden rounded-2xl mb-5 bg-rose-50 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.7)]">
+                <img
                   src={menu.img}
                   alt={menu.title}
-                  loading="lazy"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  fetchPriority={index === 0 ? "high" : "auto"}
                   decoding="async"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
                 />
               </div>
 
               {/* Title */}
-              <div className="relative mb-3">
-                <h2 className="text-[17px] font-semibold text-gray-800 leading-snug drop-shadow-sm">
+              <div className="relative mb-4">
+                <h2 className="font-playfair text-xl font-semibold text-gray-800 leading-snug drop-shadow-sm">
                   {menu.title}
                 </h2>
-                <span className="block w-8 h-[2px] bg-rose-400 mt-2 mx-auto"></span>
+                <span className="block w-10 h-[2px] bg-[#d97757] mt-2.5 mx-auto"></span>
               </div>
 
               {/* Price */}
-              <p className="bg-rose-500 text-white text-sm font-bold py-1 px-4 rounded-full shadow-sm">
+              <p className="font-manrope bg-[#D97757] text-white text-sm font-semibold tracking-wide py-1.5 px-4 rounded-full shadow-[0_12px_24px_-16px_rgba(217,119,87,0.95)]">
                 {menu.price}
               </p>
             </motion.div>
