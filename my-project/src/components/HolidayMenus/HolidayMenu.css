@@ -14,11 +14,14 @@
     background-size: cover;
     width: 23rem;
     height: 31rem;
+    display: flex;
+    align-items: stretch;
 }
 
 
 .holiday-card {
   transition: box-shadow 0.35s ease, transform 0.35s ease;
+  justify-content: flex-start;
 }
 
 .holiday-card:hover {

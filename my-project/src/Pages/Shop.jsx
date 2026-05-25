@@ -168,18 +168,18 @@ const Shop = () => {
         </div>
       </section>
 
-      <Suspense fallback={<SectionFallback label="categories" minHeight="min-h-[500px]" />}>
-        <section id="product-menu" className="bg-[#FFF8F3]">
+      <section id="product-menu" className="bg-[#FFF8F3]">
+        <Suspense fallback={<SectionFallback label="categories" minHeight="min-h-[500px]" />}>
           <ExploreMenu category={category} setCategory={setCategory} />
-        </section>
-      </Suspense>
+        </Suspense>
+      </section>
 
-      <Suspense fallback={<SectionFallback label="dessert collection" minHeight="min-h-[760px]" />}>
-        <section id="dessert-collection" className="bg-white relative overflow-hidden">
+      <section id="dessert-collection" className="bg-white relative overflow-hidden">
+        <Suspense fallback={<SectionFallback label="dessert collection" minHeight="min-h-[760px]" />}>
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[130%] h-14 bg-[#FFF8F3] rounded-b-[100%]" />
           <FoodDisplay category={category} />
-        </section>
-      </Suspense>
+        </Suspense>
+      </section>
 
       <ScrollToTopButton />
     </div>

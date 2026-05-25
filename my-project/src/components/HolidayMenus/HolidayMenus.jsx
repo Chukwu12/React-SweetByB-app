@@ -103,16 +103,26 @@ const HolidayMenus = () => {
   };
 
   return (
-    <section className="py-14">
+    <section className="relative overflow-hidden py-20 bg-gradient-to-b from-[#fff8f3] to-[#fff3ec]">
+      <div className="absolute -top-16 -left-10 w-72 h-72 rounded-full bg-[#fce7f3]/35 blur-3xl" />
+      <div className="absolute -bottom-20 right-0 w-80 h-80 rounded-full bg-[#f4b860]/18 blur-3xl" />
       <div className="container">
-        <MotionH2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="font-playfair text-4xl md:text-5xl font-bold tracking-tight text-center pb-8 text-neutral-900"
-        >
-          Holiday Menus
-        </MotionH2>
+        <div className="relative z-10 max-w-3xl mx-auto text-center mb-8 md:mb-10">
+          <p className="font-manrope text-xs md:text-sm tracking-[0.2em] uppercase text-[#9a7268] mb-3">
+            Limited Seasonal Collection
+          </p>
+          <MotionH2
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900"
+          >
+            Holiday Menus
+          </MotionH2>
+          <p className="font-manrope text-sm md:text-base text-[#7d655d] mt-4 leading-8">
+            Seasonal collections designed to make every celebration feel special.
+          </p>
+        </div>
 
         <Swiper
           className="holiday-swiper"
@@ -150,7 +160,7 @@ const HolidayMenus = () => {
                 onClick={() => openMenuModal(menu)}
                 className="holiday-card relative cursor-pointer bg-gradient-to-br 
                 from-white to-rose-50 rounded-[25px] shadow-2xl overflow-hidden
-                flex flex-col items-center p-4"
+                flex flex-col items-center p-4 w-full h-full"
               >
                 {/* Menu placeholder image */}
                 <div className="relative w-full">
@@ -168,19 +178,19 @@ const HolidayMenus = () => {
                   </div>
                 </div>
 
-                {/* Title */}
-                <h3 className="font-playfair text-2xl font-semibold text-center mt-3 text-neutral-900">
-                  {menu.title}
-                </h3>
+                <div className="flex flex-col items-center justify-start text-center min-h-[108px] pt-3">
+                  <h3 className="font-playfair text-2xl font-semibold text-neutral-900 leading-tight">
+                    {menu.title}
+                  </h3>
 
-                {/* Mobile hint */}
-                <p className="font-manrope text-sm text-gray-500 mt-1 md:hidden">
-                  Tap to view menu
-                </p>
+                  <p className="font-manrope text-sm text-gray-500 mt-1 md:hidden">
+                    Tap to view menu
+                  </p>
 
-                <span className="font-manrope text-[11px] tracking-[0.18em] uppercase text-rose-500/80 mt-2">
-                  Limited Seasonal Drop
-                </span>
+                  <span className="font-manrope text-[11px] tracking-[0.18em] uppercase text-rose-500/80 mt-2">
+                    Limited Seasonal Drop
+                  </span>
+                </div>
               </MotionDiv >
             </SwiperSlide>
           ))}
