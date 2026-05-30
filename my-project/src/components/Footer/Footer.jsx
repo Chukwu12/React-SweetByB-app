@@ -288,7 +288,7 @@ function Footer() {
 
           <Flex as={motion.div} variants={fadeUpItem} justify="center" pt={2}>
             <Text fontFamily="'Manrope', sans-serif" fontSize="sm" color="whiteAlpha.900" textAlign="center">
-              Copyright {new Date().getFullYear()} Sweets by B. Crafted fresh with love.
+              Copyright {new Date().getFullYear()} OE Software Solution.
             </Text>
           </Flex>
         </Stack>

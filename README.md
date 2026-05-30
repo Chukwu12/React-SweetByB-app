@@ -1,62 +1,159 @@
-# Bakery React App
+# SweetByB Monorepo 🍰
 
-Welcome to the **Bakery React App**! This app is designed to showcase and sell desserts in an easy-to-navigate, visually appealing format. The website provides users with a seamless experience for browsing delicious desserts and placing orders online. The app will also highlight the client's desserts and include features like contact forms, customer reviews, and more.
+![React](https://img.shields.io/badge/Frontend-React%2018-61DAFB?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Bundler-Vite-646CFF?logo=vite&logoColor=white)
+![Express](https://img.shields.io/badge/API-Express-000000?logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?logo=mongodb&logoColor=white)
+![Stripe](https://img.shields.io/badge/Payments-Stripe-635BFF?logo=stripe&logoColor=white)
 
----
+SweetByB is a full-stack dessert ordering platform with:
 
-## Table of Contents
+- 🛍️ Customer storefront (React + Vite)
+- 🧑‍💼 Admin dashboard for product and order management
+- ⚙️ Express API with MongoDB, auth sessions, and Stripe checkout
 
-- [Project Overview](#project-overview)
-- [Key Features](#key-features)
-- [Installation Instructions](#installation-instructions)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+## Documentation Map 🗺️
 
----
+- Root overview: `README.md`
+- Storefront app guide: `my-project/README.md`
+- Admin app guide: `admin/README.md`
 
-## Project Overview
+## What Is In This Repo
 
-This React app is a custom-built website for **Bianca’s Bakery**, where users can:
+```text
+React-SweetByB-app/
+├── my-project/   # Customer-facing frontend
+├── admin/        # Admin dashboard frontend
+└── backend/      # Express + MongoDB API
+```
 
-- Browse a gallery of desserts
-- Easily place orders for desserts online
-- View customer reviews and testimonials
-- Contact the bakery for inquiries
-- Learn more about the bakery and the founder
+## Feature Highlights ✨
 
-### Purpose & Vision
+- Product browsing and category-driven menu display
+- Cart and checkout flow with Stripe session creation
+- Session-based auth with Passport + Mongo-backed sessions
+- Admin product add/list/remove flows
+- Order verification endpoint for post-payment confirmation
 
-The website's primary purpose is to showcase Bianca's dessert creations and make it easy for customers to order them online. The design aims to provide an attractive and user-friendly experience with an emphasis on visual content and simplicity in navigating the website.
+## Tech Stack 🧰
 
----
+- Frontend: React 18, Vite, Chakra UI, Tailwind CSS, Axios
+- Backend: Node.js, Express, Mongoose, Passport, Express Session
+- Integrations: Stripe, Cloudinary
 
-## Key Features
+## Quick Start 🚀
 
-1. **E-commerce functionality** for customers to browse and order desserts online.
-2. **Product gallery** showcasing the various desserts available for purchase.
-3. **Custom ordering forms** allowing customers to place dessert orders and request invoices.
-4. **Customer reviews** and a **testimonials section** to build trust and encourage sales.
-5. **Contact form** for inquiries and customer communication.
-6. **About Me page** that introduces the bakery and its mission.
-7. **Home page** as the main landing page for the bakery with featured products.
+### 1. Clone and install dependencies
 
----
+```bash
+git clone <your-repo-url>
+cd React-SweetByB-app
 
-## Installation Instructions
+cd backend && npm install
+cd ../my-project && npm install
+cd ../admin && npm install
+```
 
-To get started with this project locally, follow the steps below:
+### 2. Configure environment variables
 
-### Prerequisites
+Create a `.env` file in `backend/` with values similar to:
 
-Ensure you have the following installed:
-- **Node.js**: [Download Node.js](https://nodejs.org/)
-- **npm**: Node package manager, usually installed along with Node.js.
+```env
+PORT=5000
+NODE_ENV=development
+DB_STRING=mongodb+srv://<username>:<password>@<cluster>/<dbName>
+SESSION_SECRET=replace-with-a-strong-secret
+FRONTEND_URL=http://localhost:5173
+STRIPE_SECRET_KEY=sk_test_xxx
 
-### Clone the Repository
+# Cloudinary
+CLOUD_NAME=your_cloud_name
+API_KEY=your_cloudinary_api_key
+API_SECRET=your_cloudinary_api_secret
+```
 
-1. Clone the repository to your local machine:
+For the storefront, create `my-project/.env` (optional for local dev):
 
-   ```bash
-   git clone https://github.com/your-username/bakery-react-app.git
+```env
+VITE_BACKEND_URL=http://localhost:5000
+# Alternative supported key:
+# VITE_API_BASE_URL=http://localhost:5000
+```
+
+### 3. Run the apps
+
+Open 3 terminals and run:
+
+```bash
+# Terminal 1
+cd backend
+npm run dev
+
+# Terminal 2
+cd my-project
+npm run dev
+
+# Terminal 3
+cd admin
+npm run dev
+```
+
+Default local URLs:
+
+- Storefront: `http://localhost:5173`
+- Admin: `http://localhost:5174` (or next free Vite port)
+- API: `http://localhost:5000`
+
+## Scripts By App 📜
+
+### backend
+
+- `npm run dev` - start API with nodemon
+- `npm run start` - start API with node
+- `npm run server` - alias for nodemon server start
+
+### my-project
+
+- `npm run dev` - run Vite dev server (host enabled)
+- `npm run build` - production build
+- `npm run preview` - preview build
+- `npm run lint` - lint frontend code
+
+### admin
+
+- `npm run dev` - run Vite dev server
+- `npm run build` - production build
+- `npm run preview` - preview build
+- `npm run lint` - lint admin code
+
+For app-specific details, see the app README files in `my-project/` and `admin/`.
+
+## API Surface (High-Level) 🔌
+
+- `/api/user` - auth/user endpoints
+- `/api/foods` - food catalog CRUD/listing
+- `/api/cart` - cart add/remove operations
+- `/api/order` - place and verify orders
+
+## Deployment Notes 🌍
+
+- Storefront uses Vite proxy in dev and env-based backend URL in production.
+- Backend CORS allows localhost plus configured frontend origin(s).
+- Set production `FRONTEND_URL`, `DB_STRING`, and Stripe/Cloudinary secrets before deploy.
+
+## Known Gaps / Next Improvements 🛠️
+
+- Move admin hardcoded API URLs to env-based config for easier deployments.
+- Add a single root-level script runner (or workspace tooling) to start all services together.
+- Add automated tests for order placement and payment verification flow.
+
+## Contributing 🤝
+
+1. Create a feature branch.
+2. Make focused changes.
+3. Run lint/build checks in affected app(s).
+4. Open a pull request with clear test notes.
+
+## License
+
+No license declared yet. Add a `LICENSE` file if you plan to distribute this project publicly.

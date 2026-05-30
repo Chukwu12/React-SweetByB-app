@@ -123,9 +123,6 @@ const total = subtotal + deliveryFee;
       const response = await apiClient.post("/api/order/place", orderData);
 
       if (response.data.success) {
-        // Clear saved form and cart on success
-        localStorage.removeItem("formData");
-        localStorage.removeItem("cartItems");
         // Redirect to Stripe checkout
         window.location.href = response.data.session_url;
       } else {

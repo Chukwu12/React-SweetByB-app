@@ -48,11 +48,6 @@ const frontend_url = process.env.FRONTEND_URL || "http://localhost:5173";
 
     await newOrder.save();
 
-    // Clear user's cart only if valid userId
-    if (validUserId) {
-      await userModel.findByIdAndUpdate(validUserId, { cartData: {} });
-    }
-
     // Prepare Stripe line items
     const line_items = items.map((item) => ({
       price_data: {
@@ -105,4 +100,47 @@ const frontend_url = process.env.FRONTEND_URL || "http://localhost:5173";
   }
 };
 
-export { placeOrder };
+const verifyOrder = async (req, res) => {
+  try {
+    const { orderId, success } = req.body;
+
+    if (!orderId || !mongoose.Types.ObjectId.isValid(orderId)) {
+      return res.status(400).json({
+        success: false,
+        message: "A valid orderId is required.",
+      });
+    }
+
+    const normalizedSuccess = success === true || success === "true";
+    const order = await orderModel.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found.",
+      });
+    }
+
+    if (normalizedSuccess) {
+      order.payment = true;
+      order.status = "Payment Confirmed";
+      await order.save();
+
+      if (order.userId && mongoose.Types.ObjectId.isValid(order.userId)) {
+        await userModel.findByIdAndUpdate(order.userId, { cartData: {} });
+      }
+
+      return res.json({ success: true, message: "Payment verified." });
+    }
+
+    return res.json({ success: true, message: "Payment not completed." });
+  } catch (error) {
+    console.error("Error verifying order:", error);
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while verifying your order.",
+    });
+  }
+};
+
+export { placeOrder, verifyOrder };

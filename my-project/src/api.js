@@ -1,9 +1,14 @@
 import axios from 'axios';
 
 // In Vite dev, use same-origin requests so /api is proxied to backend (no CORS needed).
+const configuredBaseUrl =
+  import.meta.env.VITE_BACKEND_URL ||
+  import.meta.env.VITE_API_BASE_URL ||
+  'http://localhost:5000';
+
 const API_BASE_URL = import.meta.env.DEV
   ? ''
-  : (import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000');
+  : configuredBaseUrl.replace(/\/+$/, '');
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,

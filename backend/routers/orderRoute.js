@@ -1,5 +1,5 @@
 import express from 'express'
-import { placeOrder } from '../controllers/orderController.js'
+import { placeOrder, verifyOrder } from '../controllers/orderController.js'
 // import { ensureAuth } from '../middleware/auth.js';
 
 const orderRouter = express.Router();
@@ -10,5 +10,6 @@ orderRouter.options("/place", (req, res) => {
   });
 
 orderRouter.post("/place",placeOrder);
+orderRouter.post("/verify", verifyOrder);
 
 export default orderRouter;
