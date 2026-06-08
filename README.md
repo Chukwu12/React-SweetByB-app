@@ -61,7 +61,7 @@ Create a `.env` file in `backend/` with values similar to:
 ```env
 PORT=5000
 NODE_ENV=development
-DB_STRING=mongodb+srv://<username>:<password>@<cluster>/<dbName>
+DB_STRING=<mongodb_atlas_connection_string>
 SESSION_SECRET=replace-with-a-strong-secret
 FRONTEND_URL=http://localhost:5173
 STRIPE_SECRET_KEY=sk_test_xxx
