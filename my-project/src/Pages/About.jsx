@@ -1,5 +1,5 @@
 // src/pages/About.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import BannerImg from "../assets/images/banner-img.png";
 import OwnerPortrait from "../assets/images/banner-img.webp"; // add a small portrait (recommended)
@@ -17,6 +17,10 @@ const MotionH2 = motion.create("h2");
 
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
   const scrollToShop = () => {
     const el = document.getElementById("product-menu");
     if (el) {

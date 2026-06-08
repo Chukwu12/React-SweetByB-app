@@ -386,25 +386,6 @@ return (
           </Button>
         </VStack>
       </form>
-
-      <HStack justify="center" spacing={4} mt={6}>
-        {[FaFacebook, FaTwitter, FaGoogle, FaInstagram].map((SocialIcon, index) => (
-          <Box
-            key={index}
-            width="42px"
-            height="42px"
-            borderRadius="full"
-            bg="#fff5f0"
-            border="1px solid"
-            borderColor="#ecd8ce"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Icon as={SocialIcon} boxSize={4} color="#b27e6f" />
-          </Box>
-        ))}
-      </HStack>
       </Box>
     </HStack>
   </Flex>

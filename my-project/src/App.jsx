@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Navigate, Routes, Route, useLocation } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import Home from './Pages/Home';
@@ -20,6 +21,10 @@ const AppRoutes = () => {
   const noNavbarPaths = ['/verify'];
   const showFooter = !noFooterPaths.includes(normalizedPath);
   const showNavbar = !noNavbarPaths.includes(normalizedPath);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname]);
 
   return (
     <>
