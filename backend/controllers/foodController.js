@@ -1,5 +1,6 @@
 import FoodItem from '../models/foodModel.js';  // ESM import
 import cloudinary from "../middleware/cloudinary.js";
+import mongoose from "mongoose";
 
 // Add food item
 export const addFood = async (req, res) => {
@@ -68,7 +69,13 @@ export const listFood = async (req, res) => {
 // Remove food item
 export const removeFood = async (req, res) => {
   try {
-    const food = await FoodItem.findById(req.body.id);
+    const { id } = req.body;
+
+    if (typeof id !== "string" || !mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ success: false, message: "Invalid food item id" });
+    }
+
+    const food = await FoodItem.findById(id);
 
     if (!food) {
       return res.status(404).json({ success: false, message: "Food item not found" });
@@ -79,7 +86,7 @@ export const removeFood = async (req, res) => {
     await cloudinary.uploader.destroy(publicId);
 
     // Delete food item from MongoDB
-    await FoodItem.findByIdAndDelete(req.body.id);
+    await FoodItem.findByIdAndDelete(id);
 
     if (process.env.NODE_ENV !== 'production') {
       console.log("✅ Food item removed!");
